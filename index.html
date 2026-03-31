@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>cheryl's portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --cream:#fdf8f2;--cream2:#faf3e8;--white:#fff;
+  --blush:#f9d5cb;--blush2:#f7c4b6;
+  --mint:#c8ede0;--mint2:#a8dece;
+  --lav:#ddd4f7;--lav2:#c9bdf0;
+  --peach:#fde8d0;--yellow:#fceea3;--sky:#c8e8f9;
+  --text:#2d2926;--text2:#6b5f58;--text3:#9e918a;
+  --border:rgba(45,41,38,.09);
+  --shadow:0 2px 16px rgba(45,41,38,.07);
+  --shadow-md:0 5px 32px rgba(45,41,38,.11);
+  --r:16px;--r-lg:24px;--r-xl:32px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    radial-gradient(circle at 10% 15%,rgba(249,213,203,.32) 0%,transparent 38%),
+    radial-gradient(circle at 90% 10%,rgba(200,237,224,.28) 0%,transparent 34%),
+    radial-gradient(circle at 78% 80%,rgba(221,212,247,.25) 0%,transparent 36%),
+    radial-gradient(circle at 20% 88%,rgba(252,238,163,.22) 0%,transparent 32%)}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 44px;background:rgba(253,248,242,.92);backdrop-filter:blur(22px);border-bottom:1.5px solid var(--border)}
+.nav-logo{font-family:'Caveat',cursive;font-size:23px;font-weight:700;color:var(--text)}
+.nav-logo span{color:#e07b5a}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;padding:7px 14px;border-radius:100px;transition:all .2s}
+.nav-links a:hover{background:var(--blush);color:var(--text)}
+
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;padding:110px 56px 72px;position:relative;z-index:1}
+h1{font-family:'Caveat',cursive;font-size:clamp(42px,4.5vw,64px);font-weight:700;line-height:1;letter-spacing:-.01em;margin-bottom:6px;color:var(--text)}
+.h1-sub{font-family:'Caveat',cursive;font-size:clamp(20px,2.6vw,32px);font-weight:500;color:#e07b5a;margin-bottom:24px;line-height:1.2}
+.hero-desc{font-size:15.5px;color:var(--text2);max-width:420px;line-height:1.8;margin-bottom:36px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn-main{background:var(--text);color:var(--cream);padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s;border:none;cursor:pointer}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(45,41,38,.2);background:#1a1714}
+.btn-sec{background:var(--white);color:var(--text);padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s;border:1.5px solid var(--border);cursor:pointer}
+.btn-sec:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:rgba(45,41,38,.2)}
+
+.card-stack{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hero-card{background:var(--white);border-radius:var(--r-lg);padding:22px 20px;border:1.5px solid var(--border);box-shadow:var(--shadow);transition:all .25s;position:relative;overflow:hidden}
+.hero-card:hover{transform:translateY(-4px) rotate(-.5deg);box-shadow:var(--shadow-md)}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:var(--r-lg) var(--r-lg) 0 0}
+.hc-blush::before{background:var(--blush2)} .hc-mint::before{background:var(--mint2)}
+.hc-lav::before{background:var(--lav2)}   .hc-sky::before{background:var(--sky)}
+.hero-card-num{font-family:'Caveat',cursive;font-size:38px;font-weight:700;line-height:1;margin-bottom:4px}
+.hc-blush .hero-card-num{color:#d96040} .hc-mint .hero-card-num{color:#2a8a68}
+.hc-lav .hero-card-num{color:#6650c0}   .hc-sky .hero-card-num{color:#2070a8}
+.hero-card-label{font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:2px}
+.hero-card-desc{font-size:11.5px;color:var(--text3);line-height:1.45}
+
+section{padding:88px 56px;position:relative;z-index:1}
+.section-pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;padding:6px 14px;border-radius:100px;margin-bottom:14px;letter-spacing:.05em;text-transform:uppercase}
+.sp-blush{background:var(--blush);color:#c05030} .sp-mint{background:var(--mint);color:#1a7058}
+.sp-lav{background:var(--lav);color:#5040b0}     .sp-peach{background:var(--peach);color:#b86020}
+.sp-sky{background:var(--sky);color:#1060a0}
+h2{font-family:'Caveat',cursive;font-size:clamp(34px,4.5vw,54px);font-weight:700;line-height:1.05;margin-bottom:8px;color:var(--text)}
+.section-sub{font-size:15px;color:var(--text2);max-width:540px;line-height:1.75;margin-bottom:44px}
+
+/* SKILLS */
+#skills{background:var(--white)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.skill-card{background:var(--cream);border-radius:var(--r-lg);padding:28px 24px;border:1.5px solid var(--border);transition:all .22s}
+.skill-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.skill-icon{font-size:26px;margin-bottom:12px}
+.skill-card h3{font-size:15px;font-weight:700;margin-bottom:12px;color:var(--text)}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:12px;font-weight:500;padding:4px 11px;border-radius:100px;letter-spacing:.01em}
+.p-mint{background:var(--mint);color:#1a7058} .p-lav{background:var(--lav);color:#5040b0}
+.p-sky{background:var(--sky);color:#1060a0}   .p-peach{background:var(--peach);color:#b86020}
+
+/* EXPERIENCE */
+#experience{background:var(--cream2)}
+.exp-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.exp-tab{padding:9px 18px;border-radius:100px;border:1.5px solid var(--border);background:var(--white);font-size:12.5px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .2s}
+.exp-tab:hover{border-color:rgba(45,41,38,.2)}
+.exp-tab.active{background:var(--text);color:var(--cream);border-color:var(--text)}
+.exp-panel{display:none;animation:softIn .28s ease}
+.exp-panel.active{display:block}
+@keyframes softIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.exp-card{background:var(--white);border-radius:var(--r-xl);padding:40px 44px;border:1.5px solid var(--border);box-shadow:var(--shadow)}
+.exp-co-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:5px}
+.exp-company{font-size:12.5px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em}
+.exp-dates{display:flex;flex-direction:row;align-items:flex-end;gap:5px}
+.exp-date-badge{font-size:12px;font-weight:600;background:var(--cream2);color:var(--text2);padding:5px 14px;border-radius:100px;border:1.5px solid var(--border);white-space:nowrap}
+.exp-date-badge.hi{background:var(--blush);color:#c05030;border-color:var(--blush2)}
+.exp-term-divider{display:flex;align-items:center;gap:12px;margin:28px 0 20px;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3)}
+.exp-term-divider::before,.exp-term-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.exp-role{font-family:'Caveat',cursive;font-size:30px;font-weight:700;margin-bottom:18px;color:var(--text);line-height:1.1}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+.exp-bullets li{font-size:14px;color:var(--text2);line-height:1.7;padding-left:20px;position:relative}
+.exp-bullets li::before{content:'✦';position:absolute;left:0;top:3px;font-size:9px;color:#e07b5a}
+.exp-hl{color:var(--text);font-weight:700}
+.skill-pills{display:flex;flex-wrap:wrap;gap:6px;padding-top:18px;border-top:1.5px solid var(--border)}
+
+/* CASE STUDIES */
+#cases{background:var(--white)}
+.cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+.case-card{background:var(--cream);border-radius:var(--r-xl);border:1.5px solid var(--border);overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
+.case-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.case-banner{height:7px}
+.cb-blush{background:linear-gradient(90deg,var(--blush2),var(--lav2))}
+.cb-mint{background:linear-gradient(90deg,var(--mint2),var(--sky))}
+.cb-lav{background:linear-gradient(90deg,var(--lav2),var(--blush2))}
+.case-top{padding:26px 26px 18px;border-bottom:1.5px solid var(--border)}
+.case-emoji{font-size:28px;margin-bottom:10px;display:block}
+.case-type{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
+.case-card h3{font-family:'Caveat',cursive;font-size:24px;font-weight:700;line-height:1.2;margin-bottom:5px}
+.case-tagline{font-size:13px;color:var(--text2);line-height:1.6}
+.case-body{padding:20px 26px;flex:1;display:flex;flex-direction:column;gap:14px}
+.case-section h4{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
+.case-section p,.case-section li{font-size:13px;color:var(--text2);line-height:1.7}
+.case-section ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+.case-section li{padding-left:13px;position:relative}
+.case-section li::before{content:'·';position:absolute;left:0;color:#e07b5a;font-weight:700}
+.case-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:0 0 var(--r-xl) var(--r-xl);overflow:hidden;margin-top:auto}
+.cs-cell{background:var(--white);padding:13px 8px;text-align:center}
+.cs-val{font-family:'Caveat',cursive;font-size:21px;font-weight:700;color:var(--text);display:block;line-height:1;margin-bottom:3px}
+.cs-lbl{font-size:10px;color:var(--text3);font-weight:500}
+
+/* PROJECTS */
+#projects{background:var(--cream2)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.proj-card{background:var(--white);border-radius:var(--r-xl);padding:26px 24px;border:1.5px solid var(--border);display:flex;flex-direction:column;gap:11px;transition:all .22s}
+.proj-card:hover{transform:translateY(-4px) rotate(.3deg);box-shadow:var(--shadow-md)}
+.proj-emoji{font-size:26px}
+.proj-type{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3)}
+.proj-card h3{font-family:'Caveat',cursive;font-size:20px;font-weight:700;line-height:1.2}
+.proj-card p{font-size:13px;color:var(--text2);line-height:1.7}
+.proj-pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
+
+/* CONTACT */
+#contact{background:var(--white);text-align:center}
+.contact-inner{max-width:520px;margin:0 auto}
+.contact-emoji{font-size:44px;margin-bottom:16px;display:block;animation:bob 2.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.contact-sub{font-size:15px;color:var(--text2);margin-bottom:36px}
+.contact-links{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.contact-link{display:flex;align-items:center;gap:8px;background:var(--cream);color:var(--text);padding:12px 22px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;border:1.5px solid var(--border);transition:all .2s}
+.contact-link:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:rgba(45,41,38,.2)}
+.contact-link.primary{background:var(--text);color:var(--cream);border-color:var(--text)}
+.contact-link.primary:hover{background:#1a1714}
+
+footer{padding:22px 56px;border-top:1.5px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--cream);position:relative;z-index:1}
+footer p{font-size:12.5px;color:var(--text3);font-weight:500}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:960px){nav{padding:14px 24px}#hero{grid-template-columns:1fr;padding:100px 24px 56px;gap:36px}section{padding:72px 24px}.exp-card{padding:28px 24px}}
+@media(max-width:780px){.proj-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.nav-links{display:none}.card-stack,.proj-grid,.cases-grid{grid-template-columns:1fr}footer{flex-direction:column;gap:8px;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">cheryl<span>.</span>li <span>🌸</span></div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#cases">Case Studies</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-left reveal">
+    <h1>hi! I'm Cheryl,</h1>
+    <p class="h1-sub">a Data Scientist & Product Thinker</p>
+    <p class="hero-desc">I transform messy data into decisions people trust, and build tools to help others understand their data! With experience across mutliple industries, I'm always asking "how do you make complex information useful?"</p>
+    <div class="hero-ctas">
+      <a href="#cases" class="btn-main">See my work ✨</a>
+      <a href="mailto:cheryl.li@uwaterloo.ca" class="btn-sec">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-right reveal">
+    <div class="card-stack">
+      <div class="hero-card hc-blush">
+        <div class="hero-card-num">30M+</div>
+        <div class="hero-card-label">records processed</div>
+        <div class="hero-card-desc">multi-source government datasets at McGill</div>
+      </div>
+      <div class="hero-card hc-mint">
+        <div class="hero-card-num">$88M</div>
+        <div class="hero-card-label">Portfolio modelled</div>
+        <div class="hero-card-desc">Tableau dashboards at GRHF</div>
+      </div>
+      <div class="hero-card hc-lav">
+        <div class="hero-card-num">90%</div>
+        <div class="hero-card-label">Fewer user complaints</div>
+        <div class="hero-card-desc">UX/UI improvements at RehvUp</div>
+      </div>
+      <div class="hero-card hc-sky">
+        <div class="hero-card-num">3,500+</div>
+        <div class="hero-card-label">Signups in 12 hrs</div>
+        <div class="hero-card-desc">product launch, Aphrodite</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="reveal">
+    <div class="section-pill sp-mint">✦ Skills</div>
+    <h2>What I bring to the table</h2>
+    <p class="section-sub">My experience spans raw data all the way to meaningful insights and informed decisions for a non-technical stakeholders.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">🐍</div>
+      <h3>Data Science</h3>
+      <div class="tag-cloud">
+        <span class="pill p-mint">Python</span><span class="pill p-mint">SQL</span><span class="pill p-mint">Pandas</span>
+        <span class="pill p-mint">Scikit-learn</span><span class="pill p-mint">TensorFlow</span>
+        <span class="pill p-mint">R</span><span class="pill p-mint">MATLAB</span><span class="pill p-mint">QGIS</span><span class="pill p-mint">Spatial Analysis</span><span class="pill p-mint">Jupyter Notebooks</span><span class="pill p-mint">Colab</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🤖</div>
+      <h3>Machine Learning</h3>
+      <div class="tag-cloud">
+        <span class="pill p-lav">Logistic & Linear Regression</span><span class="pill p-lav">Clustering</span>
+        <span class="pill p-lav">Gradient Boosting</span><span class="pill p-lav">Decision Trees</span>
+        <span class="pill p-lav">A/B Testing</span><span class="pill p-lav">Fairness ML</span>
+        <span class="pill p-lav">SVM</span><span class="pill p-lav">Classification</span><span class="pill p-lav">PCA</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">📊</div>
+      <h3>Visualization & Tooling</h3>
+      <div class="tag-cloud">
+        <span class="pill p-sky">Tableau</span><span class="pill p-sky">PowerBI</span>
+        <span class="pill p-sky">Google Analytics</span><span class="pill p-sky">MySQL</span>
+        <span class="pill p-sky">Firebase</span><span class="pill p-sky">Qualtrics</span>
+        <span class="pill p-sky">Excel</span><span class="pill p-sky">Docker</span><span class="pill p-sky">Anaconda</span>
+      </div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🗺️</div>
+      <h3>Product & Design</h3>
+      <div class="tag-cloud">
+        <span class="pill p-peach">User Research</span><span class="pill p-peach">Figma</span>
+        <span class="pill p-peach">Information Architecture</span>
+        <span class="pill p-peach">Metrics Design</span><span class="pill p-peach">UX/UI</span>
+        <span class="pill p-peach">Mixed Methods Research</span><span class="pill p-peach">Problem Scoping</span><span class="pill p-peach">Accessibility (AODA)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="reveal">
+    <div class="section-pill sp-blush">💼 Experience</div>
+    <h2>Where I've worked</h2>
+    <p class="section-sub">Particle physics, healthcare fundraising, biotech SaaS, UX development, and environmental data projects, each one a different flavour of problem solving.</p>
+  </div>
+  <div class="reveal">
+    <div class="exp-tabs">
+      <button class="exp-tab active" onclick="showTab('triumf',this)">⚛️ TRIUMF</button>
+      <button class="exp-tab" onclick="showTab('scispot',this)">🔬 Scispot</button>
+      <button class="exp-tab" onclick="showTab('grhf',this)">🏥 GRHF</button>
+      <button class="exp-tab" onclick="showTab('rehvup',this)">🎮 RehvUp</button>
+      <button class="exp-tab" onclick="showTab('mcgill',this)">🏫 McGill</button>
+    </div>
+
+    <div id="panel-triumf" class="exp-panel active">
+      <div class="exp-card">
+        <div class="exp-co-row">
+          <div class="exp-company">TRIUMF: Canada's Particle Accelerator · Vancouver</div>
+          <div class="exp-dates">
+            <span class="exp-date-badge hi">Sep – Dec 2021</span>
+            <span class="exp-date-badge">Jan – Apr 2021</span>
+          </div>
+        </div>
+        
+        <div class="exp-term-divider">Jan – Apr 2021</div>
+        <div class="exp-role">Data Analyst</div>
+        <ul class="exp-bullets">
+          <li>Analysed web traffic across <span class="exp-hl">200+ scientific content pages</span> using Google Analytics to identify engagement drop-off points and proposed internal tool redesigns</li>
+          <li>Conducted multi-department user interviews, distributed staff surveys distributed via Qualtrics, analysed responses across departments, and produced <span class="exp-hl">executive-level Excel visualisations</span> used to inform workforce strategy</li>
+        </ul>
+        <div class="skill-pills">
+          <span class="pill p-sky">Google Analytics</span><span class="pill p-sky">Qualtrics</span><span class="pill p-sky">Excel</span><span class="pill p-peach">Survey Design</span><span class="pill p-peach">User Research</span>
+        </div>
+        <div class="exp-term-divider">Sep – Dec 2021</div>
+        <div class="exp-role">Digital Design Intern</div>
+        <ul class="exp-bullets">
+          <li>Redesigned the public outreach website for usability. Ran internal surveys to surface pain points, then redesigned navigation through competitive analysis, user profiling, and card-sorting workshops</li>
+          <li>Built a <span class="exp-hl">fully interactive facility map</span> using custom HTML and jQuery within Elementor, replacing a static tour brochure with an immersive, icon-rich digital experience</li>
+          <li>Restructured the virtual tour into dedicated pages per facility and created an interactive scientific glossary, iterating through hover-based and dedicated-page formats</li>
+          <li>Ensured <span class="exp-hl">AODA compliance</span> throughout the website. Improved colour contrast, added non-colour visual cues, increased text sizes, and improved mobile responsiveness across the site</li>
+        </ul>
+        <div class="skill-pills" style="margin-bottom:0;padding-bottom:0;border-bottom:none">
+          <span class="pill p-mint">HTML/CSS</span><span class="pill p-mint">jQuery</span><span class="pill p-peach">UX Research</span><span class="pill p-peach">Accessibility</span><span class="pill p-peach">Figma</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-scispot" class="exp-panel">
+      <div class="exp-card">
+        <div class="exp-co-row">
+          <div class="exp-company">Scispot · Kitchener</div>
+          <div class="exp-dates"><span class="exp-date-badge">May – Aug 2022</span></div>
+        </div>
+        <div class="exp-role">Product Designer</div>
+        <ul class="exp-bullets">
+          <li>Ran competitive landscape research and designed a custom inventory management system tailored to the specific workflows of biotech lab clients</li>
+          <li>Built a scheduling tool that improved customer acquisition and redesigned onboarding flows to reduce early drop-off</li>
+          <li>Prototyped and shipped major product features across the platform within four months: secure document sharing with granular permissions, a lab materials manager with multi-level storage, an equipment checkout system that helped secure a major client, and real-time inventory linking the lab notebook to Labsheets</li>
+          <li>Also designed a permissions-based training module tracker, Figma flows for Google Sheets and S3 integrations, advanced filtering for Labsheets, and redesigned alerts and data visualisation templates that increased user engagement</li>
+        </ul>
+        <div class="skill-pills">
+          <span class="pill p-peach">Figma</span><span class="pill p-peach">User Research</span><span class="pill p-peach">Product Design</span><span class="pill p-lav">A/B Testing</span><span class="pill p-peach">Information Architecture</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-grhf" class="exp-panel">
+      <div class="exp-card">
+        <div class="exp-co-row">
+          <div class="exp-company">Grand River Hospital Foundation · Waterloo</div>
+          <div class="exp-dates">
+            <span class="exp-date-badge hi">May – Aug 2024</span>
+            <span class="exp-date-badge">Jan – Apr 2023</span>
+          </div>
+        </div>
+        <div class="exp-term-divider">May – Aug 2024</div>
+        <div class="exp-role">Data Scientist</div>
+        <ul class="exp-bullets">
+          <li>Returned to extend the donor modelling work, applying predictive models across <span class="exp-hl">10 concurrent campaigns</span> and building Tableau reporting tools that non-technical staff could use independently</li>
+          <li>Applied decision tree regression, logistic regression, and k-means clustering across <span class="exp-hl">800k donor records</span> to identify high-potential donors, uncovering <span class="exp-hl">over $1M in previously overlooked assets</span></li>
+        </ul>
+        <div class="skill-pills" style="margin-bottom:0;padding-bottom:0;border-bottom:none">
+          <span class="pill p-sky">Tableau</span><span class="pill p-mint">Python</span><span class="pill p-mint">SQL</span>
+        </div>
+        <div class="exp-term-divider">Jan – Apr 2023</div>
+        <div class="exp-role">Data Scientist</div>
+        <ul class="exp-bullets">
+          <li>Built Tableau dashboards surfacing donation trends across an <span class="exp-hl">$88M portfolio</span></li>
+          <li>Created automated data pipelines and SQL-based scaffolding that removed a manual reporting bottleneck the team had lived with for years</li>
+          <li>Denormalized the Raiser's Edge database, halving query times and improving data quality for downstream DRM conversion work</li>
+          <li>Built a separate volunteer activity and KPI dashboard, designed so non-technical staff could explore without touching SQL</li>
+        </ul>
+        <div class="skill-pills">
+          <span class="pill p-sky">Tableau</span><span class="pill p-lav">Decision Trees</span><span class="pill p-lav">k-means</span><span class="pill p-mint">Python</span><span class="pill p-mint">SQL</span><span class="pill p-mint">Scikit-learn</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-rehvup" class="exp-panel">
+      <div class="exp-card">
+        <div class="exp-co-row">
+          <div class="exp-company">RehvUp</div>
+          <div class="exp-dates"><span class="exp-date-badge">Sep – Dec 2023</span></div>
+        </div>
+        <div class="exp-role">Information Architect</div>
+        <ul class="exp-bullets">
+          <li>Identified root causes of recurring user frustration through iterative UX research and logic audits. Implemented fixes that reduced user complaints by <span class="exp-hl">90%</span></li>
+          <li>Designed the full product experience: user personas, product roadmaps, a gamification system to drive engagement, and a desktop companion interface</li>
+          <li>Restructured the information architecture for intuitive navigation without guidance, tested and iterated through multiple rounds of user feedback</li>
+        </ul>
+        <div class="skill-pills">
+          <span class="pill p-peach">UX/UI</span><span class="pill p-peach">User Research</span><span class="pill p-peach">Figma</span><span class="pill p-peach">Information Architecture</span><span class="pill p-peach">Roadmapping</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-mcgill" class="exp-panel">
+      <div class="exp-card">
+        <div class="exp-co-row">
+          <div class="exp-company">McGill University · Dept of Civil Engineering · Montréal</div>
+          <div class="exp-dates"><span class="exp-date-badge">May – Aug 2024</span></div>
+        </div>
+        <div class="exp-role">Data Analyst</div>
+        <ul class="exp-bullets">
+          <li>Integrated and cleaned <span class="exp-hl">30M+ government records</span> from multiple sources using SQL and Python, building standardised preprocessing pipelines that reduced manual QA time by <span class="exp-hl">90%</span></li>
+          <li>Wrote Python scripts removing <span class="exp-hl">23k+ redundant records</span>, cutting downstream query errors by 30%, and converted exploratory analyses into reproducible, research-ready datasets</li>
+          <li>Consolidated and validated historical abandoned oil well data against industry and government sources, then performed spatial analysis using Python and QGIS to evaluate renewable energy potential at each site — improving viable site identification by <span class="exp-hl">15%</span></li>
+        </ul>
+        <div class="skill-pills">
+          <span class="pill p-mint">Python</span><span class="pill p-mint">SQL</span><span class="pill p-lav">QGIS</span><span class="pill p-lav">Spatial Analysis</span><span class="pill p-mint">Pandas</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="projects">
+  <div class="reveal">
+    <div class="section-pill sp-sky">🚀 Projects</div>
+    <h2>Interesting things I've worked on</h2>
+    <p class="section-sub">Research roles, design teams, and student initiatives!</p>
+  </div>
+  <div class="proj-grid">
+    <div class="proj-card reveal">
+      <div class="proj-emoji">💊</div>
+      <div class="proj-type">LLM + RAG · Wat.ai</div>
+      <h3>Pharmaceutical Vector Database</h3>
+      <p>Researched embedding models and built a vector database for pharmaceutical knowledge retrieval as part of Waterloo's AI design team.</p>
+      <div class="proj-pills"><span class="pill p-lav">LLM</span><span class="pill p-lav">Vector DB</span><span class="pill p-mint">RAG</span><span class="pill p-mint">Python</span></div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-emoji">⚖️</div>
+      <div class="proj-type">Fairness ML · Aphrodite Project</div>
+      <h3>Algorithmic Bias in Matching</h3>
+      <p>Led EDA on 20k+ user profiles to surface and reduce demographic bias in a campus dating app. Resolved Firebase data issues, ran funnel analysis, and managed a global launch hitting 3,500+ signups in 12 hours.</p>
+      <div class="proj-pills"><span class="pill p-lav">Fairness ML</span><span class="pill p-mint">Python</span><span class="pill p-sky">Firebase</span></div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-emoji">🏥</div>
+      <div class="proj-type">Data Engineering · TraySense</div>
+      <h3>Surgical Inventory Schema</h3>
+      <p>Scoped a hospital overstock problem through site tours, then designed a MySQL schema handling 1,900+ surgical instrument configurations across four vendor datasets. User testing cut processing errors by 37%.</p>
+      <div class="proj-pills"><span class="pill p-mint">MySQL</span><span class="pill p-peach">Stakeholder Research</span></div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-emoji">🤖</div>
+      <div class="proj-type">HCI · SSIRL Research Lab</div>
+      <h3>QT Robot Interface</h3>
+      <p>Reviewed academic literature on wellness practices and designed an application interface for human interactions with QT, a social robot used in wellness and educational research settings.</p>
+      <div class="proj-pills"><span class="pill p-peach">HCI</span><span class="pill p-peach">Interface Design</span></div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-emoji">🥽</div>
+      <div class="proj-type">Assistive Tech · University of Calgary</div>
+      <h3>HoloLens for Learning Disabilities</h3>
+      <p>Early-stage research exploring how Microsoft HoloLens mixed reality could support students with learning disabilities in educational environments.</p>
+      <div class="proj-pills"><span class="pill p-lav">AR/MR</span><span class="pill p-peach">Research</span></div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-emoji">📣</div>
+      <div class="proj-type">Branding & Marketing · WARG</div>
+      <h3>Brand Identity & Outreach</h3>
+      <p>Built WARG's visual identity from scratch: colour palette, typography, tone guide. Plus designed merchandise, managed vendor negotiations, and ran a recruitment social media campaign.</p>
+      <div class="proj-pills"><span class="pill p-peach">Branding</span><span class="pill p-peach">Marketing</span><span class="pill p-peach">Figma</span></div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-emoji">📊</div>
+      <div class="proj-type">Data Viz · SYDE Class Profile</div>
+      <h3>Class Demographic Visualisations</h3>
+      <p>Cleaned and visualised demographic trend data for the SYDE cohort profile, building charts showing patterns across cohort demographics as part of annual tradition.</p>
+      <div class="proj-pills"><span class="pill p-mint">Python</span><span class="pill p-sky">Data Viz</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-inner reveal">
+    <span class="contact-emoji">✉️</span>
+    <h2>Let's work together!</h2>
+    <p class="contact-sub">Open to data science, product analytics, and APM roles.</p>
+    <div class="contact-links">
+      <a href="mailto:cheryl.li@uwaterloo.ca" class="contact-link primary">✉️ Email me</a>
+      <a href="https://linkedin.com/in/cheryl-xue-li" class="contact-link" target="_blank">💼 LinkedIn</a>
+      <a href="https://github.com/cherrowo" class="contact-link">🐙 GitHub</a>
+      <!--<a href="#" class="contact-link">📄 Resume</a> -->
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Cheryl Li</p>
+  <div>🌸</div>
+</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.exp-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.exp-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e, i) {
+    if (e.isIntersecting) {
+      setTimeout(function() { e.target.classList.add('visible'); }, i * 55);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+document.querySelectorAll('.skills-grid,.proj-grid,.cases-grid,.card-stack').forEach(function(g) {
+  g.querySelectorAll('.reveal').forEach(function(el, i) { el.style.transitionDelay = (i * 70) + 'ms'; });
+});
+</script>
+</body>
+</html>
