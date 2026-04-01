@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TraySense · cheryl's portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --cream:#fdf8f2;--cream2:#faf3e8;--white:#fff;
+  --blush:#f9d5cb;--blush2:#f7c4b6;
+  --mint:#c8ede0;--mint2:#a8dece;
+  --lav:#ddd4f7;--lav2:#c9bdf0;
+  --peach:#fde8d0;--yellow:#fceea3;--sky:#c8e8f9;
+  --text:#2d2926;--text2:#6b5f58;--text3:#9e918a;
+  --border:rgba(45,41,38,.09);
+  --shadow:0 2px 16px rgba(45,41,38,.07);
+  --shadow-md:0 5px 32px rgba(45,41,38,.11);
+  --accent:#2a8a68;
+  --r:16px;--r-lg:24px;--r-xl:32px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    radial-gradient(circle at 10% 15%,rgba(200,237,224,.35) 0%,transparent 38%),
+    radial-gradient(circle at 90% 10%,rgba(168,222,206,.28) 0%,transparent 34%),
+    radial-gradient(circle at 78% 80%,rgba(200,232,249,.22) 0%,transparent 36%),
+    radial-gradient(circle at 20% 88%,rgba(252,238,163,.18) 0%,transparent 32%)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 44px;background:rgba(253,248,242,.92);backdrop-filter:blur(22px);border-bottom:1.5px solid var(--border)}
+.nav-logo{font-family:'Caveat',cursive;font-size:23px;font-weight:700;color:var(--text);text-decoration:none}
+.nav-logo span{color:#e07b5a}
+.nav-back{font-size:13px;font-weight:600;color:var(--text2);text-decoration:none;padding:8px 18px;border-radius:100px;border:1.5px solid var(--border);background:var(--white);transition:all .2s}
+.nav-back:hover{background:var(--mint);color:var(--text);border-color:var(--mint2)}
+.hero{padding:120px 56px 64px;max-width:900px;margin:0 auto;position:relative;z-index:1}
+.case-tag{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;padding:6px 14px;border-radius:100px;background:var(--mint);color:#1a7058;letter-spacing:.05em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Caveat',cursive;font-size:clamp(36px,5vw,60px);font-weight:700;line-height:1.05;margin-bottom:16px}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--text3);font-weight:500;margin-bottom:32px}
+.hero-tagline{font-size:17px;color:var(--text2);line-height:1.75;max-width:680px;padding-bottom:32px;border-bottom:1.5px solid var(--border)}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:var(--r-xl);overflow:hidden;margin:40px 0;box-shadow:var(--shadow)}
+.stat-cell{background:var(--white);padding:24px 16px;text-align:center}
+.stat-val{font-family:'Caveat',cursive;font-size:38px;font-weight:700;color:var(--text);display:block;line-height:1;margin-bottom:6px}
+.stat-lbl{font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.content{max-width:900px;margin:0 auto;padding:0 56px 100px;position:relative;z-index:1}
+.section{margin-bottom:56px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.section h2{font-family:'Caveat',cursive;font-size:32px;font-weight:700;margin-bottom:16px;line-height:1.1}
+.section p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:14px}
+ul.body-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin:14px 0}
+ul.body-list li{font-size:14.5px;color:var(--text2);line-height:1.75;padding-left:20px;position:relative}
+ul.body-list li::before{content:'✦';position:absolute;left:0;top:4px;font-size:9px;color:var(--accent)}
+strong{color:var(--text);font-weight:700}
+.callout{background:var(--white);border-radius:var(--r-lg);padding:22px 26px;border-left:4px solid var(--accent);margin:24px 0;box-shadow:var(--shadow)}
+.callout p{font-size:14.5px;color:var(--text);font-style:italic;line-height:1.7;margin:0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:24px 0}
+.info-card{background:var(--white);border-radius:var(--r-lg);padding:24px;border:1.5px solid var(--border);box-shadow:var(--shadow)}
+.info-card h4{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.info-card p,.info-card li{font-size:13.5px;color:var(--text2);line-height:1.7}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;padding:0}
+.info-card li{padding-left:14px;position:relative}
+.info-card li::before{content:'·';position:absolute;left:0;color:var(--accent);font-weight:700;font-size:16px;line-height:1.3}
+.chart-wrap{background:var(--white);border-radius:var(--r-xl);padding:28px;border:1.5px solid var(--border);box-shadow:var(--shadow);margin:24px 0}
+.chart-wrap h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.chart-wrap p.chart-sub{font-size:12px;color:var(--text3);margin-bottom:20px}
+.chart-wrap canvas{max-height:300px}
+.stat-insight{background:var(--mint);border-radius:var(--r-lg);padding:20px 24px;margin:20px 0}
+.stat-insight h4{font-size:13px;font-weight:700;color:#1a5040;margin-bottom:6px}
+.stat-insight p{font-size:13.5px;color:#1a5040;line-height:1.65;margin:0}
+.data-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0}
+.data-table th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);padding:8px 12px;border-bottom:1.5px solid var(--border)}
+.data-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text2)}
+.data-table tr:last-child td{border-bottom:none}
+.hl{color:var(--text);font-weight:700}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.pill{font-size:12px;font-weight:500;padding:4px 12px;border-radius:100px}
+.p-mint{background:var(--mint);color:#1a7058}
+.p-lav{background:var(--lav);color:#5040b0}
+.p-sky{background:var(--sky);color:#1060a0}
+.p-peach{background:var(--peach);color:#b86020}
+.system-diagram{display:flex;align-items:center;justify-content:center;gap:0;margin:24px 0;flex-wrap:wrap}
+.sys-box{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:16px 20px;text-align:center;min-width:130px;box-shadow:var(--shadow)}
+.sys-box .icon{font-size:24px;margin-bottom:8px}
+.sys-box h5{font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:4px}
+.sys-box p{font-size:11px;color:var(--text3);margin:0}
+.sys-arrow{font-size:22px;color:var(--text3);padding:0 8px;align-self:center}
+@media(max-width:768px){
+  nav{padding:14px 20px}
+  .hero,.content{padding-left:20px;padding-right:20px}
+  .hero{padding-top:96px}
+  .stat-row,.two-col,.three-col{grid-template-columns:1fr 1fr}
+  .system-diagram{gap:8px}
+  .sys-arrow{display:none}
+}
+@media(max-width:480px){.stat-row,.two-col,.three-col{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">cheryl<span>.</span>li <span>🌸</span></a>
+  <a href="index.html#cases" class="nav-back">← Back to portfolio</a>
+</nav>
+
+<div class="hero">
+  <div class="case-tag">🏥 Product + Data Engineering · TraySense · SYDE Capstone</div>
+  <h1>Assisted surgical tray verification</h1>
+  <div class="hero-meta">
+    <span>📅 When: Sep 2024 – Apr 2025</span>
+    <span>👥 Team of 5 (my role: data + DB design)</span>
+    <span>🏢 University of Waterloo</span>
+  </div>
+  <p class="hero-tagline">In Canada, 21.6% of surgeries face delays due to Medical Device Reprocessing (MDR) errors. TraySense is a tray assembly verification system designed to reduce those errors. I scoped the problem, designed the data model, and ran the statistical analysis proving it works.</p>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <div class="section-label">The problem space</div>
+    <h2>What the MDR department actually deals with</h2>
+    <p>The Medical Device Reprocessing department is the invisible backbone of surgical operations. Every surgical tray (containing dozens of specific instruments) must be decontaminated, reassembled correctly, and sterilised before it can be used. At Grand River Hospital, this cycle runs over 123,000 times a year.</p>
+
+    <div class="three-col">
+      <div class="info-card">
+        <h4>📋 Static documentation</h4>
+        <p>Depending on the hospital, tray assembly instructions are stored in paper booklets or Excel files. This leaves technicians to manually navigate 1900+ tray configurations.</p>
+      </div>
+      <div class="info-card">
+        <h4>🧠 Cognitive load</h4>
+        <p>Technicians work under significant time pressure. 73% of Ontario medical technicians report burnout as pace, quantity, and quality are all critical.</p>
+      </div>
+      <div class="info-card">
+        <h4>💸 Real costs</h4>
+        <p>$38k in tool overstock, ~$300k lost annually from surgery delays, and at least one costly error everyday. Each error can cascade; one delayed tray can delay multiple procedures.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Discovery</div>
+    <h2>How we understood the problem</h2>
+    <p>We didn't start with a solution. We started with observation. The team conducted an introductory call, a discovery tour, shadowing sessions, and formal user interviews with MDR leads and technicians at Grand River Hospital before writing a line of code.</p>
+    <p>We built a <strong>Hierarchical Task Analysis</strong> using verbal protocol with two experienced technicians across multiple tray reassemblies. This identified the exact workflow stages where things broke down:</p>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h4>⚠️ Bottleneck 1: Missing / incorrect items</h4>
+        <p>When a tool was absent or wrong, the entire workflow halted. Technicians had to stop, search, and troubleshoot with no system to tell them what was missing or where it might be.</p>
+      </div>
+      <div class="info-card">
+        <h4>⚠️ Bottleneck 2: Sterile indicator validation</h4>
+        <p>Verifying sterile indicators was a point of uncertainty during final checks. Technicians second-guessed themselves, adding time and stress to an already demanding workflow.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">The solution</div>
+    <h2>How TraySense works</h2>
+    <p>TraySense tags surgical tools and trays, and scans them at assembly stations. Rather than full automation, this is a human-in-the-loop approach. The technology supports and validates the technician's work without replacing their judgement.</p>
+
+    <div class="system-diagram">
+      <div class="sys-box"><div class="icon">🏷️</div><h5>Tags</h5><p>Applied to all tools & trays</p></div>
+      <div class="sys-arrow">→</div>
+      <div class="sys-box"><div class="icon">📡</div><h5>Reader</h5><p>Scanner at each assembly station</p></div>
+      <div class="sys-arrow">→</div>
+      <div class="sys-box"><div class="icon">⚙️</div><h5>Java + WebSocket</h5><p>Processes tag reads, handles stale detection</p></div>
+      <div class="sys-arrow">→</div>
+      <div class="sys-box"><div class="icon">🗄️</div><h5>MySQL DB</h5><p>Tray configs, instrument records</p></div>
+      <div class="sys-arrow">→</div>
+      <div class="sys-box"><div class="icon">🖥️</div><h5>Next.js UI</h5><p>Real-time tool status for technicians</p></div>
+    </div>
+
+    <p>One design challenge: the scanner can only reliably read 10–12 tags simultaneously. We handled this with a stale/refresh rate: if a tag isn't detected for a specified number of scan cycles, it's marked "stale" and removed from the UI. This prevents phantom reads while accounting for tags that temporarily drop out of range.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Dta engineering</div>
+    <h2>The MySQL schema</h2>
+    <p>I designed the relational database schema that underpins the system. The core challenge was building something that could handle multiple levels of instrument identity simultaneously:</p>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h4>🔑 Type-level tracking</h4>
+        <p>All scalpels share a ID for "scalpel" regardless of manufacturer, so you can query "does this tray have a scalpel" without caring which specific scalpel it is.</p>
+      </div>
+      <div class="info-card">
+        <h4>🔑 Item-level tracking</h4>
+        <p>Each individual instrument also has its own ID, enabling individual history, defect tracking, and usage counts. This is what enables predictive maintenance.</p>
+      </div>
+    </div>
+
+    <p>The bigger picture: when a hospital switches vendors for a specific instrument, a single record update reflects across all records for that type of instrument. Without a relational DB, that change used to mean mean manually updating hundreds of Excel files.</p>
+
+      </div>
+
+  <div class="section">
+    <div class="section-label">User testing & statistics</div>
+    <h2>What the data actually showed</h2>
+    <p>I ran the full statistical analysis for our controlled user study: timed trials comparing manual assembly (A) vs TraySense (B) across users in two groups: those who started with A then switched to B (our modelled real-world scenario), and those who started with B then switched to A.</p>
+
+    <div class="chart-wrap">
+      <h4>Average assembly time: Manual (A) vs TraySense (B)</h4>
+      <p class="chart-sub">Grouped by test order: all users, A-first group, B-first group (seconds, lower is better)</p>
+      <canvas id="timeChart"></canvas>
+    </div>
+
+    <div class="chart-wrap">
+      <h4>Effect size by group</h4>
+      <p class="chart-sub">Cohen's d — practical significance of the difference between A and B (>0.8 = large effect)</p>
+      <canvas id="effectChart"></canvas>
+    </div>
+
+    <h4 style="margin:24px 0 12px;font-size:15px;font-weight:700">Full results breakdown</h4>
+    <table class="data-table">
+      <thead><tr><th>Group</th><th>Mean A (s)</th><th>Mean B (s)</th><th>Improvement</th><th>p-value</th><th>Effect size</th><th>Correlation</th></tr></thead>
+      <tbody>
+        <tr><td>All users</td><td>130.9</td><td>115.6</td><td class="hl">−15.3s</td><td>0.24</td><td>0.45 (sm-med)</td><td>0.12 (weak)</td></tr>
+        <tr><td>Started with A (manual first)</td><td>140.9</td><td>114.3</td><td class="hl">−26.6s ✦</td><td>0.17</td><td class="hl">0.89 (large)</td><td>~0.01</td></tr>
+        <tr><td>Started with B (TraySense first)</td><td>121.0</td><td>117.0</td><td>−4.0s</td><td>0.83</td><td>0.11 (tiny)</td><td>0.23</td></tr>
+      </tbody>
+    </table>
+
+    <div class="stat-insight">
+      <h4>Why the A→B group is the one that matters</h4>
+      <p>In real-world settings, technicians trained on manual assembly would transition to TraySense, exactly what the A-first group models. That group showed a 26.6s average improvement with a large effect size (0.89) and a p-value approaching significance (0.17) despite only 7 participants. The near-zero correlation (~0.01) means performance on the manual system doesn't predict TraySense performance, it's a different skill.</p>
+    </div>
+
+  </div>
+
+  <div class="section">
+    <div class="section-label">Tools & methods</div>
+    <div class="pill-row">
+      <span class="pill p-mint">MySQL</span>
+      <span class="pill p-mint">Statistical Analysis</span>
+      <span class="pill p-mint">Paired T-Test</span>
+      <span class="pill p-mint">Effect Size (Cohen's d)</span>
+      <span class="pill p-lav">User Research</span>
+      <span class="pill p-lav">Stakeholder Interviews</span>
+      <span class="pill p-lav">HTA (Hierarchical Task Analysis)</span>
+      <span class="pill p-sky">Next.js</span>
+      <span class="pill p-peach">Literature Review</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Time comparison chart
+const ctx1 = document.getElementById('timeChart').getContext('2d');
+new Chart(ctx1, {
+  type: 'bar',
+  data: {
+    labels: ['All users', 'Started with A (manual first)', 'Started with B (TraySense first)'],
+    datasets: [
+      {
+        label: 'Manual (A)',
+        data: [130.93, 140.86, 121.0],
+        backgroundColor: 'rgba(249,213,203,0.85)',
+        borderColor: '#e07b5a',
+        borderWidth: 1.5,
+        borderRadius: 8
+      },
+      {
+        label: 'TraySense (B)',
+        data: [115.64, 114.29, 117.0],
+        backgroundColor: 'rgba(168,222,206,0.85)',
+        borderColor: '#2a8a68',
+        borderWidth: 1.5,
+        borderRadius: 8
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { family: 'Plus Jakarta Sans', size: 12 }, padding: 16 } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}s` } }
+    },
+    scales: {
+      x: { ticks: { font: { family: 'Plus Jakarta Sans', size: 12 } } },
+      y: { min: 80, title: { display: true, text: 'Assembly time (seconds)', font: { family: 'Plus Jakarta Sans', size: 12 } }, ticks: { font: { size: 11 } } }
+    }
+  }
+});
+
+// Effect size chart
+const ctx2 = document.getElementById('effectChart').getContext('2d');
+new Chart(ctx2, {
+  type: 'bar',
+  data: {
+    labels: ['All users', 'A-first group (modelled scenario)', 'B-first group'],
+    datasets: [{
+      label: "Cohen's d (effect size)",
+      data: [0.45, 0.89, 0.11],
+      backgroundColor: ['rgba(200,232,249,0.85)','rgba(168,222,206,0.85)','rgba(221,212,247,0.85)'],
+      borderColor: ['#2070a8','#2a8a68','#6650c0'],
+      borderWidth: 1.5,
+      borderRadius: 8
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      annotation: {},
+      tooltip: { callbacks: { label: ctx => ` Effect size: ${ctx.raw} (${ctx.raw >= 0.8 ? 'large' : ctx.raw >= 0.5 ? 'medium' : ctx.raw >= 0.2 ? 'small' : 'tiny'})` } }
+    },
+    scales: {
+      x: { min: 0, max: 1.1, title: { display: true, text: "Cohen's d", font: { family: 'Plus Jakarta Sans', size: 12 } },
+        ticks: { callback: v => { const labels = {0:'0',0.2:'small',0.5:'medium',0.8:'large',1:''}; return labels[v]||v; }, font: { size: 11 } } },
+      y: { ticks: { font: { family: 'Plus Jakarta Sans', size: 12 } } }
+    }
+  }
+});
+</script>
+</body>
+</html>

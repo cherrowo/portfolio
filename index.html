@@ -104,7 +104,7 @@ h2{font-family:'Caveat',cursive;font-size:clamp(34px,4.5vw,54px);font-weight:700
 
 /* CASE STUDIES */
 #cases{background:var(--white)}
-.cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+.cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .case-card{background:var(--cream);border-radius:var(--r-xl);border:1.5px solid var(--border);overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
 .case-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
 .case-banner{height:7px}
@@ -159,6 +159,37 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
 @media(max-width:960px){nav{padding:14px 24px}#hero{grid-template-columns:1fr;padding:100px 24px 56px;gap:36px}section{padding:72px 24px}.exp-card{padding:28px 24px}}
 @media(max-width:780px){.proj-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.nav-links{display:none}.card-stack,.proj-grid,.cases-grid{grid-template-columns:1fr}footer{flex-direction:column;gap:8px;text-align:center}}
+
+/* MODAL OVERLAY */
+.cs-modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(45,41,38,.55);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
+.cs-modal-overlay.open{display:flex;animation:fadeIn .22s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.cs-modal{background:var(--cream);border-radius:var(--r-xl);max-width:720px;width:100%;max-height:90vh;overflow-y:auto;border:1.5px solid var(--border);box-shadow:0 20px 60px rgba(45,41,38,.18);position:relative;animation:slideUp .26s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.cs-modal-close{position:sticky;top:0;display:flex;justify-content:flex-end;padding:16px 20px 0;background:var(--cream);z-index:2}
+.cs-modal-close button{background:var(--border);border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:all .18s}
+.cs-modal-close button:hover{background:var(--blush);color:var(--text)}
+.cs-modal-inner{padding:4px 36px 36px}
+.cs-modal-banner{height:6px;border-radius:var(--r-xl) var(--r-xl) 0 0;margin:-4px -36px 24px;width:calc(100% + 72px)}
+.cs-modal-emoji{font-size:36px;margin-bottom:10px;display:block}
+.cs-modal-type{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
+.cs-modal-title{font-family:'Caveat',cursive;font-size:32px;font-weight:700;line-height:1.1;margin-bottom:8px}
+.cs-modal-tagline{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:24px;padding-bottom:20px;border-bottom:1.5px solid var(--border)}
+.cs-modal h4{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;margin-top:20px}
+.cs-modal p{font-size:14px;color:var(--text2);line-height:1.75}
+.cs-modal ul{list-style:none;display:flex;flex-direction:column;gap:6px;margin:0}
+.cs-modal li{font-size:13.5px;color:var(--text2);line-height:1.7;padding-left:16px;position:relative}
+.cs-modal li::before{content:'·';position:absolute;left:0;color:#e07b5a;font-weight:700;font-size:16px;line-height:1.4}
+.cs-modal-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:var(--r);overflow:hidden;margin-top:24px}
+.cs-modal-stat{background:var(--white);padding:16px 10px;text-align:center}
+.cs-modal-stat-val{font-family:'Caveat',cursive;font-size:26px;font-weight:700;color:var(--text);display:block;line-height:1;margin-bottom:4px}
+.cs-modal-stat-lbl{font-size:11px;color:var(--text3);font-weight:500}
+.cs-modal-link{display:inline-flex;align-items:center;gap:7px;margin-top:22px;padding:10px 20px;border-radius:100px;background:var(--text);color:var(--cream);font-size:13px;font-weight:600;text-decoration:none;transition:all .18s}
+.cs-modal-link:hover{background:#1a1714;transform:translateY(-2px)}
+.case-card-btn{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:9px 18px;border-radius:100px;border:1.5px solid var(--border);background:var(--white);font-size:12.5px;font-weight:600;color:var(--text);cursor:pointer;transition:all .18s;font-family:inherit}
+.case-card-btn:hover{background:var(--cream2);border-color:rgba(45,41,38,.2);transform:translateY(-1px)}
+.cs-callout{background:var(--cream2);border-radius:var(--r);padding:14px 18px;border-left:3px solid #e07b5a;margin-top:14px}
+.cs-callout p{font-size:13.5px;color:var(--text);font-style:italic;line-height:1.65}
 </style>
 </head>
 <body>
@@ -181,7 +212,7 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
     <p class="hero-desc">I transform messy data into decisions people trust, and build tools to help others understand their data! With experience across mutliple industries, I'm always asking "how do you make complex information useful?"</p>
     <div class="hero-ctas">
       <a href="#cases" class="btn-main">See my work ✨</a>
-      <a href="mailto:cheryl.li@uwaterloo.ca" class="btn-sec">Get in touch</a>
+      <a href="/cdn-cgi/l/email-protection#3b58535e4942571557527b4e4c5a4f5e4957545415585a" class="btn-sec">Get in touch</a>
     </div>
   </div>
   <div class="hero-right reveal">
@@ -193,18 +224,18 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
       </div>
       <div class="hero-card hc-mint">
         <div class="hero-card-num">$88M</div>
-        <div class="hero-card-label">Portfolio modelled</div>
+        <div class="hero-card-label">portfolio analyzed & modelled</div>
         <div class="hero-card-desc">Tableau dashboards at GRHF</div>
       </div>
       <div class="hero-card hc-lav">
         <div class="hero-card-num">90%</div>
-        <div class="hero-card-label">Fewer user complaints</div>
+        <div class="hero-card-label">fewer user complaints</div>
         <div class="hero-card-desc">UX/UI improvements at RehvUp</div>
       </div>
       <div class="hero-card hc-sky">
         <div class="hero-card-num">3,500+</div>
-        <div class="hero-card-label">Signups in 12 hrs</div>
-        <div class="hero-card-desc">product launch, Aphrodite</div>
+        <div class="hero-card-label">signups in 12 hrs</div>
+        <div class="hero-card-desc">product launch at the Aphrodite Project</div>
       </div>
     </div>
   </div>
@@ -213,8 +244,8 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
 <section id="skills">
   <div class="reveal">
     <div class="section-pill sp-mint">✦ Skills</div>
-    <h2>What I bring to the table</h2>
-    <p class="section-sub">My experience spans raw data all the way to meaningful insights and informed decisions for a non-technical stakeholders.</p>
+    <h2>What I bring to the table!</h2>
+    <p class="section-sub">what I use to transform raw data into to meaningful insights and informed decisions for a non-technical stakeholders.</p>
   </div>
   <div class="skills-grid">
     <div class="skill-card reveal">
@@ -263,7 +294,7 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
   <div class="reveal">
     <div class="section-pill sp-blush">💼 Experience</div>
     <h2>Where I've worked</h2>
-    <p class="section-sub">Particle physics, healthcare fundraising, biotech SaaS, UX development, and environmental data projects, each one a different flavour of problem solving.</p>
+    <p class="section-sub">particle physics, healthcare fundraising, biotech SaaS, UX development, and environmental data projects, each one a different flavour of problem solving.</p>
   </div>
   <div class="reveal">
     <div class="exp-tabs">
@@ -277,7 +308,7 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
     <div id="panel-triumf" class="exp-panel active">
       <div class="exp-card">
         <div class="exp-co-row">
-          <div class="exp-company">TRIUMF: Canada's Particle Accelerator · Vancouver</div>
+          <div class="exp-company">TRIUMF: Canada's Particle Accelerator</div>
           <div class="exp-dates">
             <span class="exp-date-badge hi">Sep – Dec 2021</span>
             <span class="exp-date-badge">Jan – Apr 2021</span>
@@ -287,11 +318,13 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
         <div class="exp-term-divider">Jan – Apr 2021</div>
         <div class="exp-role">Data Analyst</div>
         <ul class="exp-bullets">
-          <li>Analysed web traffic across <span class="exp-hl">200+ scientific content pages</span> using Google Analytics to identify engagement drop-off points and proposed internal tool redesigns</li>
           <li>Conducted multi-department user interviews, distributed staff surveys distributed via Qualtrics, analysed responses across departments, and produced <span class="exp-hl">executive-level Excel visualisations</span> used to inform workforce strategy</li>
+          <li>Analysed web traffic using Google Analytics, structuring findings around <span class="exp-hl">3 hypotheses</span> on external disengagement, internal navigation patterns, and audience intent</li>
+          <li>Identified a broken internal traffic filter in GA and flagged it as a data quality issue affecting all engagement metrics</li>
+          <li>Interpreted Sankey flow diagrams to map how new vs. returning users moved through the site differently, supporting the case for an internal/external IA split</li>
         </ul>
         <div class="skill-pills">
-          <span class="pill p-sky">Google Analytics</span><span class="pill p-sky">Qualtrics</span><span class="pill p-sky">Excel</span><span class="pill p-peach">Survey Design</span><span class="pill p-peach">User Research</span>
+          <span class="pill p-sky">Google Analytics</span><span class="pill p-sky">Qualtrics</span><span class="pill p-sky">Excel</span><span class="pill p-peach">Survey Design</span><span class="pill p-peach">User Research</span><span class="pill p-peach">People Data</span>
         </div>
         <div class="exp-term-divider">Sep – Dec 2021</div>
         <div class="exp-role">Digital Design Intern</div>
@@ -310,18 +343,20 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
     <div id="panel-scispot" class="exp-panel">
       <div class="exp-card">
         <div class="exp-co-row">
-          <div class="exp-company">Scispot · Kitchener</div>
+          <div class="exp-company">Scispot</div>
           <div class="exp-dates"><span class="exp-date-badge">May – Aug 2022</span></div>
         </div>
-        <div class="exp-role">Product Designer</div>
+        <div class="exp-role">Product Designer — Analytics & Experimentation</div>
         <ul class="exp-bullets">
-          <li>Ran competitive landscape research and designed a custom inventory management system tailored to the specific workflows of biotech lab clients</li>
-          <li>Built a scheduling tool that improved customer acquisition and redesigned onboarding flows to reduce early drop-off</li>
-          <li>Prototyped and shipped major product features across the platform within four months: secure document sharing with granular permissions, a lab materials manager with multi-level storage, an equipment checkout system that helped secure a major client, and real-time inventory linking the lab notebook to Labsheets</li>
-          <li>Also designed a permissions-based training module tracker, Figma flows for Google Sheets and S3 integrations, advanced filtering for Labsheets, and redesigned alerts and data visualisation templates that increased user engagement</li>
+          <li>Scoped, designed, and prototyped <span class="exp-hl">8+ SaaS product offerings in Figma</span> for biotech clients: inventory management, equipment checkout, secure document-sharing, and onboarding flows</li>
+          <li>Led engineering teams in shipping projects, managing tasks with Trello and directly leading to securing major client contracts</li>
+          <li>Defined success metrics and evaluated product feature experiments, contributing to <span class="exp-hl">25% increased feature adoption</span> and improved early user engagement</li>
+          <li>Reduced churn by <span class="exp-hl">20%</span> by identifying workflow friction through user research interviews and iterative UX improvements</li>
+          <li>Prototyped a lab materials manager with multi-level storage IA, an equipment checkout system that helped close a major deal, and real-time inventory that linked the lab notebook directly to Labsheets</li>
+          <li>Also designed and shipped these product features: a permissions-based training module tracker, Google Sheets and S3 integrations, advanced Labsheets filtering, and redesigned alerts and data visualisation templates</li>
         </ul>
         <div class="skill-pills">
-          <span class="pill p-peach">Figma</span><span class="pill p-peach">User Research</span><span class="pill p-peach">Product Design</span><span class="pill p-lav">A/B Testing</span><span class="pill p-peach">Information Architecture</span>
+          <span class="pill p-peach">Figma</span><span class="pill p-peach">User Research</span><span class="pill p-peach">Product Design</span><span class="pill p-peach">Project Management</span><span class="pill p-peach">Information Architecture</span><span class="pill p-peach">Metrics Design</span>
         </div>
       </div>
     </div>
@@ -329,7 +364,7 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
     <div id="panel-grhf" class="exp-panel">
       <div class="exp-card">
         <div class="exp-co-row">
-          <div class="exp-company">Grand River Hospital Foundation · Waterloo</div>
+          <div class="exp-company">Grand River Hospital Foundation</div>
           <div class="exp-dates">
             <span class="exp-date-badge hi">May – Aug 2024</span>
             <span class="exp-date-badge">Jan – Apr 2023</span>
@@ -339,7 +374,7 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
         <div class="exp-role">Data Scientist</div>
         <ul class="exp-bullets">
           <li>Returned to extend the donor modelling work, applying predictive models across <span class="exp-hl">10 concurrent campaigns</span> and building Tableau reporting tools that non-technical staff could use independently</li>
-          <li>Applied decision tree regression, logistic regression, and k-means clustering across <span class="exp-hl">800k donor records</span> to identify high-potential donors, uncovering <span class="exp-hl">over $1M in previously overlooked assets</span></li>
+          <li>Applied decision tree regression, logistic regression, and k-means clustering across <span class="exp-hl">800k donor records</span> to identify high-potential segments, uncovering <span class="exp-hl">over $1M in previously overlooked assets</span></li>
         </ul>
         <div class="skill-pills" style="margin-bottom:0;padding-bottom:0;border-bottom:none">
           <span class="pill p-sky">Tableau</span><span class="pill p-mint">Python</span><span class="pill p-mint">SQL</span>
@@ -366,7 +401,7 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
         </div>
         <div class="exp-role">Information Architect</div>
         <ul class="exp-bullets">
-          <li>Identified root causes of recurring user frustration through iterative UX research and logic audits. Implemented fixes that reduced user complaints by <span class="exp-hl">90%</span></li>
+          <li>Identified root causes of recurring user frustration through iterative UX research and logic audits, implementing fixes that reduced user complaints by <span class="exp-hl">90%</span></li>
           <li>Designed the full product experience: user personas, product roadmaps, a gamification system to drive engagement, and a desktop companion interface</li>
           <li>Restructured the information architecture for intuitive navigation without guidance, tested and iterated through multiple rounds of user feedback</li>
         </ul>
@@ -379,14 +414,16 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
     <div id="panel-mcgill" class="exp-panel">
       <div class="exp-card">
         <div class="exp-co-row">
-          <div class="exp-company">McGill University · Dept of Civil Engineering · Montréal</div>
+          <div class="exp-company">McGill University · Dept of Civil Engineering</div>
           <div class="exp-dates"><span class="exp-date-badge">May – Aug 2024</span></div>
         </div>
         <div class="exp-role">Data Analyst</div>
         <ul class="exp-bullets">
           <li>Integrated and cleaned <span class="exp-hl">30M+ government records</span> from multiple sources using SQL and Python, building standardised preprocessing pipelines that reduced manual QA time by <span class="exp-hl">90%</span></li>
-          <li>Wrote Python scripts removing <span class="exp-hl">23k+ redundant records</span>, cutting downstream query errors by 30%, and converted exploratory analyses into reproducible, research-ready datasets</li>
-          <li>Consolidated and validated historical abandoned oil well data against industry and government sources, then performed spatial analysis using Python and QGIS to evaluate renewable energy potential at each site — improving viable site identification by <span class="exp-hl">15%</span></li>
+          <li>Wrote Python scripts removing <span class="exp-hl">23k+ duplicate records</span>, cutting downstream query errors by 30%</li>
+          <li>Consolidated and validated historical abandoned oil well data against industry and government sources, converting exploratory analyses into datasets used across the lab</li>
+          
+          <li>Performed spatial analysis using Python and QGIS to evaluate renewable energy potential at abandoned well sites, improving viable site identification by <span class="exp-hl">15%</span></li>
         </ul>
         <div class="skill-pills">
           <span class="pill p-mint">Python</span><span class="pill p-mint">SQL</span><span class="pill p-lav">QGIS</span><span class="pill p-lav">Spatial Analysis</span><span class="pill p-mint">Pandas</span>
@@ -397,10 +434,151 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
   </div>
 </section>
 
+
+<section id="cases">
+  <div class="reveal">
+    <div class="section-pill sp-lav">📖 Case Studies</div>
+    <h2>Want to know more?</h2>
+    <p class="section-sub">Projects where I went from ambiguous problem all the way to measurable outcome.</p>
+  </div>
+  <div class="cases-grid">
+
+    <!-- CASE 1: RehvUp Gamification -->
+    <div class="case-card reveal">
+      <div class="case-banner cb-blush"></div>
+      <div class="case-top">
+        <span class="case-emoji">🎮</span>
+        <div class="case-type">UX / Product Design · RehvUp</div>
+        <h3>Designing a gamification system from zero</h3>
+        <p class="case-tagline">How I went from a vague brief to a fully scoped, Figma-prototyped engagement system, and cut user complaints by 90% along the way!</p>
+      </div>
+      <div class="case-body">
+        <div class="case-section">
+          <h4>The Problem</h4>
+          <p>RehvUp (think Instagram and Linkedin had a baby) had low engagement and a backlog of user frustration. The app's logic and navigation created confusion, and there was no coherent system to incentivise participation.</p>
+        </div>
+        <div class="case-section">
+          <h4>What I did</h4>
+          <ul>
+            <li>Audited app logic through usability testing, identifying root causes of recurring UX complaints</li>
+            <li>Redesigned the information architecture for intuitive navigation</li>
+            <li>Conceptualised and prototyped a full gamification system: XP points, persona ranks, leaderboards, challenges, and milestone badges</li>
+            <li>Wrote a formal scope document defining deliverables, approval process, and integration boundaries</li>
+          </ul>
+        </div>
+        <div class="case-stats">
+          <div class="cs-cell"><span class="cs-val">90%</span><div class="cs-lbl">fewer complaints</div></div>
+          <div class="cs-cell"><span class="cs-val">7</span><div class="cs-lbl">features scoped</div></div>
+          <div class="cs-cell"><span class="cs-val">1</span><div class="cs-lbl">solo designer (me!)</div></div>
+        </div>
+      </div>
+      <div style="padding:0 26px 20px"><a href="case-rehvup.html" class="case-card-btn">Read full case study →</a></div>
+    </div>
+
+    <!-- CASE 2: TraySense -->
+    <div class="case-card reveal">
+      <div class="case-banner cb-mint"></div>
+      <div class="case-top">
+        <span class="case-emoji">🏥</span>
+        <div class="case-type">Product + Data · TraySense (Engineering Capstone)</div>
+        <h3>Reducing surgical tray assembly errors</h3>
+        <p class="case-tagline">From hospital floor observation to a user-tested verification system, and the statistics to prove it works!</p>
+      </div>
+      <div class="case-body">
+        <div class="case-section">
+          <h4>The Problem</h4>
+          <p>21.6% of Canadian surgeries face delays from MDR errors. Technicians relied on paper and Excel files to assemble 1,900+ tray configurations under time pressure with a 4% error rate and $38k in overstock costs.</p>
+        </div>
+        <div class="case-section">
+          <h4>What I did</h4>
+          <ul>
+            <li>Scoped the problem through hospital tours, shadowing sessions, and stakeholder interviews</li>
+            <li>Led literature review and statistical analysis of user testing data (paired t-tests, effect sizes, correlation)</li>
+            <li>Designed a relational MySQL schema supporting 1,900+ instrument configurations across four vendor datasets</li>
+            <li>Ran a controlled user study: users switching from manual to our system improved by 26.7s avg with large effect size (0.89)</li>
+          </ul>
+        </div>
+        <div class="case-stats">
+          <div class="cs-cell"><span class="cs-val">26.7s</span><div class="cs-lbl">avg time saved</div></div>
+          <div class="cs-cell"><span class="cs-val">37%</span><div class="cs-lbl">error Reduction</div></div>
+          <div class="cs-cell"><span class="cs-val">1,900+</span><div class="cs-lbl">tray configurations</div></div>
+        </div>
+      </div>
+      <div style="padding:0 26px 20px"><a href="case-traysense.html" class="case-card-btn">Read full case study →</a></div>
+    </div>
+
+    <!-- CASE 3: McGill Renewable Energy -->
+    <div class="case-card reveal">
+      <div class="case-banner cb-lav"></div>
+      <div class="case-top">
+        <span class="case-emoji">🌱</span>
+        <div class="case-type">Data Science · McGill University</div>
+        <h3>Mapping renewable energy potential @ abandoned oil wells</h3>
+        <p class="case-tagline">Cleaning 30M+ government records and using QGIS to assess how many of North America's abandoned oil wells could generate wind, solar, or geothermal energy</p>
+      </div>
+      <div class="case-body">
+        <div class="case-section">
+          <h4>The Problem</h4>
+          <p>North America has over a million abandoned oil wells with no clean data on where they are. Researchers needed a comprehensive dataset to model for various projects, such as assessing how many could viably be repurposed for renewable energy generation.</p>
+        </div>
+        <div class="case-section">
+          <h4>What I did</h4>
+          <ul>
+            <li>Integrated and cleaned 30M+ records from government and industry sources using SQL and Python</li>
+            <li>Wrote Python scripts removing 23k+ redundant records; cross-validated with govern,emt amd industry sources to within 10%</li>
+            <li>Used QGIS spatial analysis to assess wind, solar, and geothermal potential at each viable site</li>
+            <li>Researched turbine models and energy generation formulas to improve viable site identification by 15%</li>
+          </ul>
+        </div>
+        <div class="case-stats">
+          <div class="cs-cell"><span class="cs-val">30M+</span><div class="cs-lbl">records cleaned</div></div>
+          <div class="cs-cell"><span class="cs-val">23k+</span><div class="cs-lbl">duplicates removed</div></div>
+          <div class="cs-cell"><span class="cs-val">+15%</span><div class="cs-lbl">site identification</div></div>
+        </div>
+      </div>
+      <div style="padding:0 26px 20px"><a href="case-mcgill.html" class="case-card-btn">Read full case study →</a></div>
+    </div>
+
+    <!-- CASE 4: TRIUMF -->
+    <div class="case-card reveal">
+      <div class="case-banner" style="background:linear-gradient(90deg,var(--sky),var(--mint2))"></div>
+      <div class="case-top">
+        <span class="case-emoji">⚛️</span>
+        <div class="case-type">UX Research & Strategy · TRIUMF</div>
+        <h3>Rebuilding a 5,000-page website</h3>
+        <p class="case-tagline">Data-driven strategic recommendation for redesigning Canada's particle accelerator website: starting with three hypotheses tested against Google Analytics, then building to IA and content strategy.</p>
+      </div>
+      <div class="case-body">
+        <div class="case-section">
+          <h4>The Problem</h4>
+          <p>TRIUMF's website had 5,000+ pages, two navbars, facility-specific microsites pulling in different directions, and no clear internal vs. external split. Analytics showed power users only ever visited a handful of pages.</p>
+        </div>
+        <div class="case-section">
+          <h4>What I did</h4>
+          <ul>
+            <li>Analysed Google Analytics traffic data for October 2021 and structured findings around 3 testable hypotheses on user behaviour</li>
+            <li>Identified a broken internal traffic filter in Google Analytics, flagging a data quality issue that affected all engagement metrics</li>
+            <li>Conducted competitive landscape analysis across MIT Media Lab, Adobe, and Bruce Power</li>
+            <li>Proposed a full IA restructure: internal/external split, facility-site strategy, and content framework</li>
+          </ul>
+        </div>
+        <div class="case-stats">
+          <div class="cs-cell"><span class="cs-val">5k+</span><div class="cs-lbl">pages audited</div></div>
+          <div class="cs-cell"><span class="cs-val">46%</span><div class="cs-lbl">bounce rate</div></div>
+          <div class="cs-cell"><span class="cs-val">3</span><div class="cs-lbl">hypotheses tested</div></div>
+        </div>
+      </div>
+      <div style="padding:0 26px 20px"><a href="case-triumf.html" class="case-card-btn">Read full case study →</a></div>
+    </div>
+
+  </div>
+</section>
+
+
 <section id="projects">
   <div class="reveal">
-    <div class="section-pill sp-sky">🚀 Projects</div>
-    <h2>Interesting things I've worked on</h2>
+    <div class="section-pill sp-sky">🚀 Projects & Extracurriculars</div>
+    <h2>Other Things I've Worked On!</h2>
     <p class="section-sub">Research roles, design teams, and student initiatives!</p>
   </div>
   <div class="proj-grid">
@@ -408,8 +586,8 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
       <div class="proj-emoji">💊</div>
       <div class="proj-type">LLM + RAG · Wat.ai</div>
       <h3>Pharmaceutical Vector Database</h3>
-      <p>Researched embedding models and built a vector database for pharmaceutical knowledge retrieval as part of Waterloo's AI design team.</p>
-      <div class="proj-pills"><span class="pill p-lav">LLM</span><span class="pill p-lav">Vector DB</span><span class="pill p-mint">RAG</span><span class="pill p-mint">Python</span></div>
+      <p>Researched embedding models and vector databases for pharmaceutical knowledge retrieval as part of Waterloo's AI design team, with the aim of developing an interactive product for natural-language drug queries.</p>
+      <div class="proj-pills"><span class="pill p-lav">LLM</span><span class="pill p-lav">Vector DB</span><span class="pill p-mint">SMILES</span><span class="pill p-mint">Python</span></div>
     </div>
     <div class="proj-card reveal">
       <div class="proj-emoji">⚖️</div>
@@ -419,18 +597,11 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
       <div class="proj-pills"><span class="pill p-lav">Fairness ML</span><span class="pill p-mint">Python</span><span class="pill p-sky">Firebase</span></div>
     </div>
     <div class="proj-card reveal">
-      <div class="proj-emoji">🏥</div>
-      <div class="proj-type">Data Engineering · TraySense</div>
-      <h3>Surgical Inventory Schema</h3>
-      <p>Scoped a hospital overstock problem through site tours, then designed a MySQL schema handling 1,900+ surgical instrument configurations across four vendor datasets. User testing cut processing errors by 37%.</p>
-      <div class="proj-pills"><span class="pill p-mint">MySQL</span><span class="pill p-peach">Stakeholder Research</span></div>
-    </div>
-    <div class="proj-card reveal">
       <div class="proj-emoji">🤖</div>
       <div class="proj-type">HCI · SSIRL Research Lab</div>
       <h3>QT Robot Interface</h3>
       <p>Reviewed academic literature on wellness practices and designed an application interface for human interactions with QT, a social robot used in wellness and educational research settings.</p>
-      <div class="proj-pills"><span class="pill p-peach">HCI</span><span class="pill p-peach">Interface Design</span></div>
+      <div class="proj-pills"><span class="pill p-peach">HCI</span><span class="pill p-peach">Interface Design</span><span class="pill p-peach">Research</span></div>
     </div>
     <div class="proj-card reveal">
       <div class="proj-emoji">🥽</div>
@@ -443,14 +614,14 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
       <div class="proj-emoji">📣</div>
       <div class="proj-type">Branding & Marketing · WARG</div>
       <h3>Brand Identity & Outreach</h3>
-      <p>Built WARG's visual identity from scratch: colour palette, typography, tone guide. Plus designed merchandise, managed vendor negotiations, and ran a recruitment social media campaign.</p>
+      <p>Built WARG's visual identity from scratch: colour palette, typography, tone guide. Also designed merchandise, managed vendor negotiations, and ran a recruitment social media campaign.</p>
       <div class="proj-pills"><span class="pill p-peach">Branding</span><span class="pill p-peach">Marketing</span><span class="pill p-peach">Figma</span></div>
     </div>
     <div class="proj-card reveal">
       <div class="proj-emoji">📊</div>
       <div class="proj-type">Data Viz · SYDE Class Profile</div>
       <h3>Class Demographic Visualisations</h3>
-      <p>Cleaned and visualised demographic trend data for the SYDE cohort profile, building charts showing patterns across cohort demographics as part of annual tradition.</p>
+      <p>Cleaned and visualised demographic trend data for the SYDE cohort profile, building charts showing patterns across graduating classes for the wider student body.</p>
       <div class="proj-pills"><span class="pill p-mint">Python</span><span class="pill p-sky">Data Viz</span></div>
     </div>
   </div>
@@ -475,7 +646,11 @@ footer p{font-size:12.5px;color:var(--text3);font-weight:500}
   <div>🌸</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+function closeModalIfBg(e,overlay) { if(e.target===overlay){overlay.classList.remove('open');document.body.style.overflow='';} }
+document.addEventListener('keydown',function(e){ if(e.key==='Escape'){document.querySelectorAll('.cs-modal-overlay.open').forEach(function(m){m.classList.remove('open');});document.body.style.overflow='';} });
 function showTab(id, btn) {
   document.querySelectorAll('.exp-panel').forEach(function(p) { p.classList.remove('active'); });
   document.querySelectorAll('.exp-tab').forEach(function(t) { t.classList.remove('active'); });
@@ -491,9 +666,7 @@ var obs = new IntersectionObserver(function(entries) {
   });
 }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
 document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
-document.querySelectorAll('.skills-grid,.proj-grid,.cases-grid,.card-stack').forEach(function(g) {
-  g.querySelectorAll('.reveal').forEach(function(el, i) { el.style.transitionDelay = (i * 70) + 'ms'; });
-});
+document.querySelectorAll('.skill-card').forEach(function(el) { obs.observe(el); });
 </script>
 </body>
 </html>

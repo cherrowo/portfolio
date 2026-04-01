@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TRIUMF Website Redesign · cheryl's portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --cream:#fdf8f2;--cream2:#faf3e8;--white:#fff;
+  --blush:#f9d5cb;--blush2:#f7c4b6;
+  --mint:#c8ede0;--mint2:#a8dece;
+  --lav:#ddd4f7;--lav2:#c9bdf0;
+  --peach:#fde8d0;--yellow:#fceea3;--sky:#c8e8f9;
+  --text:#2d2926;--text2:#6b5f58;--text3:#9e918a;
+  --border:rgba(45,41,38,.09);
+  --shadow:0 2px 16px rgba(45,41,38,.07);
+  --shadow-md:0 5px 32px rgba(45,41,38,.11);
+  --accent:#1060a0;
+  --r:16px;--r-lg:24px;--r-xl:32px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    radial-gradient(circle at 10% 15%,rgba(200,232,249,.35) 0%,transparent 38%),
+    radial-gradient(circle at 90% 10%,rgba(200,237,224,.28) 0%,transparent 34%),
+    radial-gradient(circle at 78% 80%,rgba(221,212,247,.25) 0%,transparent 36%),
+    radial-gradient(circle at 20% 88%,rgba(200,232,249,.18) 0%,transparent 32%)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 44px;background:rgba(253,248,242,.92);backdrop-filter:blur(22px);border-bottom:1.5px solid var(--border)}
+.nav-logo{font-family:'Caveat',cursive;font-size:23px;font-weight:700;color:var(--text);text-decoration:none}
+.nav-logo span{color:#e07b5a}
+.nav-back{font-size:13px;font-weight:600;color:var(--text2);text-decoration:none;padding:8px 18px;border-radius:100px;border:1.5px solid var(--border);background:var(--white);transition:all .2s}
+.nav-back:hover{background:var(--sky);color:var(--text);border-color:#a0c8e8}
+.hero{padding:120px 56px 64px;max-width:900px;margin:0 auto;position:relative;z-index:1}
+.case-tag{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;padding:6px 14px;border-radius:100px;background:var(--sky);color:#1060a0;letter-spacing:.05em;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Caveat',cursive;font-size:clamp(36px,5vw,60px);font-weight:700;line-height:1.05;margin-bottom:16px}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--text3);font-weight:500;margin-bottom:32px}
+.hero-tagline{font-size:17px;color:var(--text2);line-height:1.75;max-width:680px;padding-bottom:32px;border-bottom:1.5px solid var(--border)}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:var(--r-xl);overflow:hidden;margin:40px 0;box-shadow:var(--shadow)}
+.stat-cell{background:var(--white);padding:24px 16px;text-align:center}
+.stat-val{font-family:'Caveat',cursive;font-size:36px;font-weight:700;color:var(--text);display:block;line-height:1;margin-bottom:6px}
+.stat-lbl{font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.content{max-width:900px;margin:0 auto;padding:0 56px 100px;position:relative;z-index:1}
+.section{margin-bottom:56px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.section h2{font-family:'Caveat',cursive;font-size:32px;font-weight:700;margin-bottom:16px;line-height:1.1}
+.section p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:14px}
+ul.body-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin:14px 0}
+ul.body-list li{font-size:14.5px;color:var(--text2);line-height:1.75;padding-left:20px;position:relative}
+ul.body-list li::before{content:'✦';position:absolute;left:0;top:4px;font-size:9px;color:var(--accent)}
+strong{color:var(--text);font-weight:700}
+.callout{background:var(--white);border-radius:var(--r-lg);padding:22px 26px;border-left:4px solid var(--accent);margin:24px 0;box-shadow:var(--shadow)}
+.callout p{font-size:14.5px;color:var(--text);font-style:italic;line-height:1.7;margin:0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:24px 0}
+.info-card{background:var(--white);border-radius:var(--r-lg);padding:24px;border:1.5px solid var(--border);box-shadow:var(--shadow)}
+.info-card h4{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.info-card p,.info-card li{font-size:13.5px;color:var(--text2);line-height:1.7}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;padding:0}
+.info-card li{padding-left:14px;position:relative}
+.info-card li::before{content:'·';position:absolute;left:0;color:var(--accent);font-weight:700;font-size:16px;line-height:1.3}
+.chart-wrap{background:var(--white);border-radius:var(--r-xl);padding:28px;border:1.5px solid var(--border);box-shadow:var(--shadow);margin:24px 0}
+.chart-wrap h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.chart-wrap p.chart-sub{font-size:12px;color:var(--text3);margin-bottom:20px}
+.chart-wrap canvas{max-height:300px}
+.competitor-card{background:var(--white);border-radius:var(--r-xl);padding:28px;border:1.5px solid var(--border);box-shadow:var(--shadow);margin-bottom:16px}
+.competitor-card .org-name{font-family:'Caveat',cursive;font-size:26px;font-weight:700;margin-bottom:4px}
+.competitor-card .org-type{font-size:12px;font-weight:600;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+.strength-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.strength-pill{font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;background:var(--sky);color:#1060a0}
+.cure-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}
+.cure-card{border-radius:var(--r-lg);padding:22px;border:1.5px solid var(--border)}
+.cure-card h4{font-size:22px;font-weight:700;font-family:'Caveat',cursive;margin-bottom:8px}
+.cure-card p{font-size:13.5px;color:var(--text2);line-height:1.65;margin:0}
+.cure-c{background:rgba(200,237,224,.4)} .cure-u{background:rgba(252,238,163,.4)}
+.cure-r{background:rgba(249,213,203,.4)} .cure-e{background:rgba(221,212,247,.4)}
+.option-card{border-radius:var(--r-lg);padding:20px;margin-bottom:12px;border:1.5px solid var(--border)}
+.option-card h4{font-size:14px;font-weight:700;margin-bottom:8px}
+.option-card p{font-size:13.5px;color:var(--text2);line-height:1.65;margin:0}
+.option-pros{color:#1a7058;font-size:12px;font-weight:600;margin-top:8px}
+.option-cons{color:#c05030;font-size:12px;font-weight:600}
+.opt-a{background:rgba(200,237,224,.3)}
+.opt-b{background:rgba(200,232,249,.3)}
+.opt-c{background:rgba(252,238,163,.3)}
+.recommended-badge{display:inline-block;background:var(--text);color:var(--cream);font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;margin-left:8px;vertical-align:middle}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.pill{font-size:12px;font-weight:500;padding:4px 12px;border-radius:100px}
+.p-sky{background:var(--sky);color:#1060a0}
+.p-mint{background:var(--mint);color:#1a7058}
+.p-peach{background:var(--peach);color:#b86020}
+.p-lav{background:var(--lav);color:#5040b0}
+@media(max-width:768px){
+  nav{padding:14px 20px}
+  .hero,.content{padding-left:20px;padding-right:20px}
+  .hero{padding-top:96px}
+  .stat-row,.two-col,.three-col,.cure-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){.stat-row,.two-col,.three-col,.cure-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">cheryl<span>.</span>li <span>🌸</span></a>
+  <a href="index.html#cases" class="nav-back">← Back to portfolio</a>
+</nav>
+
+<div class="hero">
+  <div class="case-tag">⚛️ UX Research & Strategy · TRIUMF</div>
+  <h1>Rebuilding a 5,000-page website from first principles</h1>
+  <div class="hero-meta">
+    <span>📅 When: Sep – Dec 2021</span>
+    <span>👤 Role: Designer + Analyst</span>
+    <span>🏢 Where: TRIUMF: Canada's Particle Accelerator</span>
+  </div>
+  <p class="hero-tagline">TRIUMF's website had grown for decades without a coherent strategy. 5,000+ pages, two competing nav bars, and a fragmented relationship between the main site and facility microsites. I conducted the full research and produced a strategic roadmap for fixing it.</p>
+</div>
+
+<div class="content">
+
+  <div class="stat-row">
+    <div class="stat-cell"><span class="stat-val">5k+</span><div class="stat-lbl">Pages in scope</div></div>
+    <div class="stat-cell"><span class="stat-val">46%</span><div class="stat-lbl">Site-wide bounce rate</div></div>
+    <div class="stat-cell"><span class="stat-val">3</span><div class="stat-lbl">Data hypotheses tested</div></div>
+    <div class="stat-cell"><span class="stat-val">200+</span><div class="stat-lbl">Users visiting 200+ times/month</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">The situation</div>
+    <h2>What TRIUMF's website looked like</h2>
+    <p>TRIUMF is Canada's national particle accelerator centre, a sprawling research institution with multiple facilities, dozens of divisions, and audiences ranging from academic collaborators to the general public to incoming talent. The website had to serve all of them, and was failing most of them.</p>
+
+    <div class="two-col">
+      <div class="info-card">
+        <h4>🌐 External users: disengaged</h4>
+        <ul>
+          <li>Most news articles dated from 2020. Not "we're a cutting-edge research centre" energy</li>
+          <li>Content presented as a text stream with small visuals which is not competitive with modern science communication</li>
+          <li>No clear hierarchy between TRIUMF's multiple external sites (main site, TRIUMF50, DOL, 5YP)</li>
+          <li>Unclear what the site was supposed to do: attract commercial partners? talent? public engagement? file storage? Everyone was thrown under one site</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>🔬 Internal users: lost</h4>
+        <ul>
+          <li>High-frequency internal users made up half the traffic but they were only ever visiting 5–6 pages (directory, quick-links, admin, workday)</li>
+          <li>Facility-specific microsites linked back to triumf.ca for certain tools, so the same information might be on the facility page, the main site, Docushare, or Office365</li>
+          <li>Two competing nav bars made traversal confusing. The sidebar changed as you moved through the site</li>
+        </ul>
+      </div>
+    </div>
+</div>
+
+  <div class="section">
+    <div class="section-label">Data analysis</div>
+    <h2>What Google Analytics revealed</h2>
+    <p>I analysed site traffic data collected by Google Analytics over October 2021, chosen deliberately. October is a low-volatility month: Thanksgiving is the only major holiday, fewer co-op students cycling in and out, and using past data meant numbers would stay accurate throughout analysis. The findings were organised into three testable hypotheses.</p>
+
+    <div class="callout"><p>I structured the analysis around hypotheses rather than just describing the data. The hypotheses forced the data to answer specific questions about user intent and structural failure.</p></div>
+
+    <div class="info-card" style="margin:24px 0">
+      <h4>🔍 Hypothesis 1: TRIUMF is getting external traffic! but failing to keep it.</h4>
+      <p style="margin-bottom:12px">The homepage wasn't offering anything of value to a majority of external visitors.</p>
+      <ul>
+        <li>A <strong>staggering proportion of total users were new users</strong> (high external reach with no retention)</li>
+        <li>The landing page absorbed a majority of all site traffic, but out of 5,000+ pages, most got under 100 views/month</li>
+        <li>Bounce rates were <strong>41.7% for the landing page and 59.1% for the homepage</strong> (Google Analytics tracks them separately but they're functionally the same page). Nearly half of visitors left immediately</li>
+        <li>The site-wide average bounce rate was <strong>46%</strong></li>
+        <li>Pages with the highest engagement times were internal directory pages. Externally-facing content underperformed consistently</li>
+        <li>Sankey flow diagrams showed new users overwhelmingly leaving after one page (high bounce rate, few pages visited, low engagement time)</li>
+      </ul>
+    </div>
+
+    <div class="chart-wrap">
+      <h4>Bounce rate by page type</h4>
+      <p class="chart-sub">External-facing pages bounce far more than internal utility pages, confirming the site isn't serving public visitors</p>
+      <canvas id="bounceChart"></canvas>
+    </div>
+
+    <div class="info-card" style="margin:24px 0">
+      <h4>🔍 Hypothesis 2: Internal users only use a handful of pages</h4>
+      <p style="margin-bottom:12px">They have their own tools for everything else and actively avoid triumf.ca's confusing navigation.</p>
+      <ul>
+        <li><strong>Quick-links, Directory, and Workday</strong> dominated internal traffic (high unique pageviews, low bounce rates, high exit rates). People get the link they need and leave</li>
+        <li>Sankey diagrams showed returning users accessing one resource and leaving with many bypassing the landing page entirely, going directly to Workday, Quick-links, Directory, or Training pages from saved bookmarks</li>
+        <li>User Explorer revealed a significant cohort of <strong>200+ session users in a single month</strong>. These are people for whom triumf.ca is essentially a utility app, not a website</li>
+        <li>At least 6 facility-specific microsites (cycops, cmms, titan, ccn, mis, bnmr) existed outside the GA data, meaning some important internal links didn't require navigating triumf.ca at all</li>
+      </ul>
+    </div>
+
+    <div class="chart-wrap">
+      <h4>User behaviour concentration for triumf.ca</h4>
+      <p class="chart-sub">High-frequency internal users cluster almost entirely on utility pages. External users spread across (and quickly leave) the rest, usually the landing page</p>
+      <canvas id="trafficChart"></canvas>
+    </div>
+
+    <div class="info-card" style="margin:24px 0">
+      <h4>🔍 Hypothesis 3: Most visitors already intended to come to TRIUMF.ca</h4>
+      <p style="margin-bottom:12px">Traffic channels heavily implied existing affiliation with TRIUMF this wasn't random search traffic stumbling in.</p>
+      <ul>
+        <li>"Direct" was the dominant channel (people typing "triumf.ca" directly), meaning intentional visits</li>
+        <li>"Organic Search" meant people specifically searching for TRIUMF</li>
+        <li>Many referral sites were internal, traffic was coming from other TRIUMF sites</li>
+        <li>Demographics supported this: a <strong>majority of users were Canada-based</strong>, Canadian users had the lowest bounce rate, and the largest identified city cluster was the Vancouver area (where TRIUMF is located)</li>
+        <li>Top interest categories matched TRIUMF workforce demographics: session time increased with age (older = established science career = work-related use)</li>
+        <li>Language breakdown: three forms of English dominated; Japanese was a notable secondary (consistent with TRIUMF's known Japanese researcher partnerships)</li>
+        <li>Peak usage times corresponded directly to working hours (midday spikes, low early-morning and late-night activity. TRIUMF has excellent work-life balance)</li>
+      </ul>
+    </div>
+
+    <p><strong>A methodological catch:</strong> The internal traffic filter in GA wasn't working (the numbers implied zero internal users), which directly contradicted everything the behavioural data showed. This is a data quality issue: the filter was broken, meaning the actual split between internal and external traffic was unknown and all numbers needed to be read with that in mind.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Competitive analysis</div>
+    <h2>Three organisations that also handle splits across content offerings</h2>
+    <p>Not all competitive analysis means direct competitors. It means finding organisations solving analogous (similar structure and function, that's my word of the day) problems. I chose each of these for a specific reason.</p>
+
+    <div class="competitor-card">
+      <div class="org-name">MIT Media Lab</div>
+      <div class="org-type">Best candidate for content structure + newsroom design</div>
+      <div class="strength-row">
+        <span class="strength-pill">Experimental research facility</span>
+        <span class="strength-pill">Non-profit</span>
+        <span class="strength-pill">Decentralised divisions</span>
+        <span class="strength-pill">General + specialist audiences</span>
+      </div>
+      <p style="font-size:13.5px;color:var(--text2);line-height:1.7"><strong>Key takeaways:</strong> Visual-first newsroom with large imagery and large text (contrast to TRIUMF's text-stream format). Clean internal/external split with a well-defined portal. Intuitive research topic navigation that doesn't require knowing division names upfront.</p>
+    </div>
+
+    <div class="competitor-card">
+      <div class="org-name">Adobe</div>
+      <div class="org-type">Best candidate for complex product/tool navigation patterns</div>
+      <div class="strength-row">
+        <span class="strength-pill">Large product catalogue</span>
+        <span class="strength-pill">Multiple audience types</span>
+        <span class="strength-pill">Extensive use of footer as secondary nav</span>
+      </div>
+      <p style="font-size:13.5px;color:var(--text2);line-height:1.7"><strong>Key takeaways:</strong> Organises products by <em>usage type</em> (Creativity & Design, PDF & e-Signatures, Marketing) rather than product name. Directly applicable to TRIUMF's research programmes. Extensive footer architecture surfaces everything without cluttering the primary nav. Showcases top products on homepage with a repeat in the footer.</p>
+    </div>
+
+    <div class="competitor-card">
+      <div class="org-name">Bruce Power</div>
+      <div class="org-type">Best candidate for closest direct comparison</div>
+      <div class="strength-row">
+        <span class="strength-pill">Also produces isotopes</span>
+        <span class="strength-pill">Same dual audience: talent + commercial partners</span>
+        <span class="strength-pill">Science + public safety messaging</span>
+      </div>
+      <p style="font-size:13.5px;color:var(--text2);line-height:1.7"><strong>Key takeaways:</strong> Homepage simultaneously addresses commercial partners and incoming talent while also including social cause messaging (decarbonization, anti-racism) that resonates with a younger academic audience. Clear career and commercial pathways in the nav. Highlights specific major programmes (NetZero2025, Life-Extension) to signal credibility and ambition.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Core recommendation</div>
+    <h2>The internal / external split</h2>
+    <p>The structural fix is a clean separation: a lean, purpose-built external site for public audiences, and a proper internal portal for staff. This is how most large organisations handle this problem, and it's what TRIUMF's analytics data was pointing to anyway.</p>
+    <p>I mapped out three possible approaches for handling the facility microsites:</p>
+
+    <div class="option-card opt-a">
+      <h4>Option A: Consolidate within facility pages</h4>
+      <p>All internal content lives on facility-specific microsites; triumf.ca stays lean for external audiences.</p>
+      <p class="option-pros">✓ Keeps triumf.ca simple · ✓ Facilities maintain ownership</p>
+      <p class="option-cons">✗ Requires updating decades-old pages · ✗ Creates inconsistent experience across facilities</p>
+    </div>
+    <div class="option-card opt-b">
+      <h4>Option B: Centralise in a single internal portal <span class="recommended-badge">Recommended</span></h4>
+      <p>Migrate all internal tools and content to a unified portal. Decommission facility microsites over time.</p>
+      <p class="option-pros">✓ Single source for resources · ✓ Can decommission old sites · ✓ Best long-term scalability</p>
+      <p class="option-cons">✗ Significant migration effort · ✗ Requires buy-in from all facility stakeholders</p>
+    </div>
+    <div class="option-card opt-c">
+      <h4>Option C: Status quo, with pruning</h4>
+      <p>Keep the current relationship but remove unneeded content from triumf.ca with consideration for facility needs.</p>
+      <p class="option-pros">✓ Lowest disruption · ✓ Fastest to implement</p>
+      <p class="option-cons">✗ Doesn't solve the root problem · ✗ Technical debt accumulates further</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">External content strategy</div>
+    <h2>The CURE framework</h2>
+    <p>For the external-facing side, I proposed a four-step repeatable content strategy rather than a one-time redesign. The goal was to give the team a process they could apply to any section of the site, not just a single output.</p>
+
+    <div class="cure-grid">
+      <div class="cure-card cure-c">
+        <h4>C - Curate</h4>
+        <p>Select and prioritise content for a public audience (not every internal announcement belongs on the external site). Define a content brief for each section: who is this for, what do we want them to do?</p>
+      </div>
+      <div class="cure-card cure-u">
+        <h4>U - Update</h4>
+        <p>Make content current and relevant. Most news articles on the site were outdated. For a cutting-edge research facility, that's a credibility problem. Set a content freshness standard.</p>
+      </div>
+      <div class="cure-card cure-r">
+        <h4>R - Redesign</h4>
+        <p>Move from text streams to visual-first layouts modelled on MIT's newsroom: large images correlated with stories, bigger typography, visual hierarchy that works at a glance rather than requiring reading.</p>
+      </div>
+      <div class="cure-card cure-e">
+        <h4>E - Evaluate</h4>
+        <p>Use A/B testing and analytics to measure whether changes increased engagement. Build the feedback loop from the start. Don't treat the redesign as a one-off event.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Change management</div>
+    <h2>Communicating a major redesign</h2>
+    <p>A recommendation that ignores implementation tends not to get implemented. A significant section of my proposal covered how to communicate the changes, because the Qualtrics survey data showed staff already felt communication gaps existed.</p>
+    <ul class="body-list">
+      <li>Involve facility stakeholders in the design process early! Not just as sign-off recipients but as active participants in shaping their piece of the new website</li>
+      <li>Distribute progress updates through existing channels: sitewide emails, division leaders passing information to teams, Microsoft Teams</li>
+      <li>Prepare FAQs and tutorials before the launch, not after questions arrive. Large changes always generate large question volumes</li>
+      <li>Be transparent: if people have concerns about the redesign, welcome them. Forced changes on an internal audience rarely stick</li>
+    </ul>
+    <p>The internal comms satisfaction data made this concrete. The lowest-scoring dimension was <em>amount of information</em>, not clarity or tone. People wanted more updates, more often.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Also this term</div>
+    <h2>Data work alongside the strategy project</h2>
+    <p>Alongside website strategy, I contributed to broader data and research work at TRIUMF during the same term:</p>
+    <ul class="body-list">
+      <li>Analysed cross-departmental survey responses collected via Qualtrics, producing executive-level Excel visualisations used to inform workforce strategy</li>
+      <li>Interpreted Sankey flow diagrams (user journey visualisations) to map how different user types (new vs. returning, internal vs. external) moved through the site differently</li>
+      <li>Ran card-sorting sessions with internal users to reimagine the site's navigation structure from the ground up</li>
+      <li>Created user profiles for each of TRIUMF's key audiences to ground design decisions in actual user needs</li>
+    </ul>
+    
+    <div class="chart-wrap">
+      <h4>Internal communications satisfaction — Qualtrics survey data</h4>
+      <p class="chart-sub">Staff satisfaction scores across communication dimensions (1 = very dissatisfied, 5 = very satisfied)</p>
+      <canvas id="commsChart"></canvas>
+    </div>
+
+    <p>The Qualtrics survey told a parallel story: the lowest-scoring dimension was <strong>amount of information</strong> received — people felt they weren't getting enough, and what they did get was hard to find. This directly shaped the change management recommendations.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Tools & methods</div>
+    <div class="pill-row">
+      <span class="pill p-sky">Google Analytics</span>
+      <span class="pill p-sky">Qualtrics</span>
+      <span class="pill p-sky">Sankey Flow Analysis</span>
+      <span class="pill p-sky">Competitive Landscape Analysis</span>
+      <span class="pill p-mint">Information Architecture</span>
+      <span class="pill p-mint">Card Sorting</span>
+      <span class="pill p-mint">User Personas</span>
+      <span class="pill p-peach">UX Strategy</span>
+      <span class="pill p-peach">Content Strategy</span>
+      <span class="pill p-peach">Stakeholder Communication</span>
+      <span class="pill p-lav">Excel (data visualisation)</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Bounce rate chart
+const ctx0 = document.getElementById('bounceChart').getContext('2d');
+new Chart(ctx0, {
+  type: 'bar',
+  data: {
+    labels: ['Landing page\n(GA entry)', 'Homepage\n(GA home)', 'Site average', 'Quick-links', 'Directory', 'Workday'],
+    datasets: [{
+      label: 'Bounce rate (%)',
+      data: [59.1, 41.7, 46, 12, 18, 15],
+      backgroundColor: [
+        'rgba(249,213,203,0.85)','rgba(249,213,203,0.85)',
+        'rgba(252,238,163,0.85)',
+        'rgba(200,237,224,0.85)','rgba(200,237,224,0.85)','rgba(200,237,224,0.85)'
+      ],
+      borderColor: ['#e07b5a','#e07b5a','#b86020','#2a8a68','#2a8a68','#2a8a68'],
+      borderWidth: 1.5,
+      borderRadius: 8
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` Bounce rate: ${ctx.raw}%` } }
+    },
+    scales: {
+      x: { ticks: { font: { family: 'Plus Jakarta Sans', size: 11 } } },
+      y: { min: 0, max: 100, title: { display: true, text: 'Bounce rate (%)', font: { family: 'Plus Jakarta Sans', size: 12 } }, ticks: { callback: v => v + '%', font: { size: 11 } } }
+    }
+  }
+});
+
+// Traffic concentration chart
+const ctx1 = document.getElementById('trafficChart').getContext('2d');
+new Chart(ctx1, {
+  type: 'bar',
+  data: {
+    labels: ['Directory', 'Quick-links', 'Admin tools', 'Workday', 'All other 5k+ pages (including landing)'],
+    datasets: [
+      {
+        label: 'High-frequency users (% of their visits)',
+        data: [32, 28, 22, 14, 4],
+        backgroundColor: 'rgba(200,232,249,0.85)',
+        borderColor: '#2070a8',
+        borderWidth: 1.5,
+        borderRadius: 8
+      },
+      {
+        label: 'All other users (% of their visits)',
+        data: [8, 6, 5, 4, 77],
+        backgroundColor: 'rgba(200,237,224,0.85)',
+        borderColor: '#2a8a68',
+        borderWidth: 1.5,
+        borderRadius: 8
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { family: 'Plus Jakarta Sans', size: 12 }, padding: 14 } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}% of sessions` } }
+    },
+    scales: {
+      x: { ticks: { font: { family: 'Plus Jakarta Sans', size: 12 } } },
+      y: { title: { display: true, text: '% of sessions', font: { family: 'Plus Jakarta Sans', size: 12 } }, ticks: { callback: v => v + '%', font: { size: 11 } } }
+    }
+  }
+});
+
+// Comms satisfaction chart
+const ctx2 = document.getElementById('commsChart').getContext('2d');
+new Chart(ctx2, {
+  type: 'bar',
+  data: {
+    labels: ['Clarity of\ncommunications', 'Tone &\nrespectfulness', 'Frequency of\nupdates', 'Amount of\ninformation', 'Access to\nleadership'],
+    datasets: [{
+      label: 'Satisfaction score (1–5)',
+      data: [3.4, 3.8, 2.9, 2.4, 3.1],
+      backgroundColor: ['rgba(200,237,224,0.85)','rgba(200,237,224,0.85)','rgba(252,238,163,0.85)','rgba(249,213,203,0.85)','rgba(221,212,247,0.85)'],
+      borderColor: ['#2a8a68','#2a8a68','#b86020','#e07b5a','#6650c0'],
+      borderWidth: 1.5,
+      borderRadius: 8
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      annotation: {},
+      tooltip: { callbacks: { label: ctx => ` Satisfaction: ${ctx.raw}/5` } }
+    },
+    scales: {
+      x: { ticks: { font: { family: 'Plus Jakarta Sans', size: 12 } } },
+      y: { min: 0, max: 5, title: { display: true, text: 'Score (1=very dissatisfied, 5=very satisfied)', font: { family: 'Plus Jakarta Sans', size: 12 } }, ticks: { stepSize: 1, font: { size: 11 } } }
+    }
+  }
+});
+</script>
+</body>
+</html>
