@@ -4,669 +4,825 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>cheryl's portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-:root{
-  --cream:#fdf8f2;--cream2:#faf3e8;--white:#fff;
-  --blush:#f9d5cb;--blush2:#f7c4b6;
-  --mint:#c8ede0;--mint2:#a8dece;
-  --lav:#ddd4f7;--lav2:#c9bdf0;
-  --peach:#fde8d0;--yellow:#fceea3;--sky:#c8e8f9;
-  --text:#2d2926;--text2:#6b5f58;--text3:#9e918a;
-  --border:rgba(45,41,38,.09);
-  --shadow:0 2px 16px rgba(45,41,38,.07);
-  --shadow-md:0 5px 32px rgba(45,41,38,.11);
-  --r:16px;--r-lg:24px;--r-xl:32px;
+:root {
+  --bg: #1a1528;
+  --bg2: #211c34;
+  --bg3: #2a2440;
+  --bg4: #332d4e;
+  --cream: #f5edd8;
+  --cream2: #ede0c4;
+  --cream3: #e0d0b0;
+  --lav: #c8b8e8;
+  --lav2: #b4a0d8;
+  --lav3: #9880c4;
+  --lav4: #7a62a8;
+  --lav-soft: rgba(200,184,232,.15);
+  --lav-pale: rgba(200,184,232,.08);
+  --pink: #e8b4c8;
+  --pink2: #d898b4;
+  --pink3: #c07898;
+  --pink-soft: rgba(232,180,200,.15);
+  --sky: #a8cce8;
+  --sky2: #88b8dc;
+  --sky-soft: rgba(168,204,232,.15);
+  --mint: #a8d8c8;
+  --mint2: #84c4b0;
+  --mint-soft: rgba(168,216,200,.15);
+  --peach: #f0c8a8;
+  --gold: #e8d090;
+  --ink-light: #f0e8ff;
+  --ink-mid: #c8b8e0;
+  --ink-dim: #8878a8;
+  --ink-dimmer: #584868;
+  --border: rgba(200,184,232,.14);
+  --border2: rgba(200,184,232,.28);
+  --shadow: 0 4px 24px rgba(0,0,0,.3);
+  --shadow-soft: 0 8px 40px rgba(0,0,0,.4);
+  --glow-lav: 0 0 20px rgba(180,160,216,.25);
+  --glow-pink: 0 0 20px rgba(216,152,180,.25);
+  --r: 20px; --r-lg: 28px; --r-xl: 36px; --r-pill: 100px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--cream);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:
-    radial-gradient(circle at 10% 15%,rgba(249,213,203,.32) 0%,transparent 38%),
-    radial-gradient(circle at 90% 10%,rgba(200,237,224,.28) 0%,transparent 34%),
-    radial-gradient(circle at 78% 80%,rgba(221,212,247,.25) 0%,transparent 36%),
-    radial-gradient(circle at 20% 88%,rgba(252,238,163,.22) 0%,transparent 32%)}
+body{
+  background:var(--bg);color:var(--ink-light);
+  font-family:'Nunito',sans-serif;font-size:16px;line-height:1.75;overflow-x:hidden;
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Cpath d='M11 1L13.2 8H20L14.4 12.2L16.6 19L11 14.8L5.4 19L7.6 12.2L2 8H8.8Z' fill='%23c8b8e8' stroke='%23b4a0d8' stroke-width='1.2'/%3E%3C/svg%3E") 11 11,auto;
+}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 44px;background:rgba(253,248,242,.92);backdrop-filter:blur(22px);border-bottom:1.5px solid var(--border)}
-.nav-logo{font-family:'Caveat',cursive;font-size:23px;font-weight:700;color:var(--text)}
-.nav-logo span{color:#e07b5a}
+/* STARFIELD */
+.star-field{position:fixed;inset:0;pointer-events:none;z-index:0}
+.bpc-star{position:absolute;border-radius:50%;animation:starPulse var(--dur,4s) ease-in-out infinite;opacity:0}
+@keyframes starPulse{0%,100%{opacity:0;transform:scale(.5)}50%{opacity:var(--op,.8);transform:scale(1)}}
+
+/* NEBULA CLOUDS */
+.bg-clouds{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.cloud{position:absolute;border-radius:50%;filter:blur(80px);animation:drift var(--t,20s) ease-in-out infinite alternate;opacity:var(--op,.12);}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(var(--dx,30px),var(--dy,20px)) scale(var(--sc,1.05))}}
+
+/* SCROLL BAR */
+#scroll-bar{position:fixed;top:0;left:0;height:3px;z-index:300;background:linear-gradient(90deg,var(--lav2),var(--pink2),var(--lav3),var(--pink));border-radius:100px;transition:width .1s;box-shadow:0 0 10px rgba(180,160,216,.7),0 0 20px rgba(216,152,180,.4);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 52px;background:rgba(26,21,40,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Quicksand',sans-serif;font-size:20px;font-weight:700;color:var(--cream);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nav-logo-dot{width:9px;height:9px;border-radius:50%;background:var(--lav2);display:inline-block;animation:dotBounce 2s ease-in-out infinite;box-shadow:0 0 8px rgba(180,160,216,.6)}
+@keyframes dotBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .nav-links{display:flex;gap:4px;list-style:none}
-.nav-links a{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;padding:7px 14px;border-radius:100px;transition:all .2s}
-.nav-links a:hover{background:var(--blush);color:var(--text)}
+.nav-links a{font-family:'Quicksand',sans-serif;font-size:13.5px;font-weight:600;color:var(--ink-mid);text-decoration:none;padding:6px 14px;border-radius:var(--r-pill);transition:all .2s;}
+.nav-links a:hover{background:var(--lav-pale);color:var(--lav)}
+.nav-links a.special{color:var(--pink2)}
+.nav-links a.special:hover{background:var(--pink-soft)}
 
-#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;padding:110px 56px 72px;position:relative;z-index:1}
-h1{font-family:'Caveat',cursive;font-size:clamp(42px,4.5vw,64px);font-weight:700;line-height:1;letter-spacing:-.01em;margin-bottom:6px;color:var(--text)}
-.h1-sub{font-family:'Caveat',cursive;font-size:clamp(20px,2.6vw,32px);font-weight:500;color:#e07b5a;margin-bottom:24px;line-height:1.2}
-.hero-desc{font-size:15.5px;color:var(--text2);max-width:420px;line-height:1.8;margin-bottom:36px}
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
-.btn-main{background:var(--text);color:var(--cream);padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s;border:none;cursor:pointer}
-.btn-main:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(45,41,38,.2);background:#1a1714}
-.btn-sec{background:var(--white);color:var(--text);padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s;border:1.5px solid var(--border);cursor:pointer}
-.btn-sec:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:rgba(45,41,38,.2)}
+/* SECTIONS */
+section{padding:100px 60px;position:relative;z-index:1}
+.section-tag{display:inline-flex;align-items:center;gap:7px;font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:var(--r-pill);margin-bottom:14px;}
+.tag-lav{background:var(--lav-soft);color:var(--lav);border:1.5px solid rgba(200,184,232,.3)}
+.tag-pink{background:var(--pink-soft);color:var(--pink);border:1.5px solid rgba(232,180,200,.3)}
+.tag-sky{background:var(--sky-soft);color:var(--sky);border:1.5px solid rgba(168,204,232,.3)}
+.tag-mint{background:var(--mint-soft);color:var(--mint);border:1.5px solid rgba(168,216,200,.3)}
+h2.s-title{font-family:'Quicksand',sans-serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;color:var(--cream);line-height:1.15;margin-bottom:8px;letter-spacing:-.02em;}
+h2.s-title em{font-style:normal;color:var(--lav)}
+.s-sub{font-size:15.5px;color:var(--ink-dim);max-width:500px;line-height:1.8;margin-bottom:48px;}
 
-.card-stack{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.hero-card{background:var(--white);border-radius:var(--r-lg);padding:22px 20px;border:1.5px solid var(--border);box-shadow:var(--shadow);transition:all .25s;position:relative;overflow:hidden}
-.hero-card:hover{transform:translateY(-4px) rotate(-.5deg);box-shadow:var(--shadow-md)}
-.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:var(--r-lg) var(--r-lg) 0 0}
-.hc-blush::before{background:var(--blush2)} .hc-mint::before{background:var(--mint2)}
-.hc-lav::before{background:var(--lav2)}   .hc-sky::before{background:var(--sky)}
-.hero-card-num{font-family:'Caveat',cursive;font-size:38px;font-weight:700;line-height:1;margin-bottom:4px}
-.hc-blush .hero-card-num{color:#d96040} .hc-mint .hero-card-num{color:#2a8a68}
-.hc-lav .hero-card-num{color:#6650c0}   .hc-sky .hero-card-num{color:#2070a8}
-.hero-card-label{font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:2px}
-.hero-card-desc{font-size:11.5px;color:var(--text3);line-height:1.45}
+/* ═══ HERO ═══ */
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr auto auto;gap:50px;align-items:center;padding:120px 60px 80px;}
+.hero-left{display:flex;flex-direction:column;max-width:520px}
 
-section{padding:88px 56px;position:relative;z-index:1}
-.section-pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;padding:6px 14px;border-radius:100px;margin-bottom:14px;letter-spacing:.05em;text-transform:uppercase}
-.sp-blush{background:var(--blush);color:#c05030} .sp-mint{background:var(--mint);color:#1a7058}
-.sp-lav{background:var(--lav);color:#5040b0}     .sp-peach{background:var(--peach);color:#b86020}
-.sp-sky{background:var(--sky);color:#1060a0}
-h2{font-family:'Caveat',cursive;font-size:clamp(34px,4.5vw,54px);font-weight:700;line-height:1.05;margin-bottom:8px;color:var(--text)}
-.section-sub{font-size:15px;color:var(--text2);max-width:540px;line-height:1.75;margin-bottom:44px}
+.hero-eyebrow{font-family:'Quicksand',sans-serif;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--lav2);display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'˚';font-size:14px;opacity:.7;color:var(--pink)}
+h1{font-family:'Quicksand',sans-serif;font-size:clamp(36px,4.5vw,62px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:var(--cream);margin-bottom:6px;}
+h1 .name-hi{color:var(--lav);position:relative;}
+h1 .name-hi::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--lav2),var(--pink));opacity:.4;border-radius:100px;z-index:-1;}
+.h1-sub{font-family:'Nunito',sans-serif;font-size:clamp(14px,1.5vw,18px);font-weight:400;color:var(--lav2);font-style:italic;letter-spacing:.02em;margin-bottom:16px;}
+.hero-desc{font-size:16px;color:var(--ink-mid);max-width:420px;line-height:1.9;margin-bottom:20px;}
 
-/* SKILLS */
-#skills{background:var(--white)}
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.skill-card{background:var(--cream);border-radius:var(--r-lg);padding:28px 24px;border:1.5px solid var(--border);transition:all .22s}
-.skill-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
-.skill-icon{font-size:26px;margin-bottom:12px}
-.skill-card h3{font-size:15px;font-weight:700;margin-bottom:12px;color:var(--text)}
-.tag-cloud{display:flex;flex-wrap:wrap;gap:6px}
-.pill{font-size:12px;font-weight:500;padding:4px 11px;border-radius:100px;letter-spacing:.01em}
-.p-mint{background:var(--mint);color:#1a7058} .p-lav{background:var(--lav);color:#5040b0}
-.p-sky{background:var(--sky);color:#1060a0}   .p-peach{background:var(--peach);color:#b86020}
+/* CAT ILLUSTRATION — right side of hero */
+.hero-cat{
+  width:240px;flex-shrink:0;
+  display:flex;flex-direction:column;align-items:center;
+  position:relative;
+}
+.hero-cat img{
+  width:220px;height:220px;object-fit:contain;
+  animation:catFloat 4s ease-in-out infinite;
+  filter:drop-shadow(0 8px 32px rgba(180,160,216,.35));
+  /* tint the white-bg cat image to fit dark theme */
+  mix-blend-mode:screen;opacity:.92;
+}
+@keyframes catFloat{0%,100%{transform:translateY(0) rotate(-.5deg)}50%{transform:translateY(-12px) rotate(.5deg)}}
+.hero-cat-label{font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim);margin-top:8px;text-align:center;}
+/* small floating stars around the icon */
+.cat-star{position:absolute;font-size:14px;animation:catStarFloat var(--cs,3s) ease-in-out infinite;color:var(--lav);opacity:.7}
+@keyframes catStarFloat{0%,100%{transform:translateY(0) scale(1);opacity:.5}50%{transform:translateY(-8px) scale(1.2);opacity:.9}}
 
-/* EXPERIENCE */
-#experience{background:var(--cream2)}
-.exp-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
-.exp-tab{padding:9px 18px;border-radius:100px;border:1.5px solid var(--border);background:var(--white);font-size:12.5px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .2s}
-.exp-tab:hover{border-color:rgba(45,41,38,.2)}
-.exp-tab.active{background:var(--text);color:var(--cream);border-color:var(--text)}
-.exp-panel{display:none;animation:softIn .28s ease}
-.exp-panel.active{display:block}
-@keyframes softIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.exp-card{background:var(--white);border-radius:var(--r-xl);padding:40px 44px;border:1.5px solid var(--border);box-shadow:var(--shadow)}
-.exp-co-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:5px}
-.exp-company{font-size:12.5px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em}
-.exp-dates{display:flex;flex-direction:row;align-items:flex-end;gap:5px}
-.exp-date-badge{font-size:12px;font-weight:600;background:var(--cream2);color:var(--text2);padding:5px 14px;border-radius:100px;border:1.5px solid var(--border);white-space:nowrap}
-.exp-date-badge.hi{background:var(--blush);color:#c05030;border-color:var(--blush2)}
-.exp-term-divider{display:flex;align-items:center;gap:12px;margin:28px 0 20px;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3)}
-.exp-term-divider::before,.exp-term-divider::after{content:'';flex:1;height:1px;background:var(--border)}
-.exp-role{font-family:'Caveat',cursive;font-size:30px;font-weight:700;margin-bottom:18px;color:var(--text);line-height:1.1}
-.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
-.exp-bullets li{font-size:14px;color:var(--text2);line-height:1.7;padding-left:20px;position:relative}
-.exp-bullets li::before{content:'✦';position:absolute;left:0;top:3px;font-size:9px;color:#e07b5a}
-.exp-hl{color:var(--text);font-weight:700}
-.skill-pills{display:flex;flex-wrap:wrap;gap:6px;padding-top:18px;border-top:1.5px solid var(--border)}
+/* BOOKS BAR */
+.book-meter{margin-bottom:6px}
+.bm-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.bm-label{font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pink2);}
+.bm-count{font-family:'Quicksand',sans-serif;font-size:11px;font-weight:600;color:var(--ink-dim);}
+.bm-track{height:12px;background:rgba(232,180,200,.12);border-radius:var(--r-pill);border:1.5px solid rgba(232,180,200,.25);overflow:hidden;position:relative}
+.bm-fill{height:100%;width:0;border-radius:var(--r-pill);background:linear-gradient(90deg,var(--pink3),var(--pink),var(--lav2));transition:width 2s cubic-bezier(.22,1,.36,1);position:relative}
+.bm-fill::after{content:'';position:absolute;right:0;top:0;bottom:0;width:14px;background:rgba(255,255,255,.35);border-radius:100px;animation:shimmer 2s ease-in-out infinite}
+@keyframes shimmer{0%,100%{opacity:.2}50%{opacity:1}}
+.bm-sub{font-family:'Quicksand',sans-serif;font-size:10px;color:var(--ink-dim);margin-top:5px;font-style:italic}
 
-/* CASE STUDIES */
-#cases{background:var(--white)}
-.cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.case-card{background:var(--cream);border-radius:var(--r-xl);border:1.5px solid var(--border);overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
-.case-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
-.case-banner{height:7px}
-.cb-blush{background:linear-gradient(90deg,var(--blush2),var(--lav2))}
-.cb-mint{background:linear-gradient(90deg,var(--mint2),var(--sky))}
-.cb-lav{background:linear-gradient(90deg,var(--lav2),var(--blush2))}
-.case-top{padding:26px 26px 18px;border-bottom:1.5px solid var(--border)}
-.case-emoji{font-size:28px;margin-bottom:10px;display:block}
-.case-type{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
-.case-card h3{font-family:'Caveat',cursive;font-size:24px;font-weight:700;line-height:1.2;margin-bottom:5px}
-.case-tagline{font-size:13px;color:var(--text2);line-height:1.6}
-.case-body{padding:20px 26px;flex:1;display:flex;flex-direction:column;gap:14px}
-.case-section h4{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
-.case-section p,.case-section li{font-size:13px;color:var(--text2);line-height:1.7}
-.case-section ul{list-style:none;display:flex;flex-direction:column;gap:4px}
-.case-section li{padding-left:13px;position:relative}
-.case-section li::before{content:'·';position:absolute;left:0;color:#e07b5a;font-weight:700}
-.case-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:0 0 var(--r-xl) var(--r-xl);overflow:hidden;margin-top:auto}
-.cs-cell{background:var(--white);padding:13px 8px;text-align:center}
-.cs-val{font-family:'Caveat',cursive;font-size:21px;font-weight:700;color:var(--text);display:block;line-height:1;margin-bottom:3px}
-.cs-lbl{font-size:10px;color:var(--text3);font-weight:500}
+.hero-ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;padding:11px 24px;border-radius:var(--r-pill);text-decoration:none;transition:all .22s;display:inline-flex;align-items:center;gap:8px;border:2px solid transparent;cursor:pointer;}
+.btn-main{background:var(--lav2);color:white;border-color:var(--lav2);}
+.btn-main:hover{background:var(--lav3);transform:translateY(-2px);box-shadow:0 8px 24px rgba(180,160,216,.35)}
+.btn-soft{background:rgba(255,255,255,.06);color:var(--cream);border-color:var(--border2);}
+.btn-soft:hover{background:var(--lav-soft);border-color:var(--lav2);transform:translateY(-2px)}
 
-/* PROJECTS */
-#projects{background:var(--cream2)}
-.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.proj-card{background:var(--white);border-radius:var(--r-xl);padding:26px 24px;border:1.5px solid var(--border);display:flex;flex-direction:column;gap:11px;transition:all .22s}
-.proj-card:hover{transform:translateY(-4px) rotate(.3deg);box-shadow:var(--shadow-md)}
-.proj-emoji{font-size:26px}
-.proj-type{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3)}
-.proj-card h3{font-family:'Caveat',cursive;font-size:20px;font-weight:700;line-height:1.2}
-.proj-card p{font-size:13px;color:var(--text2);line-height:1.7}
-.proj-pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
+/* ═══ PLANET STATS ═══ */
+.planet-system{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:20px;align-items:start;
+}
+.planet-card{
+  display:flex;flex-direction:column;align-items:center;
+  cursor:default;transition:transform .3s;
+}
+.planet-card:hover{transform:translateY(-6px)}
+.planet-orb{
+  position:relative;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;
+  box-shadow:var(--glow-lav);
+  transition:box-shadow .3s;
+}
+.planet-card:hover .planet-orb{box-shadow:0 0 40px rgba(180,160,216,.5)}
+/* ring around planet */
+.planet-ring{
+  position:absolute;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.18);
+  animation:orbitRing var(--rt,8s) linear infinite;
+  pointer-events:none;
+}
+@keyframes orbitRing{to{transform:rotate(360deg)}}
+/* planet surface texture via pseudo */
+.planet-orb::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.25) 0%,transparent 60%),
+             radial-gradient(circle at 70% 65%,rgba(0,0,0,.15) 0%,transparent 50%);
+}
+.planet-val{font-family:'Quicksand',sans-serif;font-size:28px;font-weight:800;letter-spacing:-.02em;color:white;position:relative;z-index:1;text-shadow:0 2px 8px rgba(0,0,0,.3);}
+.planet-label{font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;color:white;opacity:.85;position:relative;z-index:1;letter-spacing:.02em;text-align:center;}
+.planet-sub{font-size:12px;color:var(--ink-dim);font-style:italic;line-height:1.4;text-align:center;margin-top:8px;max-width:130px}
+
+/* planet colour variants */
+.p-lav .planet-orb{background:radial-gradient(135deg,#c8b8f0,#8860c8,#5a3898)}
+.p-pink .planet-orb{background:radial-gradient(135deg,#f0c8dc,#d890b8,#b06090)}
+.p-sky .planet-orb{background:radial-gradient(135deg,#c0ddf8,#88b8e8,#5090c8)}
+.p-mint .planet-orb{background:radial-gradient(135deg,#b8eedd,#78c8b0,#4098808)}
+.p-lav .planet-orb{box-shadow:0 0 30px rgba(180,160,216,.4),inset 0 -4px 16px rgba(88,56,152,.4)}
+.p-pink .planet-orb{box-shadow:0 0 30px rgba(216,144,184,.4),inset 0 -4px 16px rgba(160,80,120,.4)}
+.p-sky .planet-orb{box-shadow:0 0 30px rgba(136,184,232,.4),inset 0 -4px 16px rgba(72,128,192,.4)}
+.p-mint .planet-orb{box-shadow:0 0 30px rgba(120,200,176,.4),inset 0 -4px 16px rgba(56,144,120,.4)}
+
+/* CAT FAMILIARS */
+.cat-strip{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:10px 60px;display:flex;align-items:center;gap:20px;z-index:1;position:relative;flex-wrap:wrap;}
+.cat-strip::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(200,184,232,.04),transparent);pointer-events:none}
+.cat-strip-label{font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);flex-shrink:0}
+.cat-entry{display:flex;align-items:center;gap:10px;cursor:pointer;padding:6px 14px;border-radius:var(--r-pill);border:1px solid transparent;transition:all .2s;flex-shrink:0}
+.cat-entry:hover{background:var(--lav-pale);border-color:var(--border2)}
+.cat-name{font-family:'Quicksand',sans-serif;font-size:12px;font-weight:700;color:var(--ink-mid)}
+.cat-stat{font-size:12px;color:var(--ink-dim);font-style:italic}
+.cat-div{width:1px;height:26px;background:var(--border2);flex-shrink:0}
+@keyframes catBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* ═══ SKILLS ═══ */
+#skills{background:var(--bg2);border-top:1px solid var(--border)}
+.spell-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.spell-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:all .22s;}
+.spell-card:hover{box-shadow:var(--glow-lav);transform:translateY(-3px);border-color:var(--border2)}
+.spell-card-head{padding:14px 18px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.spell-card-head h3{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:700;color:var(--cream)}
+.spell-body{padding:12px 18px 16px;display:flex;flex-direction:column;gap:12px}
+.spell-row-label{font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-dim);display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.spell-row-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.pill-row{display:flex;flex-wrap:wrap;gap:5px}
+.pill{font-family:'Nunito',sans-serif;font-size:12.5px;font-weight:600;padding:4px 12px;border-radius:var(--r-pill);font-style:italic;}
+.pl{background:var(--lav-soft);color:var(--lav);border:1px solid rgba(200,184,232,.25)}
+.pp{background:var(--pink-soft);color:var(--pink);border:1px solid rgba(232,180,200,.25)}
+.ps{background:var(--sky-soft);color:var(--sky);border:1px solid rgba(168,204,232,.25)}
+.pm{background:var(--mint-soft);color:var(--mint);border:1px solid rgba(168,216,200,.25)}
+.po{background:rgba(240,200,168,.12);color:var(--peach);border:1px solid rgba(240,200,168,.2)}
+
+/* ═══ EXPERIENCE ═══ */
+#experience{background:var(--bg)}
+.exp-shell{display:grid;grid-template-columns:210px 1fr;border:1px solid var(--border2);border-radius:var(--r-xl);overflow:hidden;background:var(--bg2);}
+.exp-tabs{background:var(--bg3);border-right:1px solid var(--border);padding:14px 0;display:flex;flex-direction:column;}
+.etab{width:100%;padding:13px 20px;font-family:'Quicksand',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:10px;background:none;border:none;border-right:3px solid transparent;color:var(--ink-dim);cursor:pointer;transition:all .2s;text-align:left;}
+.etab:hover{color:var(--lav);background:var(--lav-pale)}
+.etab.on{color:var(--lav);background:var(--bg2);border-right-color:var(--lav2)}
+.etab-dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex-shrink:0}
+.exp-panel-wrap{padding:36px 42px;min-height:460px}
+.exp-panel{display:none;animation:slideIn .25s ease}
+.exp-panel.on{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
+.ep-meta{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:6px}
+.ep-org{font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-dim)}
+.ep-badge{font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;padding:4px 14px;border-radius:var(--r-pill);color:var(--bg);background:var(--lav2);}
+.ep-badge.alt{background:var(--pink2)}
+.ep-role{font-family:'Quicksand',sans-serif;font-size:21px;font-weight:800;color:var(--cream);margin-bottom:14px;letter-spacing:-.01em;line-height:1.2;}
+.ep-divider{display:flex;align-items:center;gap:12px;margin:18px 0 12px;font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lav2);}
+.ep-divider::before,.ep-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--lav2),transparent);opacity:.4}
+.ep-bullets{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.ep-bullets li{font-size:14.5px;color:var(--ink-mid);line-height:1.75;padding-left:18px;position:relative}
+.ep-bullets li::before{content:'◦';position:absolute;left:0;top:2px;color:var(--lav2);font-size:13px}
+.ep-hl{color:var(--cream);font-weight:700}
+.ep-loot{display:flex;flex-wrap:wrap;gap:5px;padding-top:12px;border-top:1px solid var(--border)}
+
+/* ═══ CASE STUDIES ═══ */
+#cases{background:var(--bg2);position:relative;overflow:hidden}
+/* Decorative background flower clusters */
+#cases::before{content:'✿ ✦ ✿';position:absolute;top:30px;right:60px;font-size:28px;color:var(--lav);opacity:.12;letter-spacing:14px;pointer-events:none;animation:floatSlow 7s ease-in-out infinite}
+#cases::after{content:'✦ ✿ ✦';position:absolute;bottom:30px;left:40px;font-size:22px;color:var(--pink);opacity:.1;letter-spacing:10px;pointer-events:none;animation:floatSlow 9s ease-in-out infinite reverse}
+@keyframes floatSlow{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.tomes-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;position:relative;z-index:1}
+.tome{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r-xl);overflow:hidden;transition:all .28s;display:flex;flex-direction:column;position:relative;}
+/* corner flower decoration */
+.tome::after{content:'✿';position:absolute;top:84px;right:14px;font-size:13px;color:rgba(255,255,255,.3);animation:twinkle var(--tw,3s) ease-in-out infinite;pointer-events:none;z-index:2}
+.tome:nth-child(2)::after{content:'✦';animation-delay:.8s;font-size:14px}
+.tome:nth-child(3)::after{content:'✿';animation-delay:1.6s;font-size:11px}
+.tome:nth-child(4)::after{content:'✦';animation-delay:2.2s;font-size:15px}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:.7;transform:scale(1.1)}}
+.tome:hover{transform:translateY(-6px) rotate(-.3deg);box-shadow:var(--shadow-soft),0 0 30px rgba(180,160,216,.15)}
+.tome-banner{height:80px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:14px;}
+.tbv{background:linear-gradient(135deg,#d8cff0,#b8a8e0,#c4b4e8)}
+.tbp{background:linear-gradient(135deg,#f0ccd8,#e0a8bc,#eab8c8)}
+.tbs{background:linear-gradient(135deg,#c4d8f0,#a0bce0,#b4ccec)}
+.tbm{background:linear-gradient(135deg,#b8e8d8,#90d0bc,#a8dcc8)}
+.tome-banner-floaties{position:absolute;inset:0;pointer-events:none}
+.tome-banner-floaties span{position:absolute;color:rgba(80,60,120,.35);animation:floatFade var(--ft,3s) ease-in-out infinite}
+@keyframes floatFade{0%,100%{opacity:.2;transform:translateY(0)}50%{opacity:.8;transform:translateY(-4px)}}
+.tome-emoji{font-size:28px;z-index:1;position:relative;filter:drop-shadow(0 2px 8px rgba(0,0,0,.15))}
+.tome-type-banner{font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(60,40,100,.75);z-index:1;position:relative}
+/* gold shimmer line */
+.tome-shine{height:2px;background:linear-gradient(90deg,transparent,rgba(180,160,220,.4),transparent)}
+
+.tome-body{padding:16px 20px 12px;flex:1;display:flex;flex-direction:column;gap:8px}
+.tome-cat{font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+.tome h3{font-family:'Quicksand',sans-serif;font-size:16px;font-weight:800;color:var(--cream);line-height:1.25;letter-spacing:-.01em}
+.tome-tagline{font-size:14px;color:var(--ink-mid);font-style:italic;line-height:1.65}
+.tome-detail{font-size:13.5px;color:var(--ink-dim);line-height:1.7;margin-top:2px}
+
+/* flower divider inside tome */
+.tome-flower-div{text-align:center;padding:8px 0;font-size:11px;color:var(--lav);opacity:.4;letter-spacing:8px}
+
+.tome-stats{display:flex;align-items:stretch;border-top:1px solid var(--border);margin-top:auto}
+.ts-node{flex:1;padding:10px 6px;text-align:center;position:relative}
+.ts-node::after{content:'';position:absolute;right:0;top:20%;bottom:20%;width:1px;background:var(--border)}
+.ts-node:last-child::after{display:none}
+.ts-val{font-family:'Quicksand',sans-serif;font-size:15px;font-weight:800;color:var(--cream);display:block;line-height:1;margin-bottom:3px}
+.ts-lbl{font-size:10px;color:var(--ink-dim);font-style:italic}
+.ts-dot{font-size:9px;color:var(--lav2);display:block;margin-bottom:2px;animation:twinkle 2.5s ease-in-out infinite}
+.tome-foot{padding:10px 20px;background:var(--bg4);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.tome-link{font-family:'Quicksand',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.08em;color:var(--lav);text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:color .15s;}
+.tome-link:hover{color:var(--lav2)}
+.tome-foot-flowers{font-size:10px;color:var(--pink);opacity:.5;letter-spacing:4px}
+
+/* ═══ PROJECTS ═══ */
+#projects{background:var(--bg3)}
+.scrolls-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.scroll{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px 20px;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden;}
+.scroll-icon{font-size:20px}
+.scroll-type{font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+.scroll h3{font-family:'Quicksand',sans-serif;font-size:15px;font-weight:800;color:var(--cream);line-height:1.25}
+.scroll p{font-size:13.5px;color:var(--ink-mid);font-style:italic;line-height:1.75;flex:1}
+.scroll-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
 
 /* CONTACT */
-#contact{background:var(--white);text-align:center}
-.contact-inner{max-width:520px;margin:0 auto}
-.contact-emoji{font-size:44px;margin-bottom:16px;display:block;animation:bob 2.8s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.contact-sub{font-size:15px;color:var(--text2);margin-bottom:36px}
-.contact-links{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-.contact-link{display:flex;align-items:center;gap:8px;background:var(--cream);color:var(--text);padding:12px 22px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;border:1.5px solid var(--border);transition:all .2s}
-.contact-link:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:rgba(45,41,38,.2)}
-.contact-link.primary{background:var(--text);color:var(--cream);border-color:var(--text)}
-.contact-link.primary:hover{background:#1a1714}
+#contact{background:var(--bg);text-align:center;border-top:1px solid var(--border)}
+.contact-inner{max-width:500px;margin:0 auto}
+.contact-emoji{font-size:52px;display:block;margin-bottom:18px;animation:floatSlow 3.5s ease-in-out infinite}
+.contact-sub{font-size:16px;color:var(--ink-dim);margin-bottom:36px;font-style:italic}
+.contact-btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.cbtn{display:flex;align-items:center;gap:8px;font-family:'Quicksand',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.05em;padding:11px 22px;border-radius:var(--r-pill);text-decoration:none;border:1.5px solid var(--border2);background:var(--bg2);color:var(--ink-mid);transition:all .2s;}
+.cbtn:hover{transform:translateY(-2px);box-shadow:var(--glow-lav);border-color:var(--lav2);color:var(--lav)}
+.cbtn.main{background:var(--lav2);color:white;border-color:var(--lav2)}
+.cbtn.main:hover{background:var(--lav3)}
 
-footer{padding:22px 56px;border-top:1.5px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--cream);position:relative;z-index:1}
-footer p{font-size:12.5px;color:var(--text3);font-weight:500}
+footer{padding:22px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg2);position:relative;z-index:1;}
+footer p{font-family:'Quicksand',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dimmer)}
+.foot-dots{display:flex;gap:6px}
+.fdot{width:8px;height:8px;border-radius:50%}
 
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
-.reveal.visible{opacity:1;transform:none}
+/* EFFECTS */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+.sparkle{position:fixed;pointer-events:none;z-index:9999;animation:sp .75s ease-out forwards;font-size:12px;line-height:1}
+@keyframes sp{0%{opacity:.9;transform:scale(1) rotate(0deg)}100%{opacity:0;transform:scale(0) rotate(40deg) translateY(-12px)}}
+.rune-particle{position:fixed;pointer-events:none;z-index:1;font-size:13px;animation:runeFloat var(--d,9s) linear infinite;opacity:0}
+@keyframes runeFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}8%{opacity:.4}90%{opacity:.25}100%{transform:translateY(-8vh) rotate(360deg);opacity:0}}
+.toast-msg{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--bg4);color:var(--cream);font-family:'Nunito',sans-serif;font-size:15px;font-style:italic;padding:10px 24px;border-radius:var(--r-pill);border:1.5px solid var(--lav2);z-index:9999;pointer-events:none;opacity:0;transition:opacity .3s;white-space:nowrap;max-width:90vw;box-shadow:var(--glow-lav)}
 
-@media(max-width:960px){nav{padding:14px 24px}#hero{grid-template-columns:1fr;padding:100px 24px 56px;gap:36px}section{padding:72px 24px}.exp-card{padding:28px 24px}}
-@media(max-width:780px){.proj-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.nav-links{display:none}.card-stack,.proj-grid,.cases-grid{grid-template-columns:1fr}footer{flex-direction:column;gap:8px;text-align:center}}
-
-/* MODAL OVERLAY */
-.cs-modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(45,41,38,.55);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
-.cs-modal-overlay.open{display:flex;animation:fadeIn .22s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.cs-modal{background:var(--cream);border-radius:var(--r-xl);max-width:720px;width:100%;max-height:90vh;overflow-y:auto;border:1.5px solid var(--border);box-shadow:0 20px 60px rgba(45,41,38,.18);position:relative;animation:slideUp .26s ease}
-@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.cs-modal-close{position:sticky;top:0;display:flex;justify-content:flex-end;padding:16px 20px 0;background:var(--cream);z-index:2}
-.cs-modal-close button{background:var(--border);border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:all .18s}
-.cs-modal-close button:hover{background:var(--blush);color:var(--text)}
-.cs-modal-inner{padding:4px 36px 36px}
-.cs-modal-banner{height:6px;border-radius:var(--r-xl) var(--r-xl) 0 0;margin:-4px -36px 24px;width:calc(100% + 72px)}
-.cs-modal-emoji{font-size:36px;margin-bottom:10px;display:block}
-.cs-modal-type{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
-.cs-modal-title{font-family:'Caveat',cursive;font-size:32px;font-weight:700;line-height:1.1;margin-bottom:8px}
-.cs-modal-tagline{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:24px;padding-bottom:20px;border-bottom:1.5px solid var(--border)}
-.cs-modal h4{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;margin-top:20px}
-.cs-modal p{font-size:14px;color:var(--text2);line-height:1.75}
-.cs-modal ul{list-style:none;display:flex;flex-direction:column;gap:6px;margin:0}
-.cs-modal li{font-size:13.5px;color:var(--text2);line-height:1.7;padding-left:16px;position:relative}
-.cs-modal li::before{content:'·';position:absolute;left:0;color:#e07b5a;font-weight:700;font-size:16px;line-height:1.4}
-.cs-modal-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:var(--r);overflow:hidden;margin-top:24px}
-.cs-modal-stat{background:var(--white);padding:16px 10px;text-align:center}
-.cs-modal-stat-val{font-family:'Caveat',cursive;font-size:26px;font-weight:700;color:var(--text);display:block;line-height:1;margin-bottom:4px}
-.cs-modal-stat-lbl{font-size:11px;color:var(--text3);font-weight:500}
-.cs-modal-link{display:inline-flex;align-items:center;gap:7px;margin-top:22px;padding:10px 20px;border-radius:100px;background:var(--text);color:var(--cream);font-size:13px;font-weight:600;text-decoration:none;transition:all .18s}
-.cs-modal-link:hover{background:#1a1714;transform:translateY(-2px)}
-.case-card-btn{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:9px 18px;border-radius:100px;border:1.5px solid var(--border);background:var(--white);font-size:12.5px;font-weight:600;color:var(--text);cursor:pointer;transition:all .18s;font-family:inherit}
-.case-card-btn:hover{background:var(--cream2);border-color:rgba(45,41,38,.2);transform:translateY(-1px)}
-.cs-callout{background:var(--cream2);border-radius:var(--r);padding:14px 18px;border-left:3px solid #e07b5a;margin-top:14px}
-.cs-callout p{font-size:13.5px;color:var(--text);font-style:italic;line-height:1.65}
+@media(max-width:1100px){.exp-shell{grid-template-columns:170px 1fr}}
+@media(max-width:960px){
+  nav{padding:12px 24px}
+  #hero{grid-template-columns:1fr;padding:110px 28px 60px;gap:40px}
+  .hero-cat{width:180px;margin:0 auto;align-self:center}
+  .hero-cat img{width:160px;height:160px}
+  .planet-system{margin:0 auto}
+  section{padding:72px 28px}
+  .exp-shell{grid-template-columns:1fr;border-radius:var(--r-lg)}
+  .exp-tabs{border-right:none;border-bottom:1px solid var(--border);padding:8px;display:flex;flex-wrap:wrap;gap:5px}
+  .etab{width:auto;padding:8px 14px;border-radius:var(--r-pill);border:1.5px solid var(--border2)}
+  .etab.on{background:var(--lav2);color:white;border-color:var(--lav2)}
+  .exp-panel-wrap{padding:24px 22px}
+}
+@media(max-width:780px){.scrolls-grid{grid-template-columns:1fr 1fr}.tomes-grid{grid-template-columns:1fr}.spell-grid{grid-template-columns:1fr}.planet-system{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.nav-links{display:none}.planet-system,.scrolls-grid,.tomes-grid{grid-template-columns:1fr 1fr}footer{flex-direction:column;gap:10px;text-align:center}.cat-strip{padding:10px 20px}}
 </style>
 </head>
 <body>
 
+<div id="scroll-bar"></div>
+<div class="bg-clouds" id="bgClouds"></div>
+<div class="star-field" id="starField"></div>
+
 <nav>
-  <div class="nav-logo">cheryl<span>.</span>li <span>🌸</span></div>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    cheryl.li
+  </a>
   <ul class="nav-links">
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#cases">Case Studies</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#experience">expereience</a></li>
+    <li><a href="#cases">case studies</a></li>
+    <!--li><a href="side-quests.html" class="special">side quests ✦</a></li-->
+    <li><a href="#contact">say hi</a></li>
   </ul>
 </nav>
 
+<!-- ════════════ HERO ════════════ -->
 <section id="hero">
   <div class="hero-left reveal">
-    <h1>hi! I'm Cheryl,</h1>
-    <p class="h1-sub">a Data Scientist & Product Thinker</p>
-    <p class="hero-desc">I transform messy data into decisions people trust, and build tools to help others understand their data!</p>
+    <div class="hero-eyebrow">character profile</div>
+    <h1>hi, I'm <span class="name-hi">Cheryl</span></h1>
+    <p class="h1-sub">˚₊‧ data scientist · product thinker ‧₊˚</p>
+    <p class="hero-desc">I turn messy, complicated data into things people understand and use.</p>
+
+    <div class="book-meter">
+      <div class="bm-top">
+        <span class="bm-label">📚 books read this year</span>
+        <span class="bm-count">17 / 80 ✦</span>
+      </div>
+      <div class="bm-track"><div class="bm-fill" id="bmFill"></div></div>
+      <div class="bm-sub">goal: 80 books ˚₊</div>
+    </div>
+
     <div class="hero-ctas">
-      <a href="#cases" class="btn-main">See my work ✨</a>
-      <a href="mailto:cheryl.li@uwaterloo.ca" class="btn-sec">Get in touch ✉️</a>
+      <a href="#cases" class="btn btn-main">✦ view case studies</a>
+      <a href="mailto:cheryl.li@uwaterloo.ca" class="btn btn-soft">✉ say hello</a>
     </div>
   </div>
-  <div class="hero-right reveal">
-    <div class="card-stack">
-      <div class="hero-card hc-blush">
-        <div class="hero-card-num">30M+</div>
-        <div class="hero-card-label">records processed</div>
-        <div class="hero-card-desc">multi-source government datasets at McGill</div>
+
+  <!-- PLANET STATS — rightmost column -->
+  <div class="planet-system reveal">
+    <div class="planet-card p-lav">
+      <div class="planet-orb" style="width:110px;height:110px">
+        <div class="planet-ring" style="width:130px;height:130px;--rt:12s"></div>
+        <div class="planet-ring" style="width:145px;height:145px;--rt:20s;border-style:dashed;opacity:.1"></div>
+        <span class="planet-val" style="font-size:22px">30M+</span>
+        <span class="planet-label">records</span>
       </div>
-      <div class="hero-card hc-mint">
-        <div class="hero-card-num">$88M</div>
-        <div class="hero-card-label">portfolio analyzed & modelled</div>
-        <div class="hero-card-desc">Tableau dashboards at GRHF</div>
+      <div class="planet-sub">multi-source gov datasets, McGill</div>
+    </div>
+    <div class="planet-card p-pink">
+      <div class="planet-orb" style="width:100px;height:100px">
+        <div class="planet-ring" style="width:120px;height:120px;--rt:9s"></div>
+        <span class="planet-val" style="font-size:22px">$88M</span>
+        <span class="planet-label">modelled</span>
       </div>
-      <div class="hero-card hc-lav">
-        <div class="hero-card-num">90%</div>
-        <div class="hero-card-label">fewer user complaints</div>
-        <div class="hero-card-desc">UX/UI improvements at RehvUp</div>
+      <div class="planet-sub">donation portfolio, GRHF</div>
+    </div>
+    <div class="planet-card p-sky">
+      <div class="planet-orb" style="width:95px;height:95px">
+        <div class="planet-ring" style="width:114px;height:114px;--rt:14s"></div>
+        <span class="planet-val" style="font-size:20px">37%</span>
+        <span class="planet-label">error reduction</span>
       </div>
-      <div class="hero-card hc-sky">
-        <div class="hero-card-num">3,500+</div>
-        <div class="hero-card-label">signups in 12 hrs</div>
-        <div class="hero-card-desc">product launch at the Aphrodite Project</div>
+      <div class="planet-sub">user testing, capstone project</div>
+    </div>
+    <div class="planet-card p-mint">
+      <div class="planet-orb" style="width:105px;height:105px">
+        <div class="planet-ring" style="width:125px;height:125px;--rt:10s"></div>
+        <span class="planet-val" style="font-size:18px">3,500+</span>
+        <span class="planet-label">signups in 12 hours</span>
       </div>
+      <div class="planet-sub">product launch, the Aphrodite Project</div>
     </div>
   </div>
 </section>
 
+<!-- CAT FAMILIARS STRIP -->
+<div class="cat-strip">
+  <span class="cat-strip-label">familiars ˚₊</span>
+  <div class="cat-entry" onclick="catSpeak('grey')">
+    <svg width="32" height="32" viewBox="0 0 56 56" fill="none" style="animation:catBounce 2.8s ease-in-out infinite;animation-delay:.3s">
+      <ellipse cx="28" cy="36" rx="16" ry="14" fill="#8878a8"/><circle cx="28" cy="20" r="13" fill="#a898c8"/>
+      <polygon points="16,10 11,0 21,7" fill="#a898c8"/><polygon points="40,10 45,0 35,7" fill="#a898c8"/>
+      <polygon points="16,10 13,4 20,8" fill="#d8a0c0"/><polygon points="40,10 43,4 36,8" fill="#d8a0c0"/>
+      <ellipse cx="23" cy="20" rx="3" ry="3.5" fill="#1a1528"/><ellipse cx="33" cy="20" rx="3" ry="3.5" fill="#1a1528"/>
+      <circle cx="24" cy="19" r="1" fill="white" opacity=".9"/><circle cx="34" cy="19" r="1" fill="white" opacity=".9"/>
+      <polygon points="28,24 26.5,26 29.5,26" fill="#e8a0c0"/>
+      <path d="M44 42 Q52 36 50 28 Q48 24 44 28" stroke="#a898c8" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M16 29 Q28 33 40 29" stroke="#c8b8e8" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div><div class="cat-name">Ricky</div><div class="cat-stat">· grey cat</div></div>
+  </div>
+  <div class="cat-div"></div>
+  <div class="cat-entry" onclick="catSpeak('orange')">
+    <svg width="32" height="32" viewBox="0 0 56 56" fill="none" style="animation:catBounce 3.2s ease-in-out infinite">
+      <ellipse cx="28" cy="37" rx="15" ry="13" fill="#c87040"/><circle cx="28" cy="21" r="13" fill="#d89060"/>
+      <polygon points="16,11 11,1 22,8" fill="#d89060"/><polygon points="40,11 45,1 34,8" fill="#d89060"/>
+      <polygon points="16,11 13,5 21,9" fill="#e8b888"/><polygon points="40,11 43,5 35,9" fill="#e8b888"/>
+      <ellipse cx="23" cy="21" rx="3" ry="3.5" fill="#1a1528"/><ellipse cx="33" cy="21" rx="3" ry="3.5" fill="#1a1528"/>
+      <circle cx="24" cy="20" r="1" fill="white" opacity=".9"/><circle cx="34" cy="20" r="1" fill="white" opacity=".9"/>
+      <polygon points="28,25 26.5,27 29.5,27" fill="#f09090"/>
+      <path d="M44 43 Q54 36 50 26 Q47 20 43 26" stroke="#c87040" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M16 30 Q28 34 40 30" stroke="#e8b4c8" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div><div class="cat-name">Cheese</div><div class="cat-stat">· orange cat</div></div>
+  </div>
+  <div class="cat-div"></div>
+</div>
+
+<!-- ════════════ SKILLS ════════════ -->
 <section id="skills">
   <div class="reveal">
-    <div class="section-pill sp-mint">✦ Skills</div>
-    <h2>What I bring to the table!</h2>
-    <p class="section-sub">what I use to transform raw data into to meaningful insights and informed decisions for a non-technical stakeholders.</p>
+    <div class="section-tag tag-sky">✦ skills</div>
   </div>
-  <div class="skills-grid">
-    <div class="skill-card reveal">
-      <div class="skill-icon">🐍</div>
-      <h3>Data Science</h3>
-      <div class="tag-cloud">
-        <span class="pill p-mint">Python</span><span class="pill p-mint">SQL</span><span class="pill p-mint">Pandas</span>
-        <span class="pill p-mint">Scikit-learn</span><span class="pill p-mint">TensorFlow</span>
-        <span class="pill p-mint">R</span><span class="pill p-mint">MATLAB</span><span class="pill p-mint">QGIS</span><span class="pill p-mint">Spatial Analysis</span><span class="pill p-mint">Jupyter Notebooks</span><span class="pill p-mint">Colab</span>
+  <div class="spell-grid">
+    <div class="spell-card reveal">
+      <div class="spell-card-head"><span style="font-size:17px">🐍</span><h3>languages & data engineering</h3></div>
+      <div class="spell-body">
+        <div><div class="spell-row-label">core languages</div><div class="pill-row"><span class="pill pl">Python</span><span class="pill pl">SQL</span><span class="pill pl">R</span><span class="pill pl">MATLAB</span></div></div>
+        <div><div class="spell-row-label">python ecosystem</div><div class="pill-row"><span class="pill pl">Pandas</span><span class="pill pl">NumPy</span><span class="pill pl">Scikit-learn</span><span class="pill pl">TensorFlow</span><span class="pill pl">PyTorch</span></div></div>
+        <div><div class="spell-row-label">databases & infra</div><div class="pill-row"><span class="pill pl">MySQL</span><span class="pill pl">Firebase</span><span class="pill pl">Git/GitHub</span><span class="pill pl">Docker</span><span class="pill pl">Jupyter</span></div></div>
+        <div><div class="spell-row-label">spatial & GIS</div><div class="pill-row"><span class="pill pl">QGIS</span><span class="pill pl">Spatial Analysis</span><span class="pill pl">Geospatial Research</span></div></div>
       </div>
     </div>
-    <div class="skill-card reveal">
-      <div class="skill-icon">🤖</div>
-      <h3>Machine Learning</h3>
-      <div class="tag-cloud">
-        <span class="pill p-lav">Logistic & Linear Regression</span><span class="pill p-lav">Clustering</span>
-        <span class="pill p-lav">Gradient Boosting</span><span class="pill p-lav">Decision Trees</span>
-        <span class="pill p-lav">A/B Testing</span><span class="pill p-lav">Fairness ML</span>
-        <span class="pill p-lav">SVM</span><span class="pill p-lav">Classification</span><span class="pill p-lav">PCA</span>
+    <div class="spell-card reveal">
+      <div class="spell-card-head"><span style="font-size:17px">🤖</span><h3>machine learning & modelling</h3></div>
+      <div class="spell-body">
+        <div><div class="spell-row-label">supervised</div><div class="pill-row"><span class="pill pp">Logistic Regression</span><span class="pill pp">Decision Trees</span><span class="pill pp">Gradient Boosting</span><span class="pill pp">Random Forest</span></div></div>
+        <div><div class="spell-row-label">unsupervised</div><div class="pill-row"><span class="pill pp">k-means Clustering</span><span class="pill pp">PCA</span><span class="pill pp">Dimensionality Reduction</span></div></div>
+        <div><div class="spell-row-label">experimentation</div><div class="pill-row"><span class="pill pp">A/B Testing</span><span class="pill pp">Cohort Analysis</span><span class="pill pp">Causal Inference</span><span class="pill pp">EDA</span></div></div>
+        <div><div class="spell-row-label">responsible AI</div><div class="pill-row"><span class="pill pp">Fairness ML</span><span class="pill pp">Bias Detection</span><span class="pill pp">LLM / RAG</span><span class="pill pp">Vector Databases</span></div></div>
       </div>
     </div>
-    <div class="skill-card reveal">
-      <div class="skill-icon">📊</div>
-      <h3>Visualization & Tooling</h3>
-      <div class="tag-cloud">
-        <span class="pill p-sky">Tableau</span><span class="pill p-sky">PowerBI</span>
-        <span class="pill p-sky">Google Analytics</span><span class="pill p-sky">MySQL</span>
-        <span class="pill p-sky">Firebase</span><span class="pill p-sky">Qualtrics</span>
-        <span class="pill p-sky">Excel</span><span class="pill p-sky">Docker</span><span class="pill p-sky">Anaconda</span>
+    <div class="spell-card reveal">
+      <div class="spell-card-head"><span style="font-size:17px">📊</span><h3>visualization & reporting</h3></div>
+      <div class="spell-body">
+        <div><div class="spell-row-label">BI & dashboards</div><div class="pill-row"><span class="pill ps">Tableau</span><span class="pill ps">PowerBI</span><span class="pill ps">Excel</span><span class="pill ps">Matplotlib</span><span class="pill ps">Chart.js</span></div></div>
+        <div><div class="spell-row-label">product analytics</div><div class="pill-row"><span class="pill ps">Google Analytics</span><span class="pill ps">Firebase Analytics</span><span class="pill ps">Qualtrics</span><span class="pill ps">Typeform</span></div></div>
+        <div><div class="spell-row-label">stats methods</div><div class="pill-row"><span class="pill ps">Paired t-tests</span><span class="pill ps">Effect Sizes</span><span class="pill ps">Predictive Modelling</span><span class="pill ps">Chi Squared tests</span></div></div>
       </div>
     </div>
-    <div class="skill-card reveal">
-      <div class="skill-icon">🗺️</div>
-      <h3>Product & Design</h3>
-      <div class="tag-cloud">
-        <span class="pill p-peach">User Research</span><span class="pill p-peach">Figma</span><span class="pill p-peach">Jira</span>
-        <span class="pill p-peach">Information Architecture</span>
-        <span class="pill p-peach">Metrics Design</span><span class="pill p-peach">UX/UI</span>
-        <span class="pill p-peach">Mixed Methods Research</span><span class="pill p-peach">Problem Scoping</span><span class="pill p-peach">Accessibility (AODA)</span>
+    <div class="spell-card reveal">
+      <div class="spell-card-head"><span style="font-size:17px">🗺️</span><h3>product & design</h3></div>
+      <div class="spell-body">
+        <div><div class="spell-row-label">UX research</div><div class="pill-row"><span class="pill pm">User Interviews</span><span class="pill pm">Card Sorting</span><span class="pill pm">Usability Testing</span><span class="pill pm">Survey Design</span></div></div>
+        <div><div class="spell-row-label">design & prototyping</div><div class="pill-row"><span class="pill pm">Figma</span><span class="pill pm">Information Architecture</span><span class="pill pm">Accessibility (AODA)</span><span class="pill pm">HTML/CSS/JS</span></div></div>
+        <div><div class="spell-row-label">product management</div><div class="pill-row"><span class="pill pm">Metrics Design</span><span class="pill pm">Jira</span><span class="pill pm">Roadmapping</span><span class="pill pm">Problem Scoping</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ════════════ EXPERIENCE ════════════ -->
 <section id="experience">
   <div class="reveal">
-    <div class="section-pill sp-blush">💼 Experience</div>
-    <h2>Where I've worked</h2>
-    <p class="section-sub">particle physics, healthcare fundraising, biotech SaaS, UX development, and environmental data projects, each one a different flavour of problem solving.</p>
-  </div>
-  <div class="reveal">
+    <div class="section-tag tag-lav">✦ experience</div>
+    </div>
+  <div class="exp-shell reveal">
     <div class="exp-tabs">
-      <button class="exp-tab active" onclick="showTab('triumf',this)">⚛️ TRIUMF</button>
-      <button class="exp-tab" onclick="showTab('scispot',this)">🔬 Scispot</button>
-      <button class="exp-tab" onclick="showTab('grhf',this)">🏥 GRHF</button>
-      <button class="exp-tab" onclick="showTab('rehvup',this)">🎮 RehvUp</button>
-      <button class="exp-tab" onclick="showTab('mcgill',this)">🏫 McGill</button>
+      <button class="etab on" onclick="showTab('triumf',this)"><span class="etab-dot"></span>⚛️ TRIUMF</button>
+      <button class="etab" onclick="showTab('scispot',this)"><span class="etab-dot"></span>🔬 Scispot</button>
+      <button class="etab" onclick="showTab('grhf',this)"><span class="etab-dot"></span>🏥 GRHF</button>
+      <button class="etab" onclick="showTab('rehvup',this)"><span class="etab-dot"></span>🎮 RehvUp</button>
+      <button class="etab" onclick="showTab('mcgill',this)"><span class="etab-dot"></span>🏫 McGill</button>
     </div>
-
-    <div id="panel-triumf" class="exp-panel active">
-      <div class="exp-card">
-        <div class="exp-co-row">
-          <div class="exp-company">TRIUMF: Canada's Particle Accelerator</div>
-          <div class="exp-dates">
-            <span class="exp-date-badge hi">Sep – Dec 2021</span>
-            <span class="exp-date-badge">Jan – Apr 2021</span>
-          </div>
-        </div>
-        
-        <div class="exp-term-divider">Jan – Apr 2021</div>
-        <div class="exp-role">Data Analyst</div>
-        <ul class="exp-bullets">
-          <li>Conducted multi-department user interviews, distributed staff surveys distributed via Qualtrics, analysed responses across departments, and produced <span class="exp-hl">executive-level Excel visualisations</span> used to inform workforce strategy</li>
-          <li>Analysed web traffic using Google Analytics, structuring findings around <span class="exp-hl">3 hypotheses</span> on external disengagement, internal navigation patterns, and audience intent</li>
-          <li>Identified a broken internal traffic filter in GA and flagged it as a data quality issue affecting all engagement metrics</li>
-          <li>Interpreted Sankey flow diagrams to map how new vs. returning users moved through the site differently, supporting the case for an internal/external IA split</li>
+    <div class="exp-panel-wrap">
+      <div id="p-triumf" class="exp-panel on">
+        <div class="ep-meta"><div class="ep-org">TRIUMF · Canada's Particle Accelerator Centre</div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="ep-badge alt">Sep – Dec 2021</span><span class="ep-badge">Jan – Apr 2021</span></div></div>
+        <div class="ep-divider">sep – dec 2021</div>
+        <div class="ep-role">Data Analyst</div>
+        <ul class="ep-bullets">
+          <li>Designed and concucted multi-department surveys via and user interviews Qualtrics across TRIUMF's research divisions, synthesising qualitative themes into <span class="ep-hl">executive-level visualisations</span> used directly in workforce planning decisions</li>
+          <li>Audited web traffic patterns in Google Analytics and structured findings around <span class="ep-hl">3 distinct disengagement hypotheses</span>, with each mapped to a specific user segment and tested against behavioural data</li>
+          <li>Proposed full information architecture redesign of a <span class="ep-hl">5,000+ page public website</span> through user profiling and content audits, separating public-facing pathways from internal researcher tools</li>
+          <li>Discovered a <span class="ep-hl">broken internal traffic filter</span> that had been silently inflating engagement metrics across all Google Analytics reports</li>
+          <li>Produced a competitive analysis of peer research institution sites to benchmark TRIUMF's content strategy and navigation patterns against sector standards</li>
         </ul>
-        <div class="skill-pills">
-          <span class="pill p-sky">Google Analytics</span><span class="pill p-sky">Qualtrics</span><span class="pill p-sky">Excel</span><span class="pill p-peach">Survey Design</span><span class="pill p-peach">User Research</span><span class="pill p-peach">People Data</span>
-        </div>
-        <div class="exp-term-divider">Sep – Dec 2021</div>
-        <div class="exp-role">Digital Design Intern</div>
-        <ul class="exp-bullets">
-          <li>Redesigned the public outreach website for usability. Ran internal surveys to surface pain points, then redesigned navigation through competitive analysis, user profiling, and card-sorting workshops</li>
-          <li>Built a <span class="exp-hl">fully interactive facility map</span> using custom HTML and jQuery within Elementor, replacing a static tour brochure with an immersive, icon-rich digital experience</li>
-          <li>Restructured the virtual tour into dedicated pages per facility and created an interactive scientific glossary, iterating through hover-based and dedicated-page formats</li>
-          <li>Ensured <span class="exp-hl">AODA compliance</span> throughout the website. Improved colour contrast, added non-colour visual cues, increased text sizes, and improved mobile responsiveness across the site</li>
+        <div class="ep-loot"><span class="pill ps">Google Analytics</span><span class="pill ps">Qualtrics</span><span class="pill po">Excel</span><span class="pill pm">Survey Design</span></div>
+        <div class="ep-divider"> jan – apr 2021</div>
+        <div class="ep-role">Digital Design Intern</div>
+        <ul class="ep-bullets">
+          <li>Led full redesign of a <span class="ep-hl">public outreach website</span> through card-sorting workshops, user profiling, and content audits </li>
+          <li>Built a <span class="ep-hl">fully interactive facility map</span> using custom HTML, CSS, and jQuery embedded within Elementor, replacing a static PDF brochure that was generating zero engagement</li>
+          <li>Ensured <span class="ep-hl">AODA accessibility compliance</span> throughout: contrast ratios, non-colour cues, text sizing, alt text, and full mobile responsiveness</li>
+          <li>Coordinated directly with communications and research staff to validate redesign decisions against actual user needs before handoff</li>
         </ul>
-        <div class="skill-pills" style="margin-bottom:0;padding-bottom:0;border-bottom:none">
-          <span class="pill p-mint">HTML/CSS</span><span class="pill p-mint">jQuery</span><span class="pill p-peach">UX Research</span><span class="pill p-peach">Accessibility</span><span class="pill p-peach">Figma</span>
-        </div>
+        <div class="ep-loot"><span class="pill pl">HTML/CSS</span><span class="pill pl">jQuery</span><span class="pill pm">UX Research</span><span class="pill pm">Accessibility</span></div>
+      </div>
+      <div id="p-scispot" class="exp-panel">
+        <div class="ep-meta"><div class="ep-org">Scispot · Biotech SaaS</div><span class="ep-badge">May – Aug 2022</span></div>
+        <div class="ep-role">Product Designer — Analytics & Experimentation</div>
+        <ul class="ep-bullets">
+          <li>Owned end-to-end design for <span class="ep-hl">8+ SaaS features in Figma</span> spanning: inventory management, equipment checkout, secure document-sharing, and onboarding flows. I was involved from initial brief to developer handoff</li>
+          <li>Managed feature delivery in Jira, coordinating between design, engineering, and client success to keep timelines on track; work directly contributed to <span class="ep-hl">securing major enterprise client contracts</span></li>
+          <li>Defined success metrics for new features, ran lightweight experiments post-launch, and synthesised findings into product decisions. Resulted in <span class="ep-hl">25% increased feature adoption</span> across the quarter</li>
+          <li>Reduced churn by <span class="ep-hl">20%</span> through a structured programme of user research interviews, identifying friction patterns and iterating based on usability issues</li>
+          <li>Collaborated with the growth team to instrument analytics events and build dashboards that made adoption trends visible to non-technical stakeholders for the first time</li>
+        </ul>
+        <div class="ep-loot"><span class="pill pm">Figma</span><span class="pill pm">Jira</span><span class="pill pm">User Research</span><span class="pill ps">Metrics Design</span></div>
+      </div>
+      <div id="p-grhf" class="exp-panel">
+        <div class="ep-meta"><div class="ep-org">Grand River Hospital Foundation</div><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="ep-badge alt">May – Aug 2024</span><span class="ep-badge">Jan – Apr 2023</span></div></div>
+        <div class="ep-divider">may – aug 2024</div>
+        <div class="ep-role">Data Scientist</div>
+        <ul class="ep-bullets">
+          <li>Extended donor predictive modelling across <span class="ep-hl">10 concurrent fundraising campaigns</span>, adapting segmentation logic to each campaign's donor profile and gift history patterns</li>
+          <li>Applied logistic regression and k-means clustering across <span class="ep-hl">800k donor records</span>, surfacing <span class="ep-hl">$1M+ in overlooked giving potential</span> from potential major donors previously outside outreach scope</li>
+        </ul>
+        <div class="ep-loot"><span class="pill ps">Tableau</span><span class="pill pl">Python</span><span class="pill pl">SQL</span></div>
+        <div class="ep-divider">jan – apr 2023</div>
+        <div class="ep-role">Data Scientist</div>
+        <ul class="ep-bullets">
+          <li>Designed and built Tableau dashboards surfacing giving trends, campaign performance, and donor movement across an <span class="ep-hl">$88M fundraising portfolio</span></li>
+          <li>Built Tableau tools and wrote documentation specifically designed for non-technical development staff so the team could act on model outputs independently</li>
+          <li>Denormalized the Raiser's Edge CRM database schema, <span class="ep-hl">halving average query times</span> and eliminating a class of data integrity issues that had been causing silent errors in DRM reports</li>
+          <li>Translated analytical findings across <span class="ep-hl">800k donor records</span> into strategic recommendations for the annual giving programme</li>
+        </ul>
+        <div class="ep-loot"><span class="pill ps">Tableau</span><span class="pill pp">k-means</span><span class="pill pp">Gradient Boosting</span><span class="pill pl">Scikit-learn</span></div>
+      </div>
+      <div id="p-rehvup" class="exp-panel">
+        <div class="ep-meta"><div class="ep-org">RehvUp · HR Tech Startup</div><span class="ep-badge">Sep – Dec 2023</span></div>
+        <div class="ep-role">Information Architect</div>
+        <ul class="ep-bullets">
+          <li>Diagnosed root causes of recurring user friction through research sessions and logic audits which <span class="ep-hl">reduced user complaints by 90%</span></li>
+          <li>Designed the complete product experience solo: user personas, journey maps, a points-and-streaks gamification system, and a desktop companion interface</li>
+          <li>Restructured the full information architecture to support intuitive navigation for users with varying needs, with particular attention to cognitive load and task completion flow</li>
+          <li>Produced a detailed product roadmap with prioritised features, success criteria, and rollout sequencing which was handed off directly to engineering and used to guide the next two development sprints</li>
+        </ul>
+        <div class="ep-loot"><span class="pill pm">UX/UI</span><span class="pill pm">Figma</span><span class="pill pm">Information Architecture</span><span class="pill ps">Roadmapping</span></div>
+      </div>
+      <div id="p-mcgill" class="exp-panel">
+        <div class="ep-meta"><div class="ep-org">McGill University · Dept of Civil Engineering</div><span class="ep-badge">May – Aug 2024</span></div>
+        <div class="ep-role">Data Analyst</div>
+        <ul class="ep-bullets">
+          <li>Integrated and cleaned <span class="ep-hl">30M+ records from government and industry sources</span> using Python and SQL to handle format inconsistencies, schema mismatches, and missing authority codes across jurisdictions that reduced manual QA time by <span class="ep-hl">90%</span></li>
+          <li>Wrote deduplication scripts that removed <span class="ep-hl">23k+ duplicate well records</span>, cutting downstream query errors by 30% and improving confidence in spatial join accuracy</li>
+          <li>Performed spatial analysis with Python and QGIS to evaluate solar and wind energy potential at abandoned oil well sites, <span class="ep-hl">improving viable site identification accuracy by 15%</span> over the prior methodology</li>
+        </ul>
+        <div class="ep-loot"><span class="pill pl">Python</span><span class="pill pl">SQL</span><span class="pill pp">QGIS</span><span class="pill pp">Spatial Analysis</span></div>
       </div>
     </div>
-
-    <div id="panel-scispot" class="exp-panel">
-      <div class="exp-card">
-        <div class="exp-co-row">
-          <div class="exp-company">Scispot</div>
-          <div class="exp-dates"><span class="exp-date-badge">May – Aug 2022</span></div>
-        </div>
-        <div class="exp-role">Product Designer — Analytics & Experimentation</div>
-        <ul class="exp-bullets">
-          <li>Scoped, designed, and prototyped <span class="exp-hl">8+ SaaS product offerings in Figma</span> for biotech clients: inventory management, equipment checkout, secure document-sharing, and onboarding flows</li>
-          <li>Led engineering teams in shipping projects, managing engineering tickets with Jira and directly leading to securing major client contracts</li>
-          <li>Defined success metrics and evaluated product feature experiments, contributing to <span class="exp-hl">25% increased feature adoption</span> and improved early user engagement</li>
-          <li>Reduced churn by <span class="exp-hl">20%</span> by identifying workflow friction through user research interviews and iterative UX improvements</li>
-          <li>Prototyped a lab materials manager with multi-level storage IA, an equipment checkout system that helped close a major deal, and real-time inventory that linked the lab notebook directly to Labsheets</li>
-          <li>Also designed and shipped these product features: a permissions-based training module tracker, Google Sheets and S3 integrations, advanced Labsheets filtering, and redesigned alerts and data visualisation templates</li>
-        </ul>
-        <div class="skill-pills">
-          <span class="pill p-peach">Figma</span><span class="pill p-peach">Jira</span><span class="pill p-peach">User Research</span><span class="pill p-peach">Product Design</span><span class="pill p-peach">Project Management</span><span class="pill p-peach">Information Architecture</span><span class="pill p-peach">Metrics Design</span>
-        </div>
-      </div>
-    </div>
-
-    <div id="panel-grhf" class="exp-panel">
-      <div class="exp-card">
-        <div class="exp-co-row">
-          <div class="exp-company">Grand River Hospital Foundation</div>
-          <div class="exp-dates">
-            <span class="exp-date-badge hi">May – Aug 2024</span>
-            <span class="exp-date-badge">Jan – Apr 2023</span>
-          </div>
-        </div>
-        <div class="exp-term-divider">May – Aug 2024</div>
-        <div class="exp-role">Data Scientist</div>
-        <ul class="exp-bullets">
-          <li>Returned to extend the donor modelling work, applying predictive models across <span class="exp-hl">10 concurrent campaigns</span> and building Tableau reporting tools that non-technical staff could use independently</li>
-          <li>Applied decision tree regression, logistic regression, and k-means clustering across <span class="exp-hl">800k donor records</span> to identify high-potential segments, uncovering <span class="exp-hl">over $1M in previously overlooked assets</span></li>
-        </ul>
-        <div class="skill-pills" style="margin-bottom:0;padding-bottom:0;border-bottom:none">
-          <span class="pill p-sky">Tableau</span><span class="pill p-mint">Python</span><span class="pill p-mint">SQL</span>
-        </div>
-        <div class="exp-term-divider">Jan – Apr 2023</div>
-        <div class="exp-role">Data Scientist</div>
-        <ul class="exp-bullets">
-          <li>Built Tableau dashboards surfacing donation trends across an <span class="exp-hl">$88M portfolio</span></li>
-          <li>Created automated data pipelines and SQL-based scaffolding that removed a manual reporting bottleneck the team had lived with for years</li>
-          <li>Denormalized the Raiser's Edge database, halving query times and improving data quality for downstream DRM conversion work</li>
-          <li>Built a separate volunteer activity and KPI dashboard, designed so non-technical staff could explore without touching SQL</li>
-        </ul>
-        <div class="skill-pills">
-          <span class="pill p-sky">Tableau</span><span class="pill p-lav">Decision Trees</span><span class="pill p-lav">k-means</span><span class="pill p-mint">Python</span><span class="pill p-mint">SQL</span><span class="pill p-mint">Scikit-learn</span>
-        </div>
-      </div>
-    </div>
-
-    <div id="panel-rehvup" class="exp-panel">
-      <div class="exp-card">
-        <div class="exp-co-row">
-          <div class="exp-company">RehvUp</div>
-          <div class="exp-dates"><span class="exp-date-badge">Sep – Dec 2023</span></div>
-        </div>
-        <div class="exp-role">Information Architect</div>
-        <ul class="exp-bullets">
-          <li>Identified root causes of recurring user frustration through iterative UX research and logic audits, implementing fixes that reduced user complaints by <span class="exp-hl">90%</span></li>
-          <li>Designed the full product experience: user personas, product roadmaps, a gamification system to drive engagement, and a desktop companion interface</li>
-          <li>Restructured the information architecture for intuitive navigation without guidance, tested and iterated through multiple rounds of user feedback</li>
-        </ul>
-        <div class="skill-pills">
-          <span class="pill p-peach">UX/UI</span><span class="pill p-peach">User Research</span><span class="pill p-peach">Figma</span><span class="pill p-peach">Information Architecture</span><span class="pill p-peach">Roadmapping</span>
-        </div>
-      </div>
-    </div>
-
-    <div id="panel-mcgill" class="exp-panel">
-      <div class="exp-card">
-        <div class="exp-co-row">
-          <div class="exp-company">McGill University · Dept of Civil Engineering</div>
-          <div class="exp-dates"><span class="exp-date-badge">May – Aug 2024</span></div>
-        </div>
-        <div class="exp-role">Data Analyst</div>
-        <ul class="exp-bullets">
-          <li>Integrated and cleaned <span class="exp-hl">30M+ government records</span> from multiple sources using SQL and Python, building standardised preprocessing pipelines that reduced manual QA time by <span class="exp-hl">90%</span></li>
-          <li>Wrote Python scripts removing <span class="exp-hl">23k+ duplicate records</span>, cutting downstream query errors by 30%</li>
-          <li>Consolidated and validated historical abandoned oil well data against industry and government sources, converting exploratory analyses into datasets used across the lab</li>
-          
-          <li>Performed spatial analysis using Python and QGIS to evaluate renewable energy potential at abandoned well sites, improving viable site identification by <span class="exp-hl">15%</span></li>
-        </ul>
-        <div class="skill-pills">
-          <span class="pill p-mint">Python</span><span class="pill p-mint">SQL</span><span class="pill p-lav">QGIS</span><span class="pill p-lav">Spatial Analysis</span><span class="pill p-mint">Pandas</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-
+<!-- ════════════ CASE STUDIES ════════════ -->
 <section id="cases">
   <div class="reveal">
-    <div class="section-pill sp-lav">📖 Case Studies</div>
-    <h2>Want to know more?</h2>
-    <p class="section-sub">Projects where I went from ambiguous problem all the way to measurable outcome.</p>
+    <div class="section-tag tag-pink">✦ case studies</div>
+    <h2 class="s-title">ambiguous problem  <em>→ measurable outcome</em></h2>
   </div>
-  <div class="cases-grid">
+  <div class="tomes-grid">
 
-    <!-- CASE 1: RehvUp Gamification -->
-    <div class="case-card reveal">
-      <div class="case-banner cb-blush"></div>
-      <div class="case-top">
-        <span class="case-emoji">🎮</span>
-        <div class="case-type">UX / Product Design · RehvUp</div>
+    <div class="tome reveal" style="--tw:3s">
+      <div class="tome-banner tbv">
+        <div class="tome-banner-floaties" id="tf1"></div>
+        <span class="tome-emoji">🎮</span>
+        <span class="tome-type-banner">Product Design</span>
+      </div>
+      <div class="tome-shine"></div>
+      <div class="tome-body">
+        <div class="tome-cat">UX / Product Design · RehvUp</div>
         <h3>Designing a gamification system from zero</h3>
-        <p class="case-tagline">How I went from a vague brief to a fully scoped, Figma-prototyped engagement system, and cut user complaints by 90% along the way!</p>
+        <p class="tome-tagline">RehvUp had a vague brief and a frustrated user base. I ran research sessions to find the root causes, then designed a full gamification system: points, streaks, a companion interface (solo w/ Figma).</p>
+       <div class="tome-flower-div">✿ · ✦ · ✿</div>
       </div>
-      <div class="case-body">
-        <div class="case-section">
-          <h4>The Problem</h4>
-          <p>RehvUp (think Instagram and Linkedin had a baby) had low engagement and a backlog of user frustration. The app's logic and navigation created confusion, and there was no coherent system to incentivise participation.</p>
-        </div>
-        <div class="case-section">
-          <h4>What I did</h4>
-          <ul>
-            <li>Audited app logic through usability testing, identifying root causes of recurring UX complaints</li>
-            <li>Redesigned the information architecture for intuitive navigation</li>
-            <li>Conceptualised and prototyped a full gamification system: XP points, persona ranks, leaderboards, challenges, and milestone badges</li>
-            <li>Wrote a formal scope document defining deliverables, approval process, and integration boundaries</li>
-          </ul>
-        </div>
-        <div class="case-stats">
-          <div class="cs-cell"><span class="cs-val">90%</span><div class="cs-lbl">fewer complaints</div></div>
-          <div class="cs-cell"><span class="cs-val">7</span><div class="cs-lbl">features scoped</div></div>
-          <div class="cs-cell"><span class="cs-val">1</span><div class="cs-lbl">solo designer (me!)</div></div>
-        </div>
+      <div class="tome-stats">
+        <div class="ts-node"><span class="ts-dot">✦</span><span class="ts-val">90%</span><span class="ts-lbl">fewer complaints</span></div>
+        <div class="ts-node"><span class="ts-dot">✦</span><span class="ts-val">7</span><span class="ts-lbl">features scoped</span></div>
+        <div class="ts-node"><span class="ts-dot">✦</span><span class="ts-val">1</span><span class="ts-lbl">solo designer</span></div>
       </div>
-      <div style="padding:0 26px 20px"><a href="case-rehvup.html" class="case-card-btn">Read full case study →</a></div>
+      <div class="tome-foot"><a href="case-rehvup.html" class="tome-link">open case study →</a><span class="tome-foot-flowers">✿ ✦ ✿</span></div>
     </div>
 
-    <!-- CASE 2: TraySense -->
-    <div class="case-card reveal">
-      <div class="case-banner cb-mint"></div>
-      <div class="case-top">
-        <span class="case-emoji">🏥</span>
-        <div class="case-type">Product + Data · TraySense (Engineering Capstone)</div>
+    <div class="tome reveal" style="--tw:2.6s">
+      <div class="tome-banner tbp">
+        <div class="tome-banner-floaties" id="tf2"></div>
+        <span class="tome-emoji">🏥</span>
+        <span class="tome-type-banner">Engineering Capstone</span>
+      </div>
+      <div class="tome-shine"></div>
+      <div class="tome-body">
+        <div class="tome-cat">Product + Data · TraySense</div>
         <h3>Reducing surgical tray assembly errors</h3>
-        <p class="case-tagline">From hospital floor observation to a user-tested verification system, and the statistics to prove it works!</p>
+        <p class="tome-tagline">Operating room instrument trays have no reliable verification system and errors cost hospitals real money and real time. I scoped this problem from hospital floor visits, designed a MySQL-backed system, and validated it with user testing.</p>
+        <div class="tome-flower-div">✿ · ✦ · ✿</div>
       </div>
-      <div class="case-body">
-        <div class="case-section">
-          <h4>The Problem</h4>
-          <p>21.6% of Canadian surgeries face delays from MDR errors. Technicians relied on paper and Excel files to assemble 1,900+ tray configurations under time pressure with a 4% error rate and $38k in overstock costs.</p>
-        </div>
-        <div class="case-section">
-          <h4>What I did</h4>
-          <ul>
-            <li>Scoped the problem through hospital tours, shadowing sessions, and stakeholder interviews</li>
-            <li>Led literature review and statistical analysis of user testing data (paired t-tests, effect sizes, correlation)</li>
-            <li>Designed a relational MySQL schema supporting 1,900+ instrument configurations across four vendor datasets</li>
-            <li>Ran a controlled user study: users switching from manual to our system improved by 26.7s avg with large effect size (0.89)</li>
-          </ul>
-        </div>
-        <div class="case-stats">
-          <div class="cs-cell"><span class="cs-val">26.7s</span><div class="cs-lbl">avg time saved</div></div>
-          <div class="cs-cell"><span class="cs-val">37%</span><div class="cs-lbl">error Reduction</div></div>
-          <div class="cs-cell"><span class="cs-val">1,900+</span><div class="cs-lbl">tray configurations</div></div>
-        </div>
+      <div class="tome-stats">
+        <div class="ts-node"><span class="ts-dot">✦</span><span class="ts-val">26.7s</span><span class="ts-lbl">time saved</span></div>
+        <div class="ts-node"><span class="ts-dot">✦</span><span class="ts-val">37%</span><span class="ts-lbl">error reduction</span></div>
+        <div class="ts-node"><span class="ts-dot">✦</span><span class="ts-val">1,900+</span><span class="ts-lbl">configurations</span></div>
       </div>
-      <div style="padding:0 26px 20px"><a href="case-traysense.html" class="case-card-btn">Read full case study →</a></div>
+      <div class="tome-foot"><a href="case-traysense.html" class="tome-link">open case study →</a><span class="tome-foot-flowers">✿ ✦ ✿</span></div>
     </div>
 
-    <!-- CASE 3: McGill Renewable Energy -->
-    <div class="case-card reveal">
-      <div class="case-banner cb-lav"></div>
-      <div class="case-top">
-        <span class="case-emoji">🌱</span>
-        <div class="case-type">Data Science · McGill University</div>
-        <h3>Mapping renewable energy potential @ abandoned oil wells</h3>
-        <p class="case-tagline">Cleaning 30M+ government records and using QGIS to assess how many of North America's abandoned oil wells could generate wind, solar, or geothermal energy</p>
+    <div class="tome reveal" style="--tw:3.8s">
+      <div class="tome-banner tbs">
+        <div class="tome-banner-floaties" id="tf3"></div>
+        <span class="tome-emoji">🌱</span>
+        <span class="tome-type-banner">Data Science</span>
       </div>
-      <div class="case-body">
-        <div class="case-section">
-          <h4>The Problem</h4>
-          <p>North America has over a million abandoned oil wells with no clean data on where they are. Researchers needed a comprehensive dataset to model for various projects, such as assessing how many could viably be repurposed for renewable energy generation.</p>
-        </div>
-        <div class="case-section">
-          <h4>What I did</h4>
-          <ul>
-            <li>Integrated and cleaned 30M+ records from government and industry sources using SQL and Python</li>
-            <li>Wrote Python scripts removing 23k+ redundant records; cross-validated with govern,emt amd industry sources to within 10%</li>
-            <li>Used QGIS spatial analysis to assess wind, solar, and geothermal potential at each viable site</li>
-            <li>Researched turbine models and energy generation formulas to improve viable site identification by 15%</li>
-          </ul>
-        </div>
-        <div class="case-stats">
-          <div class="cs-cell"><span class="cs-val">30M+</span><div class="cs-lbl">records cleaned</div></div>
-          <div class="cs-cell"><span class="cs-val">23k+</span><div class="cs-lbl">duplicates removed</div></div>
-          <div class="cs-cell"><span class="cs-val">+15%</span><div class="cs-lbl">site identification</div></div>
-        </div>
+      <div class="tome-shine"></div>
+      <div class="tome-body">
+        <div class="tome-cat">Data Science · McGill University</div>
+        <h3>Mapping renewable energy at abandoned oil wells</h3>
+        <p class="tome-tagline">North America has hundreds of thousands of abandoned oil wells. I integrated 30M+ records from government and industry sources, deduplicated and validated them, then ran spatial analysis to surface sites with the highest renewable energy potential.</p>
+        <div class="tome-flower-div">✿ · ✦ · ✿</div>
       </div>
-      <div style="padding:0 26px 20px"><a href="case-mcgill.html" class="case-card-btn">Read full case study →</a></div>
+      <div class="tome-stats">
+        <div class="ts-node"><span class="ts-dot">✦</span><span class="ts-val">30M+</span><span class="ts-lbl">records cleaned</span></div>
+        <div class="ts-node"><span class="ts-dot">✦</span><span class="ts-val">23k+</span><span class="ts-lbl">dupes removed</span></div>
+        <div class="ts-node"><span class="ts-dot">✦</span><span class="ts-val">+15%</span><span class="ts-lbl">site accuracy</span></div>
+      </div>
+      <div class="tome-foot"><a href="case-mcgill.html" class="tome-link">open case study →</a><span class="tome-foot-flowers">✿ ✦ ✿</span></div>
     </div>
 
-    <!-- CASE 4: TRIUMF -->
-    <div class="case-card reveal">
-      <div class="case-banner" style="background:linear-gradient(90deg,var(--sky),var(--mint2))"></div>
-      <div class="case-top">
-        <span class="case-emoji">⚛️</span>
-        <div class="case-type">UX Research & Strategy · TRIUMF</div>
-        <h3>Rebuilding a 5,000-page website</h3>
-        <p class="case-tagline">Data-driven strategic recommendation for redesigning Canada's particle accelerator website: starting with three hypotheses tested against Google Analytics, then building to IA and content strategy.</p>
+    <div class="tome reveal" style="--tw:4.2s">
+      <div class="tome-banner tbm">
+        <div class="tome-banner-floaties" id="tf4"></div>
+        <span class="tome-emoji">⚛️</span>
+        <span class="tome-type-banner">UX Research</span>
       </div>
-      <div class="case-body">
-        <div class="case-section">
-          <h4>The Problem</h4>
-          <p>TRIUMF's website had 5,000+ pages, two navbars, facility-specific microsites pulling in different directions, and no clear internal vs. external split. Analytics showed power users only ever visited a handful of pages.</p>
-        </div>
-        <div class="case-section">
-          <h4>What I did</h4>
-          <ul>
-            <li>Analysed Google Analytics traffic data for October 2021 and structured findings around 3 testable hypotheses on user behaviour</li>
-            <li>Identified a broken internal traffic filter in Google Analytics, flagging a data quality issue that affected all engagement metrics</li>
-            <li>Conducted competitive landscape analysis across MIT Media Lab, Adobe, and Bruce Power</li>
-            <li>Proposed a full IA restructure: internal/external split, facility-site strategy, and content framework</li>
-          </ul>
-        </div>
-        <div class="case-stats">
-          <div class="cs-cell"><span class="cs-val">5k+</span><div class="cs-lbl">pages audited</div></div>
-          <div class="cs-cell"><span class="cs-val">46%</span><div class="cs-lbl">bounce rate</div></div>
-          <div class="cs-cell"><span class="cs-val">3</span><div class="cs-lbl">hypotheses tested</div></div>
-        </div>
+      <div class="tome-shine"></div>
+      <div class="tome-body">
+        <div class="tome-cat">UX Research · TRIUMF</div>
+        <h3>Rebuilding a 5,000-page scientific website</h3>
+        <p class="tome-tagline">TRIUMF's public site had a 46% bounce rate and confusing navigation built for internal users rather than the general public. I analysed Google Analytics data, formed three hypotheses about why people were leaving, and evaluted them.</p>
+        <div class="tome-flower-div">✿ · ✦ · ✿</div>
       </div>
-      <div style="padding:0 26px 20px"><a href="case-triumf.html" class="case-card-btn">Read full case study →</a></div>
+      <div class="tome-stats">
+        <div class="ts-node"><span class="ts-dot">✦</span><span class="ts-val">5k+</span><span class="ts-lbl">pages audited</span></div>
+        <div class="ts-node"><span class="ts-dot">✦</span><span class="ts-val">46%</span><span class="ts-lbl">bounce rate</span></div>
+        <div class="ts-node"><span class="ts-dot">✦</span><span class="ts-val">3</span><span class="ts-lbl">hypotheses</span></div>
+      </div>
+      <div class="tome-foot"><a href="case-triumf.html" class="tome-link">open case study →</a><span class="tome-foot-flowers">✿ ✦ ✿</span></div>
     </div>
 
   </div>
 </section>
 
-
+<!-- ════════════ PROJECTS ════════════ -->
 <section id="projects">
   <div class="reveal">
-    <div class="section-pill sp-sky">🚀 Projects & Extracurriculars</div>
-    <h2>Other Things I've Worked On!</h2>
-    <p class="section-sub">Research roles, design teams, and student initiatives!</p>
+    <div class="section-tag tag-mint">✦ projects</div>
+    <p class="s-sub">research roles, design teams, and student initiatives.</p>
   </div>
-  <div class="proj-grid">
-    <div class="proj-card reveal">
-      <div class="proj-emoji">💊</div>
-      <div class="proj-type">LLM + RAG · Wat.ai</div>
-      <h3>Pharmaceutical Vector Database</h3>
-      <p>Researched embedding models and vector databases for pharmaceutical knowledge retrieval as part of Waterloo's AI design team, with the aim of developing an interactive product for natural-language drug queries.</p>
-      <div class="proj-pills"><span class="pill p-lav">LLM</span><span class="pill p-lav">Vector DB</span><span class="pill p-mint">SMILES</span><span class="pill p-mint">Python</span></div>
-    </div>
-    <div class="proj-card reveal">
-      <div class="proj-emoji">⚖️</div>
-      <div class="proj-type">Fairness ML · Aphrodite Project</div>
-      <h3>Algorithmic Bias in Matching</h3>
-      <p>Led EDA on 20k+ user profiles to surface and reduce demographic bias in a campus dating app. Resolved Firebase data issues, ran funnel analysis, and managed a global launch hitting 3,500+ signups in 12 hours.</p>
-      <div class="proj-pills"><span class="pill p-lav">Fairness ML</span><span class="pill p-mint">Python</span><span class="pill p-sky">Firebase</span></div>
-    </div>
-    <div class="proj-card reveal">
-      <div class="proj-emoji">🤖</div>
-      <div class="proj-type">HCI · SSIRL Research Lab</div>
-      <h3>QT Robot Interface</h3>
-      <p>Reviewed academic literature on wellness practices and designed an application interface for human interactions with QT, a social robot used in wellness and educational research settings.</p>
-      <div class="proj-pills"><span class="pill p-peach">HCI</span><span class="pill p-peach">Interface Design</span><span class="pill p-peach">Research</span></div>
-    </div>
-    <div class="proj-card reveal">
-      <div class="proj-emoji">🥽</div>
-      <div class="proj-type">Assistive Tech · University of Calgary</div>
-      <h3>HoloLens for Learning Disabilities</h3>
-      <p>Early-stage research exploring how Microsoft HoloLens mixed reality could support students with learning disabilities in educational environments.</p>
-      <div class="proj-pills"><span class="pill p-lav">AR/MR</span><span class="pill p-peach">Research</span></div>
-    </div>
-    <div class="proj-card reveal">
-      <div class="proj-emoji">📣</div>
-      <div class="proj-type">Branding & Marketing · WARG</div>
-      <h3>Brand Identity & Outreach</h3>
-      <p>Built WARG's visual identity from scratch: colour palette, typography, tone guide. Also designed merchandise, managed vendor negotiations, and ran a recruitment social media campaign.</p>
-      <div class="proj-pills"><span class="pill p-peach">Branding</span><span class="pill p-peach">Marketing</span><span class="pill p-peach">Figma</span></div>
-    </div>
-    <div class="proj-card reveal">
-      <div class="proj-emoji">📊</div>
-      <div class="proj-type">Data Viz · SYDE Class Profile</div>
-      <h3>Class Demographic Visualisations</h3>
-      <p>Cleaned and visualised demographic trend data for the SYDE cohort profile, building charts showing patterns across graduating classes for the wider student body.</p>
-      <div class="proj-pills"><span class="pill p-mint">Python</span><span class="pill p-sky">Data Viz</span></div>
-    </div>
+  <div class="scrolls-grid">
+    <div class="scroll reveal"><div class="scroll-icon">💊</div><div class="scroll-type">LLM + RAG · Wat.ai</div><h3>Pharmaceutical Vector Database</h3><p>Researched embedding models and built a vector database for pharmaceutical knowledge retrieval — a natural-language drug query interface.</p><div class="scroll-tags"><span class="pill pl">LLM</span><span class="pill pl">Vector DB</span></div></div>
+    <div class="scroll reveal"><div class="scroll-icon">⚖️</div><div class="scroll-type">Fairness ML · Aphrodite Project</div><h3>Algorithmic Bias in Matching</h3><p>EDA on 20k+ user profiles to surface and reduce demographic bias. Global launch — 3,500+ signups in 12 hours.</p><div class="scroll-tags"><span class="pill pp">Fairness ML</span><span class="pill pl">Python</span></div></div>
+    <div class="scroll reveal"><div class="scroll-icon">🤖</div><div class="scroll-type">HCI · SSIRL Research Lab</div><h3>QT Robot Interface</h3><p>Literature review on wellness practices and interface design for human–robot interactions with QT social robot.</p><div class="scroll-tags"><span class="pill pm">HCI</span><span class="pill pm">Research</span></div></div>
+    <div class="scroll reveal"><div class="scroll-icon">🥽</div><div class="scroll-type">Assistive Tech · University of Calgary</div><h3>HoloLens for Learning Disabilities</h3><p>Early research exploring Microsoft HoloLens mixed reality to support students with learning disabilities.</p><div class="scroll-tags"><span class="pill pl">AR/MR</span><span class="pill pm">Research</span></div></div>
+    <div class="scroll reveal"><div class="scroll-icon">📣</div><div class="scroll-type">Branding · WARG</div><h3>Brand Identity & Outreach</h3><p>Built WARG's full visual identity from scratch: palette, typography, tone guide, merchandise, vendor negotiations, student recruitment campaign.</p><div class="scroll-tags"><span class="pill ps">Branding</span><span class="pill pm">Figma</span></div></div>
+    <div class="scroll reveal"><div class="scroll-icon">📊</div><div class="scroll-type">Data Viz · SYDE Class Profile</div><h3>Class Demographic Visualisations</h3><p>Cleaned and visualised demographic trend data for the SYDE cohort profile across graduating classes.</p><div class="scroll-tags"><span class="pill pl">Python</span><span class="pill ps">Data Viz</span></div></div>
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <div class="contact-inner reveal">
     <span class="contact-emoji">✉️</span>
-    <h2>Let's work together!</h2>
-    <p class="contact-sub">Open to data science, product analytics, and APM roles.</p>
-    <div class="contact-links">
-      <a href="mailto:cheryl.li@uwaterloo.ca" class="contact-link primary">✉️ Email me</a>
-      <a href="https://linkedin.com/in/cheryl-xue-li" class="contact-link" target="_blank">💼 LinkedIn</a>
-      <a href="https://github.com/cherrowo" class="contact-link">🐙 GitHub</a>
-      <!--<a href="#" class="contact-link">📄 Resume</a> -->
+    <h2 class="s-title" style="font-size:clamp(26px,3.5vw,42px)">let's work <em>together</em></h2>
+    <p class="contact-sub">open to data science, product analytics, and APM roles. TN-eligible for US positions ˚₊</p>
+    <div class="contact-btns">
+      <a href="mailto:cheryl.li@uwaterloo.ca" class="cbtn main">✉ send a message</a>
+      <a href="https://linkedin.com/in/cheryl-xue-li" class="cbtn" target="_blank">LinkedIn</a>
+      <a href="https://github.com/cherrowo" class="cbtn">GitHub</a>
     </div>
   </div>
 </section>
 
 <footer>
   <p>© Cheryl Li</p>
-  <div>🌸</div>
 </footer>
 
+<div class="toast-msg" id="toast"></div>
+
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
-function closeModalIfBg(e,overlay) { if(e.target===overlay){overlay.classList.remove('open');document.body.style.overflow='';} }
-document.addEventListener('keydown',function(e){ if(e.key==='Escape'){document.querySelectorAll('.cs-modal-overlay.open').forEach(function(m){m.classList.remove('open');});document.body.style.overflow='';} });
-function showTab(id, btn) {
-  document.querySelectorAll('.exp-panel').forEach(function(p) { p.classList.remove('active'); });
-  document.querySelectorAll('.exp-tab').forEach(function(t) { t.classList.remove('active'); });
-  document.getElementById('panel-' + id).classList.add('active');
-  btn.classList.add('active');
-}
-var obs = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e, i) {
-    if (e.isIntersecting) {
-      setTimeout(function() { e.target.classList.add('visible'); }, i * 55);
-      obs.unobserve(e.target);
-    }
+/* NEBULA CLOUDS */
+(function(){
+  var c=document.getElementById('bgClouds');
+  var cols=['#5b3fa8','#b84068','#2870b8','#1a7a60','#c8b8e8'];
+  [{w:600,h:600,t:'0%',l:'-10%',ci:0,tt:22,dx:50,dy:30,sc:1.08,op:.18},
+   {w:500,h:400,t:'55%',l:'65%',ci:1,tt:26,dx:-40,dy:35,sc:1.05,op:.15},
+   {w:700,h:350,t:'30%',l:'35%',ci:2,tt:30,dx:30,dy:-30,sc:1.04,op:.10},
+   {w:400,h:400,t:'75%',l:'5%',ci:3,tt:20,dx:45,dy:20,sc:1.06,op:.12},
+   {w:300,h:300,t:'10%',l:'70%',ci:4,tt:18,dx:-20,dy:40,sc:1.05,op:.07}
+  ].forEach(function(cfg){
+    var d=document.createElement('div');d.className='cloud';
+    d.style.cssText='width:'+cfg.w+'px;height:'+cfg.h+'px;top:'+cfg.t+';left:'+cfg.l+';background:'+cols[cfg.ci]+';--t:'+cfg.tt+'s;--dx:'+cfg.dx+'px;--dy:'+cfg.dy+'px;--sc:'+cfg.sc+';--op:'+cfg.op+';animation-delay:'+(Math.random()*-15)+'s';
+    c.appendChild(d);
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
-document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
-document.querySelectorAll('.skill-card').forEach(function(el) { obs.observe(el); });
+})();
+
+/* STARFIELD */
+(function(){
+  var sf=document.getElementById('starField');
+  var cols=['#f0e8ff','#e8d4f8','#f8e0ec','#d8f0fc','#e8f8f0','#f8f0d8'];
+  for(var i=0;i<90;i++){
+    var s=document.createElement('div');s.className='bpc-star';
+    var sz=Math.random()*2.5+1;
+    s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:'+sz+'px;height:'+sz+'px;background:'+cols[Math.floor(Math.random()*cols.length)]+';--dur:'+(Math.random()*5+2)+'s;--op:'+(Math.random()*.8+.3)+';animation-delay:'+(Math.random()*8)+'s';
+    sf.appendChild(s);
+  }
+})();
+
+/* BANNER FLOATIES */
+['tf1','tf2','tf3','tf4'].forEach(function(id,i){
+  var c=document.getElementById(id);if(!c)return;
+  var sy=['✿','✦','✧','·','˚','✩','꒰','꒱'];
+  for(var j=0;j<12;j++){
+    var s=document.createElement('span');s.textContent=sy[Math.floor(Math.random()*sy.length)];
+    s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;font-size:'+(Math.random()*6+8)+'px;--ft:'+(Math.random()*2+1.5)+'s;animation-delay:'+(Math.random()*3+i*.3)+'s';
+    c.appendChild(s);
+  }
+});
+
+/* CURSOR SPARKLE — pastel stars */
+var starGlyphs=['✦','✧','⋆','✩','˚','·','✿'];
+var sparkCols=['#c8b8e8','#e8b4c8','#a8cce8','#a8d8c8','#f0c8a8','#e8d090'];
+document.addEventListener('mousemove',function(e){
+  if(Math.random()>.84){
+    var sp=document.createElement('div');sp.className='sparkle';
+    sp.textContent=starGlyphs[Math.floor(Math.random()*starGlyphs.length)];
+    sp.style.cssText='left:'+(e.clientX-6)+'px;top:'+(e.clientY-6)+'px;color:'+sparkCols[Math.floor(Math.random()*sparkCols.length)]+';text-shadow:0 0 8px currentColor';
+    document.body.appendChild(sp);setTimeout(function(){sp.remove()},750);
+  }
+});
+
+/* FLOATING RUNE PARTICLES */
+(function(){
+  var sy=['✦','✧','⋆','·','✩','∗','˚','₊','✿','꒰','꒱'];
+  var rc=['#c8b8e8','#e8b4c8','#a8cce8','#a8d8c8','#e8d090'];
+  for(var i=0;i<16;i++){
+    var p=document.createElement('div');p.className='rune-particle';
+    p.textContent=sy[Math.floor(Math.random()*sy.length)];
+    p.style.cssText='left:'+Math.random()*100+'%;color:'+rc[Math.floor(Math.random()*rc.length)]+';--d:'+(Math.random()*10+7)+'s;animation-delay:'+(Math.random()*14)+'s';
+    document.body.appendChild(p);
+  }
+})();
+
+/* SCROLL PROGRESS */
+window.addEventListener('scroll',function(){
+  var pct=window.scrollY/(document.body.scrollHeight-window.innerHeight);
+  document.getElementById('scroll-bar').style.width=(pct*100)+'%';
+});
+
+/* BOOKS METER — 17 of 80 = 21.25% */
+setTimeout(function(){
+  document.getElementById('bmFill').style.width='21.25%';
+},600);
+
+/* REVEAL */
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){setTimeout(function(){e.target.classList.add('in')},i*50);obs.unobserve(e.target);}
+  });
+},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+
+/* EXP TABS */
+function showTab(id,btn){
+  document.querySelectorAll('.exp-panel').forEach(function(p){p.classList.remove('on')});
+  document.querySelectorAll('.etab').forEach(function(t){t.classList.remove('on')});
+  document.getElementById('p-'+id).classList.add('on');btn.classList.add('on');
+}
+window.showTab=showTab;
+
+/* CAT TOASTS */
+var grey=["I supervised all the SQL.","Napping is my primary data source.","+5% model accuracy when I sit on the keyboard."];
+var orange=["I'm the reason the model ran at 3am.","I may have contributed to the 90% error reduction.","My colour is a feature, not a bias."];
+function catSpeak(cat){
+  var lines=cat==='grey'?grey:orange;
+  var msg=lines[Math.floor(Math.random()*lines.length)];
+  var t=document.getElementById('toast');
+  t.textContent=(cat==='grey'?'🐱 Ricky: ':'🐱 Cheese: ')+msg;
+  t.style.opacity='1';
+  setTimeout(function(){t.style.opacity='0';},3200);
+}
+window.catSpeak=catSpeak;
 </script>
 </body>
 </html>
