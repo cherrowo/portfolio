@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Aphrodite Project · cheryl's portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #1a1528;
+  --bg2: #211c34;
+  --bg3: #2a2440;
+  --bg4: #332d4e;
+  --cream: #f5edd8;
+  --lav: #c8b8e8;
+  --lav2: #b4a0d8;
+  --lav3: #9880c4;
+  --lav-soft: rgba(200,184,232,.15);
+  --lav-pale: rgba(200,184,232,.08);
+  --pink: #e8b4c8;
+  --pink2: #d898b4;
+  --pink3: #c07898;
+  --pink-soft: rgba(232,180,200,.15);
+  --sky: #a8cce8;
+  --sky2: #88b8dc;
+  --sky-soft: rgba(168,204,232,.15);
+  --mint: #a8d8c8;
+  --mint2: #84c4b0;
+  --mint-soft: rgba(168,216,200,.15);
+  --peach: #f0c8a8;
+  --gold: #e8d090;
+  --ink-light: #f0e8ff;
+  --ink-mid: #c8b8e0;
+  --ink-dim: #8878a8;
+  --ink-dimmer: #584868;
+  --border: rgba(200,184,232,.14);
+  --border2: rgba(200,184,232,.28);
+  --shadow: 0 4px 24px rgba(0,0,0,.35);
+  --shadow-soft: 0 8px 40px rgba(0,0,0,.45);
+  --glow-lav: 0 0 20px rgba(180,160,216,.25);
+  --glow-pink: 0 0 20px rgba(216,152,180,.25);
+  --r: 16px; --r-lg: 24px; --r-xl: 28px; --r-pill: 100px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink-light);
+  font-family:'Nunito',sans-serif;font-size:16px;line-height:1.75;overflow-x:hidden;
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Cpath d='M11 1L13.2 8H20L14.4 12.2L16.6 19L11 14.8L5.4 19L7.6 12.2L2 8H8.8Z' fill='%23c8b8e8' stroke='%23b4a0d8' stroke-width='1.2'/%3E%3C/svg%3E") 11 11,auto;
+}
+.star-field{position:fixed;inset:0;pointer-events:none;z-index:0}
+.bpc-star{position:absolute;border-radius:50%;animation:starPulse var(--dur,4s) ease-in-out infinite;opacity:0}
+@keyframes starPulse{0%,100%{opacity:0;transform:scale(.5)}50%{opacity:var(--op,.8);transform:scale(1)}}
+.bg-clouds{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.cloud{position:absolute;border-radius:50%;filter:blur(80px);animation:drift var(--t,20s) ease-in-out infinite alternate;opacity:var(--op,.12);}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(var(--dx,30px),var(--dy,20px)) scale(var(--sc,1.05))}}
+.sparkle{position:fixed;pointer-events:none;font-size:14px;animation:sparkFade .75s ease forwards;z-index:9999}
+@keyframes sparkFade{0%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(.4) translateY(-12px)}}
+#scroll-bar{position:fixed;top:0;left:0;height:3px;z-index:300;background:linear-gradient(90deg,var(--pink2),var(--lav2),var(--pink3));border-radius:100px;transition:width .1s;width:0;box-shadow:0 0 10px rgba(216,152,180,.7)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 52px;background:rgba(26,21,40,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Quicksand',sans-serif;font-size:20px;font-weight:700;color:var(--cream);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nav-logo-dot{width:9px;height:9px;border-radius:50%;background:var(--pink2);display:inline-block;animation:dotBounce 2s ease-in-out infinite;}
+@keyframes dotBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.nav-back{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:600;color:var(--ink-mid);text-decoration:none;padding:6px 18px;border-radius:var(--r-pill);border:1.5px solid var(--border2);background:var(--lav-pale);transition:all .2s}
+.nav-back:hover{background:var(--pink-soft);color:var(--pink);border-color:var(--pink2)}
+
+/* HERO */
+.hero{padding:110px 60px 56px;max-width:900px;margin:0 auto;position:relative;z-index:1}
+.case-tag{display:inline-flex;align-items:center;gap:7px;font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:var(--r-pill);margin-bottom:18px;background:var(--pink-soft);color:var(--pink);border:1.5px solid rgba(232,180,200,.3)}
+.hero h1{font-family:'Quicksand',sans-serif;font-size:clamp(32px,4.5vw,54px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:var(--cream);margin-bottom:14px;}
+.hero-meta{display:flex;gap:20px;flex-wrap:wrap;font-family:'Nunito',sans-serif;font-size:13px;color:var(--ink-dim);font-weight:600;margin-bottom:28px}
+.hero-meta span{display:flex;align-items:center;gap:5px}
+.hero-tagline{font-size:16.5px;color:var(--ink-mid);line-height:1.85;max-width:680px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+
+/* STAT ROW */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:var(--r-xl);overflow:hidden;margin:36px 0;box-shadow:var(--shadow)}
+.stat-cell{background:var(--bg2);padding:22px 14px;text-align:center;position:relative}
+.stat-cell::after{content:'✦';position:absolute;top:10px;right:12px;font-size:8px;color:var(--pink);opacity:.35;animation:starPulse 3s ease-in-out infinite}
+.stat-val{font-family:'Quicksand',sans-serif;font-size:32px;font-weight:800;color:var(--cream);display:block;line-height:1;margin-bottom:6px;letter-spacing:-.02em}
+.stat-lbl{font-size:11px;color:var(--ink-dim);font-weight:700;text-transform:uppercase;letter-spacing:.07em}
+
+/* CONTENT */
+.content{max-width:900px;margin:0 auto;padding:0 60px 100px;position:relative;z-index:1}
+.section{margin-bottom:56px}
+.section-label{font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pink3);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--pink2),transparent);opacity:.35;max-width:200px}
+.section h2{font-family:'Quicksand',sans-serif;font-size:28px;font-weight:800;color:var(--cream);margin-bottom:14px;line-height:1.1;letter-spacing:-.02em}
+.section p{font-size:15px;color:var(--ink-mid);line-height:1.85;margin-bottom:14px}
+.section p:last-child{margin-bottom:0}
+ul.body-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin:14px 0}
+ul.body-list li{font-size:14.5px;color:var(--ink-mid);line-height:1.75;padding-left:20px;position:relative}
+ul.body-list li::before{content:'✦';position:absolute;left:0;top:4px;font-size:9px;color:var(--pink2)}
+strong{color:var(--cream);font-weight:700}
+.callout{background:var(--bg3);border-radius:var(--r-lg);padding:22px 26px;border-left:4px solid var(--pink2);margin:24px 0;box-shadow:var(--shadow)}
+.callout p{font-size:14.5px;color:var(--ink-mid);font-style:italic;line-height:1.75;margin:0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:20px 0}
+.info-card{background:var(--bg2);border-radius:var(--r-lg);padding:22px;border:1px solid var(--border);box-shadow:var(--shadow);transition:all .2s}
+.info-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:var(--glow-pink)}
+.info-card h4{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:700;margin-bottom:10px;color:var(--cream)}
+.info-card p,.info-card li{font-size:13.5px;color:var(--ink-mid);line-height:1.7}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;padding:0}
+.info-card li{padding-left:14px;position:relative}
+.info-card li::before{content:'◦';position:absolute;left:0;color:var(--pink2);font-weight:700;font-size:16px;line-height:1.3}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.pill{font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;font-style:italic}
+.p-mint{background:var(--mint-soft);color:var(--mint);border:1px solid rgba(168,216,200,.25)}
+.p-lav{background:var(--lav-soft);color:var(--lav);border:1px solid rgba(200,184,232,.25)}
+.p-sky{background:var(--sky-soft);color:var(--sky);border:1px solid rgba(168,204,232,.25)}
+.p-peach{background:rgba(240,200,168,.12);color:var(--peach);border:1px solid rgba(240,200,168,.2)}
+.p-blush{background:var(--pink-soft);color:var(--pink);border:1px solid rgba(232,180,200,.25)}
+
+/* IMAGE COMPONENTS */
+.img-showcase{margin:24px 0;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-soft);background:var(--bg2)}
+.img-showcase img{width:100%;display:block;transition:transform .4s ease}
+.img-showcase:hover img{transform:scale(1.01)}
+.img-caption{padding:12px 18px;background:var(--bg3);border-top:1px solid var(--border);font-family:'Quicksand',sans-serif;font-size:11.5px;font-weight:600;color:var(--ink-dim);font-style:italic;letter-spacing:.02em}
+.img-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}
+.img-item{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);background:var(--bg2);display:flex;flex-direction:column}
+.img-item img{width:100%;display:block;object-fit:cover;transition:transform .3s}
+.img-item:hover img{transform:scale(1.02)}
+.img-item .img-caption{margin-top:auto}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;margin:20px 0;position:relative}
+.timeline::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{display:flex;gap:20px;padding-bottom:26px;position:relative}
+.tl-dot{width:40px;height:40px;border-radius:50%;background:var(--bg3);border:2px solid var(--pink2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;z-index:1;box-shadow:0 0 10px rgba(216,152,180,.2)}
+.tl-body{padding-top:6px}
+.tl-body h4{font-family:'Quicksand',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;color:var(--cream)}
+.tl-body p{font-size:13.5px;color:var(--ink-mid);line-height:1.7;margin:0}
+
+/* CAMPUS TABLE */
+.campus-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0;overflow:hidden;border-radius:var(--r-lg)}
+.campus-table th{text-align:left;font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);padding:10px 14px;border-bottom:1.5px solid var(--border);background:var(--bg3)}
+.campus-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--ink-mid);background:var(--bg2)}
+.campus-table tr:last-child td{border-bottom:none}
+.campus-table tr:hover td{background:var(--lav-pale)}
+.pct-high{color:var(--mint);font-weight:700}
+.pct-mid{color:var(--sky);font-weight:700}
+.campus-tag{display:inline-block;font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;}
+.ct-na{background:var(--lav-soft);color:var(--lav);border:1px solid rgba(200,184,232,.25)}
+.ct-sg{background:var(--sky-soft);color:var(--sky);border:1px solid rgba(168,204,232,.25)}
+.ct-hk{background:var(--pink-soft);color:var(--pink);border:1px solid rgba(232,180,200,.25)}
+
+/* BIAS CALLOUT */
+.bias-note{background:rgba(232,180,200,.06);border:1px solid rgba(232,180,200,.2);border-radius:var(--r-lg);padding:20px 24px;margin:20px 0}
+.bias-note h4{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:700;color:var(--pink);margin-bottom:8px}
+.bias-note p{font-size:13.5px;color:var(--ink-mid);line-height:1.7;margin:0}
+
+/* SAFETY CARDS */
+.safety-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:20px 0}
+.safety-card{background:var(--bg2);border-radius:var(--r-lg);padding:20px;border:1px solid var(--border);border-top:3px solid var(--pink2);transition:all .2s}
+.safety-card:hover{transform:translateY(-3px);box-shadow:var(--glow-pink);border-color:var(--border2)}
+.safety-card h4{font-family:'Quicksand',sans-serif;font-size:13.5px;font-weight:800;color:var(--cream);margin-bottom:6px}
+.safety-card p{font-size:13px;color:var(--ink-mid);line-height:1.65;margin:0}
+
+/* RUNE PARTICLES */
+.rune-particle{position:fixed;pointer-events:none;z-index:1;font-size:13px;animation:runeFloat var(--d,9s) linear infinite;opacity:0}
+@keyframes runeFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}8%{opacity:.4}90%{opacity:.25}100%{transform:translateY(-8vh) rotate(360deg);opacity:0}}
+
+footer{text-align:center;padding:40px;border-top:1px solid var(--border);font-size:13px;color:var(--ink-dim);position:relative;z-index:1;font-family:'Quicksand',sans-serif}
+.foot-dots{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.fdot{width:8px;height:8px;border-radius:50%}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:768px){
+  nav{padding:12px 20px}
+  .hero,.content{padding-left:20px;padding-right:20px}
+  .hero{padding-top:90px}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .two-col,.img-grid-2,.safety-grid{grid-template-columns:1fr}
+  .three-col{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){.stat-row,.three-col,.safety-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="scroll-bar"></div>
+<div class="bg-clouds" id="bgClouds"></div>
+<div class="star-field" id="starField"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="nav-logo-dot"></span>cheryl.li</a>
+  <a href="ux-portfolio.html" class="nav-back">← back to UX work</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero reveal">
+  <div class="case-tag">💌 Data Science + UX · The Aphrodite Project</div>
+  <h1>From launch manager to fairness researcher on a dating app</h1>
+  <div class="hero-meta">
+    <span>📅 Jan 2021 – Jan 2025</span>
+    <span>👤 Global Launch Lead → Data Scientist → UX</span>
+    <span>🌐 Remote · 13 campuses worldwide</span>
+  </div>
+  <p class="hero-tagline">The Aphrodite Project uses a Nobel Prize-winning stable-matching algorithm to give university students one carefully considered date. I joined to run launches — and ended up leading bias research, designing safety features, and contributing to decisions that shaped tens of thousands of matches.</p>
+</div>
+
+<div class="content">
+<div class="stat-row reveal">
+  <div class="stat-cell"><span class="stat-val">3.5k+</span><div class="stat-lbl">signups in 12 hrs</div></div>
+  <div class="stat-cell"><span class="stat-val">13</span><div class="stat-lbl">campuses launched</div></div>
+  <div class="stat-cell"><span class="stat-val">20k+</span><div class="stat-lbl">profiles analysed</div></div>
+  <div class="stat-cell"><span class="stat-val">4 yrs</span><div class="stat-lbl">of contributions</div></div>
+</div>
+
+<!-- WHAT IS APHRODITE -->
+<div class="section reveal">
+  <div class="section-label">context</div>
+  <h2>What is the Aphrodite Project?</h2>
+  <p>Aphrodite is a student-run dating platform built around a single constraint: one match per person per run. No swiping, no algorithm optimising for engagement, no infinite scroll. Participants fill out a 60-question questionnaire, and a stable-matching algorithm — based on work that won the 2012 Nobel Prize in Economics — pairs each person with one date.</p>
+  <p>The model is deliberately anti-addictive. It runs once, matches everyone it can, and closes. That scarcity is the product.</p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Aphrodite/AphroditeHome.png" alt="Aphrodite Project homepage showing 10,419 sign-ups this run counter and 'Meet Your Ideal Date' headline"/>
+    <div class="img-caption">The Aphrodite homepage — a live sign-up counter ticks up during the open period, creating urgency without manufactured scarcity. The copy is direct: one match, 60 questions, 20 minutes.</div>
+  </div>
+</div>
+
+<!-- MY ROLE EVOLUTION -->
+<div class="section reveal">
+  <div class="section-label">how my role evolved</div>
+  <h2>Three distinct chapters</h2>
+  <p>My contribution to Aphrodite changed significantly over four years. What started as logistics and marketing became substantive data science and then UX work on sensitive product features.</p>
+
+  <div class="timeline reveal">
+    <div class="tl-item">
+      <div class="tl-dot">🚀</div>
+      <div class="tl-body">
+        <h4>Chapter 1 · Global Launch Lead (Jan 2021 – Feb 2023)</h4>
+        <p>Coordinated launches across 10 then 13 university campuses across North America, Asia, and the UK. Managed regional launch project managers, oversaw the largest single campus launch (30% of 3,500+ signups), and ran all social media and copywriting to ensure tone was welcoming — particularly for LGBTQ+ students who hadn't felt the platform was for them.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">📊</div>
+      <div class="tl-body">
+        <h4>Chapter 2 · Data Scientist (Dec 2022 – Present)</h4>
+        <p>Pivoted to leading exploratory data analysis on algorithmic bias within the matching system. This work started with a hypothesis — that the stable-matching algorithm was producing racially skewed outcomes — and became a formal research effort with Python, statistical testing, and experiments to reduce disparity.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🛡️</div>
+      <div class="tl-body">
+        <h4>Chapter 3 · UX Team (Oct 2023 – Present)</h4>
+        <p>Joined the UX team to help design safety features following a confidential incident. Responsible for the copywriting and UX of the reporting modal and safety announcement — language that needed to be clear and actionable without making users feel surveilled or accused.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAUNCH -->
+<div class="section reveal">
+  <div class="section-label">chapter 1 · launch</div>
+  <h2>Getting 3,500+ students to sign up in 12 hours</h2>
+  <p>The Aphrodite launch is time-pressured by design. Sign-ups open, the window closes, and matches get released. Everything depends on getting enough students to sign up — ideally a diverse cross-section of the student population — within a tight window.</p>
+  <p>My job was coordinating the 2023 international launch: briefing regional launch managers, building the marketing calendar, writing copy across Instagram, Facebook, Discord, and Reddit, and personally managing the largest campus (Waterloo) which accounted for roughly 30% of total sign-ups.</p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Aphrodite/instagram.png" alt="Aphrodite North American Instagram grid showing Valentine's 2024 campaigns, match release announcements, and countdown posts"/>
+    <div class="img-caption">The North American Instagram grid across the 2024 run — launch teaser, sign-up countdown ("One More Day!"), sign-up milestone ("Over 9,900 signed up!"), and match release announcement. Each post is timed to the campaign calendar.</div>
+  </div>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Aphrodite/marketing.png" alt="Marketing planning board showing Instagram stories and posts across multiple campuses and languages including English, Traditional Chinese, and Cantonese"/>
+    <div class="img-caption">The 2023 international campaign planning board — stories and posts localised across English, Traditional Chinese, and Cantonese for the Hong Kong and Singapore markets. Multi-region launches require coordinating tone, timing, and platform strategy across very different campus cultures.</div>
+  </div>
+
+  <div class="callout">
+    <p>A recurring challenge: making the messaging feel inclusive for LGBTQ+ students who assumed the platform was built for straight couples. Updating copy from "meet your ideal date" framing to "for students, by students" language — and being explicit about same-sex matching — increased LGBTQ+ sign-ups measurably.</p>
+  </div>
+</div>
+
+<!-- SIGNUP STATS -->
+<div class="section reveal">
+  <div class="section-label">launch data</div>
+  <h2>Sign-up completion rates across 13 campuses</h2>
+  <p>After each run I analysed the sign-up data to understand where students were dropping off and which campuses had the strongest engagement. The dataset tracked romantic and platonic sign-up completions separately, giving us a clearer picture of how different campus cultures engaged with the product.</p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Aphrodite/signup_stats.png" alt="Spreadsheet showing sign-up completion rates across Waterloo, UofT, McMaster, MIT, Harvard, HKU, CMU, UCLA, UBC, Western, NUS, NTU, and SMU"/>
+    <div class="img-caption">Completion rate analysis across 13 campuses. Waterloo consistently led with a 94% romantic completion rate, followed by Harvard (93%). Singapore campuses (NUS, NTU, SMU) lacked baseline data for comparison but contributed 5,848 total completions.</div>
+  </div>
+
+  <div class="two-col reveal">
+    <div class="info-card">
+      <h4>📍 North America highlights</h4>
+      <ul>
+        <li>Waterloo: 93.9% romantic completion rate, 3,739 total</li>
+        <li>Harvard: 93.1% romantic, smallest but most engaged cohort</li>
+        <li>UCLA: lowest completion at 76.5% — identified as a target for improvement</li>
+        <li>Combined NA total: 9,663 completions</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h4>🌏 International expansion</h4>
+      <ul>
+        <li>Singapore (NUS + NTU + SMU): 5,848 completions — nearly matching all of NA</li>
+        <li>HK campuses added meaningful volume at 84–85% completion</li>
+        <li>Multi-region coordination required localised marketing, different timing, and platform-specific strategy</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- BIAS RESEARCH -->
+<div class="section reveal">
+  <div class="section-label">chapter 2 · data science</div>
+  <h2>Finding and measuring racial bias in the matching algorithm</h2>
+  <p>The Aphrodite matching algorithm is based on stable matching — an algorithm designed to produce stable, preference-respecting pairings. But stable matching doesn't guarantee equitable outcomes when the underlying preference data reflects real-world biases. If enough participants set racial dealbreakers (explicitly or implicitly through preference choices), the algorithm faithfully executes those biases at scale.</p>
+  <p>My research question: <strong>is the algorithm producing racially disproportionate outcomes, and if so, how much of that is structural versus preference-driven?</strong></p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Aphrodite/Distribution.png" alt="Bar chart showing distribution by race across all sign-up data — 'this doesn't matter to me' and Black are the most common selections"/>
+    <div class="img-caption">Distribution by race across the participant pool. "This doesn't matter to me" was the most common selection by a significant margin — but the long tail of specific racial categories, and the variation in their frequencies, shaped the bias analysis. A small overrepresentation in one category can compound within the matching algorithm.</div>
+  </div>
+
+  <div class="bias-note">
+    <h4>What "bias in stable matching" actually means</h4>
+    <p>If Group A is underrepresented and also receives lower preference rankings on average, they accumulate to the end of the matching queue — and are disproportionately likely to go unmatched. Even small per-person preference skews produce large aggregate effects across thousands of matches. This is the phenomenon I was quantifying.</p>
+  </div>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Aphrodite/eps.png" alt="Histogram showing distribution of average match scores — heavily right-skewed with the majority of scores clustered near zero"/>
+    <div class="img-caption">Exploration of average match scores (EPS — expected preference scores) to determine appropriate scaling values. The heavy right skew reveals that most participants receive very low scores in cross-group pairings — a key input for understanding how bias accumulates in the queue.</div>
+  </div>
+
+  <p>The analysis involved EDA across 20k+ user profiles, statistical testing to identify which demographic groups were systematically under-matched, and designing experiments to test whether preference score rescaling or queue reordering could reduce disparity without overriding stated preferences.</p>
+
+  <div class="three-col reveal">
+    <div class="info-card">
+      <h4>🔍 Exploratory analysis</h4>
+      <p>Python, Pandas, matplotlib. Characterised the racial distribution of the participant pool, the distribution of racial dealbreakers, and the correlation between demographic features and match outcomes.</p>
+    </div>
+    <div class="info-card">
+      <h4>⚖️ Fairness experiments</h4>
+      <p>Designed and ran experiments on preference score scaling to test whether normalising scores within demographic groups could reduce outcome disparity. Evaluated tradeoffs between fairness metrics and individual match quality.</p>
+    </div>
+    <div class="info-card">
+      <h4>📋 Reporting</h4>
+      <p>Translated findings into actionable recommendations for the Aphrodite team and contributed to the annual data report shared with participants — making the research visible and accountable to the community it affected.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SAFETY -->
+<div class="section reveal">
+  <div class="section-label">chapter 3 · safety UX</div>
+  <h2>Designing safety features that don't make things worse</h2>
+  <p>After a confidential incident involving a participant, the Aphrodite team made the decision to add formal safety infrastructure to the platform: a report feature, a resources page, and updated harassment guidelines. I was brought into the UX team to help design and write these features.</p>
+  <p>The core design challenge was language. Safety features on dating platforms often fall into one of two failure modes: either too clinical and alarming (making users feel surveilled), or too soft and euphemistic (making users feel the report won't be taken seriously). The goal was to be clear, direct, and human.</p>
+
+  <div class="img-grid-2 reveal">
+    <div class="img-item">
+      <img src="assets/imgs/Aphrodite/safety.png" alt="Safety modal announcing new features: report feature, resources page, and updated zero-tolerance harassment guidelines with a Get Started button"/>
+      <div class="img-caption">The safety onboarding modal — shown to all returning users before they can access their match. Introduces the three new safety features without alarming language. "Get started" rather than "I understand" was a deliberate choice to avoid a compliance-checkbox feel.</div>
+    </div>
+    <div class="img-item">
+      <img src="assets/imgs/Aphrodite/Questionnaire_page__starting_questionnaire_.png" alt="Reporting modal showing step-by-step instructions for how to report harassment through the three-dot menu"/>
+      <div class="img-caption">The harassment reporting flow — accessed through the match page's three-dot menu. Clear numbered steps, no jargon. "Tell us what is going on" rather than "describe the incident" — a small word choice that significantly changes the emotional register of the interaction.</div>
+    </div>
+  </div>
+
+  <div class="safety-grid reveal">
+    <div class="safety-card">
+      <h4>🚨 Report feature</h4>
+      <p>Direct reporting to the Aphrodite team from the match page. Accessible via the three-dot menu so it's available without being prominently visible — present when needed, not anxiety-inducing at first glance.</p>
+    </div>
+    <div class="safety-card">
+      <h4>📚 Resources page</h4>
+      <p>Region-aware links to support services. The key design decision: surfacing resources organised by region rather than by incident type, so users don't have to categorise their own experience to get help.</p>
+    </div>
+    <div class="safety-card">
+      <h4>📋 Updated guidelines</h4>
+      <p>Rewritten zero-tolerance harassment policy in plain language. Avoided legalese while making the consequences concrete. Copywriting objective: a student should know exactly what they can report and what happens next.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:24px">
+    <p>The hardest part of safety feature design isn't the interface — it's the words. Every phrase in a report modal carries weight for someone who is already in a difficult situation. I reviewed the copy multiple times with this question: "Does this make it easier or harder to ask for help?"</p>
+  </div>
+</div>
+
+<!-- ANALYTICS -->
+<div class="section reveal">
+  <div class="section-label">product analytics</div>
+  <h2>Using Google Analytics to improve the product between runs</h2>
+  <p>Between run cycles, Aphrodite's website still serves an important function — explaining the project to prospective participants, building trust, and converting curious students into sign-ups when the next run opens. I used Google Analytics to identify where people were leaving and what was working.</p>
+  <ul class="body-list">
+    <li><strong>Engagement drop-off analysis</strong> — identified which pages had high exit rates and hypothesised whether the issue was content, navigation, or expectation mismatch</li>
+    <li><strong>Off-season content strategy</strong> — proposed new content initiatives to keep the audience engaged between runs based on what existing content was retaining attention</li>
+    <li><strong>Firebase data integrity</strong> — identified and resolved match data errors in Firebase that were causing incorrect match results to be surfaced to some participants</li>
+  </ul>
+</div>
+
+<!-- REFLECTIONS -->
+<div class="section reveal">
+  <div class="section-label">reflection</div>
+  <h2>What four years on this project taught me</h2>
+
+  <div class="two-col reveal">
+    <div class="info-card">
+      <h4>✦ Fairness is a design problem</h4>
+      <p>Algorithmic bias isn't something that only machine learning engineers should care about. The Aphrodite research made it clear that design decisions — how preferences are framed, what options are offered, how the questionnaire structures choices — shape the bias that enters the system before the algorithm even runs.</p>
+    </div>
+    <div class="info-card">
+      <h4>✦ Tone is a product decision</h4>
+      <p>The LGBTQ+ inclusion work and the safety feature copywriting both reinforced the same lesson: how you say something determines whether people feel the product is for them. Inclusive language isn't a nicety — it's a conversion driver and a trust signal.</p>
+    </div>
+    <div class="info-card">
+      <h4>✦ Data and design need each other</h4>
+      <p>The bias research produced findings. Converting those findings into changes required understanding the UX of the questionnaire, the product logic of the matching system, and the psychology of how participants interpret preference questions. You can't fix a bias problem with data alone.</p>
+    </div>
+    <div class="info-card">
+      <h4>✦ Small platforms, real stakes</h4>
+      <p>Aphrodite isn't a billion-user platform. But the stakes for the individual participants — a first date, a match that reflects or ignores their identity, a safety incident — are completely real. Working at small scale with real consequences is better training than working at massive scale where individual impact is invisible.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="section reveal">
+  <div class="section-label">tools used</div>
+  <div class="pill-row">
+    <span class="pill p-lav">Python</span>
+    <span class="pill p-lav">Pandas</span>
+    <span class="pill p-lav">Matplotlib</span>
+    <span class="pill p-blush">Google Analytics</span>
+    <span class="pill p-blush">Firebase</span>
+    <span class="pill p-blush">Typeform</span>
+    <span class="pill p-sky">Figma</span>
+    <span class="pill p-sky">Canva</span>
+    <span class="pill p-mint">UX Copywriting</span>
+    <span class="pill p-mint">Fairness ML</span>
+    <span class="pill p-mint">Bias Detection</span>
+    <span class="pill p-peach">Instagram</span>
+    <span class="pill p-peach">Multi-region Marketing</span>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<footer>
+  <div class="foot-dots">
+    <div class="fdot" style="background:var(--pink2)"></div>
+    <div class="fdot" style="background:var(--lav2)"></div>
+    <div class="fdot" style="background:var(--pink3)"></div>
+  </div>
+  <p>© Cheryl Li · The Aphrodite Project</p>
+  <div class="foot-dots">
+    <div class="fdot" style="background:var(--lav2)"></div>
+    <div class="fdot" style="background:var(--pink2)"></div>
+    <div class="fdot" style="background:var(--mint2)"></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var c=document.getElementById('bgClouds');
+  var cols=['#b84068','#5b3fa8','#c84090','#2870b8','#c8b8e8'];
+  [{w:600,h:600,t:'0%',l:'-10%',ci:0,tt:22,dx:50,dy:30,sc:1.08,op:.16},
+   {w:500,h:400,t:'55%',l:'65%',ci:1,tt:26,dx:-40,dy:35,sc:1.05,op:.12},
+   {w:700,h:350,t:'30%',l:'35%',ci:2,tt:30,dx:30,dy:-30,sc:1.04,op:.08},
+   {w:400,h:400,t:'75%',l:'5%',ci:3,tt:20,dx:45,dy:20,sc:1.06,op:.10},
+   {w:300,h:300,t:'10%',l:'70%',ci:4,tt:18,dx:-20,dy:40,sc:1.05,op:.06}
+  ].forEach(function(cfg){
+    var d=document.createElement('div');d.className='cloud';
+    d.style.cssText='width:'+cfg.w+'px;height:'+cfg.h+'px;top:'+cfg.t+';left:'+cfg.l+';background:'+cols[cfg.ci]+';--t:'+cfg.tt+'s;--dx:'+cfg.dx+'px;--dy:'+cfg.dy+'px;--sc:'+cfg.sc+';--op:'+cfg.op+';animation-delay:'+(Math.random()*-15)+'s';
+    c.appendChild(d);
+  });
+})();
+(function(){
+  var sf=document.getElementById('starField');
+  var cols=['#f0e8ff','#f8e0ec','#e8d4f8','#f8f0d8','#d8f0fc'];
+  for(var i=0;i<80;i++){
+    var s=document.createElement('div');s.className='bpc-star';
+    var sz=Math.random()*2.5+1;
+    s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:'+sz+'px;height:'+sz+'px;background:'+cols[Math.floor(Math.random()*cols.length)]+';--dur:'+(Math.random()*5+2)+'s;--op:'+(Math.random()*.8+.3)+';animation-delay:'+(Math.random()*8)+'s';
+    sf.appendChild(s);
+  }
+})();
+var starGlyphs=['✦','✧','⋆','✩','˚','·','✿'];
+var sparkCols=['#e8b4c8','#c8b8e8','#d898b4','#f0c8a8','#a8d8c8'];
+document.addEventListener('mousemove',function(e){
+  if(Math.random()>.86){
+    var sp=document.createElement('div');sp.className='sparkle';
+    sp.textContent=starGlyphs[Math.floor(Math.random()*starGlyphs.length)];
+    sp.style.cssText='left:'+(e.clientX-6)+'px;top:'+(e.clientY-6)+'px;color:'+sparkCols[Math.floor(Math.random()*sparkCols.length)]+';text-shadow:0 0 8px currentColor';
+    document.body.appendChild(sp);setTimeout(function(){sp.remove()},750);
+  }
+});
+(function(){
+  var sy=['✦','✧','⋆','·','✩','✿','˚','₊'];
+  var rc=['#e8b4c8','#c8b8e8','#d898b4','#e8d090'];
+  for(var i=0;i<12;i++){
+    var p=document.createElement('div');p.className='rune-particle';
+    p.textContent=sy[Math.floor(Math.random()*sy.length)];
+    p.style.cssText='left:'+Math.random()*100+'%;color:'+rc[Math.floor(Math.random()*rc.length)]+';--d:'+(Math.random()*10+7)+'s;animation-delay:'+(Math.random()*14)+'s';
+    document.body.appendChild(p);
+  }
+})();
+window.addEventListener('scroll',function(){
+  var pct=window.scrollY/(document.body.scrollHeight-window.innerHeight);
+  document.getElementById('scroll-bar').style.width=(pct*100)+'%';
+});
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){setTimeout(function(){e.target.classList.add('in')},i*55);obs.unobserve(e.target);}
+  });
+},{threshold:.07,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+</script>
+</body>
+</html>

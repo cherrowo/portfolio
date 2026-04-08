@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>UX & Design Work · cheryl's portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #1a1528;
+  --bg2: #211c34;
+  --bg3: #2a2440;
+  --bg4: #332d4e;
+  --cream: #f5edd8;
+  --cream2: #ede0c4;
+  --lav: #c8b8e8;
+  --lav2: #b4a0d8;
+  --lav3: #9880c4;
+  --lav4: #7a62a8;
+  --lav-soft: rgba(200,184,232,.15);
+  --lav-pale: rgba(200,184,232,.08);
+  --pink: #e8b4c8;
+  --pink2: #d898b4;
+  --pink3: #c07898;
+  --pink-soft: rgba(232,180,200,.15);
+  --sky: #a8cce8;
+  --sky2: #88b8dc;
+  --sky-soft: rgba(168,204,232,.15);
+  --mint: #a8d8c8;
+  --mint2: #84c4b0;
+  --mint-soft: rgba(168,216,200,.15);
+  --peach: #f0c8a8;
+  --gold: #e8d090;
+  --ink-light: #f0e8ff;
+  --ink-mid: #c8b8e0;
+  --ink-dim: #8878a8;
+  --ink-dimmer: #584868;
+  --border: rgba(200,184,232,.14);
+  --border2: rgba(200,184,232,.28);
+  --shadow: 0 4px 24px rgba(0,0,0,.3);
+  --shadow-soft: 0 8px 40px rgba(0,0,0,.4);
+  --glow-lav: 0 0 20px rgba(180,160,216,.25);
+  --glow-pink: 0 0 20px rgba(216,152,180,.25);
+  --r: 20px; --r-lg: 28px; --r-xl: 36px; --r-pill: 100px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink-light);
+  font-family:'Nunito',sans-serif;font-size:16px;line-height:1.75;overflow-x:hidden;
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Cpath d='M11 1L13.2 8H20L14.4 12.2L16.6 19L11 14.8L5.4 19L7.6 12.2L2 8H8.8Z' fill='%23c8b8e8' stroke='%23b4a0d8' stroke-width='1.2'/%3E%3C/svg%3E") 11 11,auto;
+}
+
+/* STARFIELD */
+.star-field{position:fixed;inset:0;pointer-events:none;z-index:0}
+.bpc-star{position:absolute;border-radius:50%;animation:starPulse var(--dur,4s) ease-in-out infinite;opacity:0}
+@keyframes starPulse{0%,100%{opacity:0;transform:scale(.5)}50%{opacity:var(--op,.8);transform:scale(1)}}
+
+/* NEBULA CLOUDS */
+.bg-clouds{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.cloud{position:absolute;border-radius:50%;filter:blur(80px);animation:drift var(--t,20s) ease-in-out infinite alternate;opacity:var(--op,.12);}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(var(--dx,30px),var(--dy,20px)) scale(var(--sc,1.05))}}
+
+/* SPARKLE */
+.sparkle{position:fixed;pointer-events:none;font-size:14px;animation:sparkFade .75s ease forwards;z-index:9999}
+@keyframes sparkFade{0%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(.4) translateY(-12px)}}
+
+/* SCROLL BAR */
+#scroll-bar{position:fixed;top:0;left:0;height:3px;z-index:300;background:linear-gradient(90deg,var(--lav2),var(--pink2),var(--lav3),var(--pink));border-radius:100px;transition:width .1s;box-shadow:0 0 10px rgba(180,160,216,.7),0 0 20px rgba(216,152,180,.4);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 52px;background:rgba(26,21,40,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Quicksand',sans-serif;font-size:20px;font-weight:700;color:var(--cream);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nav-logo-dot{width:9px;height:9px;border-radius:50%;background:var(--lav2);display:inline-block;animation:dotBounce 2s ease-in-out infinite;box-shadow:0 0 8px rgba(180,160,216,.6)}
+@keyframes dotBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{font-family:'Quicksand',sans-serif;font-size:13.5px;font-weight:600;color:var(--ink-mid);text-decoration:none;padding:6px 14px;border-radius:var(--r-pill);transition:all .2s;}
+.nav-links a:hover{background:var(--lav-pale);color:var(--lav)}
+.nav-back{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:600;color:var(--ink-mid);text-decoration:none;padding:6px 18px;border-radius:var(--r-pill);border:1.5px solid var(--border2);background:var(--lav-pale);transition:all .2s}
+.nav-back:hover{background:var(--lav-soft);color:var(--lav);border-color:var(--lav2)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* SECTIONS */
+section{padding:90px 60px;position:relative;z-index:1}
+.section-tag{display:inline-flex;align-items:center;gap:7px;font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:var(--r-pill);margin-bottom:14px;}
+.tag-lav{background:var(--lav-soft);color:var(--lav);border:1.5px solid rgba(200,184,232,.3)}
+.tag-pink{background:var(--pink-soft);color:var(--pink);border:1.5px solid rgba(232,180,200,.3)}
+.tag-sky{background:var(--sky-soft);color:var(--sky);border:1.5px solid rgba(168,204,232,.3)}
+.tag-mint{background:var(--mint-soft);color:var(--mint);border:1.5px solid rgba(168,216,200,.3)}
+h2.s-title{font-family:'Quicksand',sans-serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;color:var(--cream);line-height:1.15;margin-bottom:8px;letter-spacing:-.02em;}
+h2.s-title em{font-style:normal;color:var(--lav)}
+.s-sub{font-size:15.5px;color:var(--ink-dim);max-width:560px;line-height:1.8;margin-bottom:48px;}
+
+/* ═══ HERO ═══ */
+#hero{min-height:60vh;display:flex;flex-direction:column;justify-content:flex-end;padding:140px 60px 70px;border-bottom:1px solid var(--border)}
+.hero-eyebrow{font-family:'Quicksand',sans-serif;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--lav2);display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'˚';font-size:14px;opacity:.7;color:var(--pink)}
+h1{font-family:'Quicksand',sans-serif;font-size:clamp(36px,5vw,68px);font-weight:800;line-height:1.0;letter-spacing:-.03em;color:var(--cream);margin-bottom:10px;}
+h1 em{font-style:normal;color:var(--lav)}
+.hero-desc{font-size:17px;color:var(--ink-mid);max-width:560px;line-height:1.9;margin-bottom:24px;}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.pill{font-family:'Nunito',sans-serif;font-size:12.5px;font-weight:600;padding:5px 14px;border-radius:var(--r-pill);font-style:italic;}
+.pl{background:var(--lav-soft);color:var(--lav);border:1px solid rgba(200,184,232,.25)}
+.pp{background:var(--pink-soft);color:var(--pink);border:1px solid rgba(232,180,200,.25)}
+.ps{background:var(--sky-soft);color:var(--sky);border:1px solid rgba(168,204,232,.25)}
+.pm{background:var(--mint-soft);color:var(--mint);border:1px solid rgba(168,216,200,.25)}
+.po{background:rgba(240,200,168,.12);color:var(--peach);border:1px solid rgba(240,200,168,.2)}
+
+/* HERO STATS ROW */
+.hero-stats{display:flex;gap:0;border:1px solid var(--border2);border-radius:var(--r-xl);overflow:hidden;background:var(--bg2);max-width:680px}
+.hs-cell{flex:1;padding:18px 20px;text-align:center;border-right:1px solid var(--border);position:relative}
+.hs-cell:last-child{border-right:none}
+.hs-val{font-family:'Quicksand',sans-serif;font-size:26px;font-weight:800;color:var(--cream);display:block;line-height:1;margin-bottom:4px;letter-spacing:-.02em}
+.hs-lbl{font-size:11px;color:var(--ink-dim);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.hs-cell::after{content:'✦';position:absolute;top:10px;right:12px;font-size:7px;color:var(--lav);opacity:.3;animation:starPulse 3s ease-in-out infinite}
+
+/* ═══ WORK GRID ═══ */
+#work{background:var(--bg2);border-top:1px solid var(--border);position:relative;overflow:hidden}
+#work::before{content:'✿ ✦ ✿';position:absolute;top:30px;right:60px;font-size:28px;color:var(--lav);opacity:.1;letter-spacing:14px;pointer-events:none;animation:floatSlow 7s ease-in-out infinite}
+@keyframes floatSlow{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;position:relative;z-index:1}
+
+/* PROJECT CARD */
+.pcard{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r-xl);overflow:hidden;display:flex;flex-direction:column;transition:all .28s;position:relative;}
+.pcard::after{content:'✿';position:absolute;top:84px;right:14px;font-size:12px;color:rgba(255,255,255,.25);animation:twinkle var(--tw,3s) ease-in-out infinite;pointer-events:none}
+.pcard:nth-child(2)::after{content:'✦';animation-delay:.7s}
+.pcard:nth-child(3)::after{content:'✿';animation-delay:1.4s}
+.pcard:nth-child(4)::after{content:'✦';animation-delay:2s}
+.pcard:nth-child(5)::after{content:'✿';animation-delay:.4s}
+.pcard:nth-child(6)::after{content:'✦';animation-delay:1.8s}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.8)}50%{opacity:.65;transform:scale(1.1)}}
+.pcard:hover{transform:translateY(-6px) rotate(-.25deg);box-shadow:var(--shadow-soft),0 0 30px rgba(180,160,216,.15)}
+
+/* CARD BANNER */
+.pcard-banner{height:82px;display:flex;align-items:center;justify-content:center;gap:14px;position:relative;overflow:hidden}
+.ban-lav{background:linear-gradient(135deg,#d8cff0,#b8a8e0,#c4b4e8)}
+.ban-pink{background:linear-gradient(135deg,#f0ccd8,#e0a8bc,#eab8c8)}
+.ban-sky{background:linear-gradient(135deg,#c0d8f4,#9ec0e8,#b4ccec)}
+.ban-mint{background:linear-gradient(135deg,#b8e8d8,#90d0bc,#a8dcc8)}
+.ban-peach{background:linear-gradient(135deg,#f4dcc8,#e8c4a0,#f0cca8)}
+.ban-gold{background:linear-gradient(135deg,#f0e4b0,#e0c878,#e8d490)}
+.pcard-banner-floaties{position:absolute;inset:0;pointer-events:none}
+.pcard-banner-floaties span{position:absolute;color:rgba(80,60,120,.3);animation:floatFade var(--ft,3s) ease-in-out infinite}
+@keyframes floatFade{0%,100%{opacity:.15;transform:translateY(0)}50%{opacity:.7;transform:translateY(-5px)}}
+.pcard-emoji{font-size:30px;z-index:1;position:relative;filter:drop-shadow(0 2px 8px rgba(0,0,0,.15))}
+.pcard-type-tag{font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(60,40,100,.75);z-index:1;position:relative}
+.pcard-shine{height:2px;background:linear-gradient(90deg,transparent,rgba(180,160,220,.4),transparent)}
+
+/* CARD BODY */
+.pcard-body{padding:18px 22px 14px;flex:1;display:flex;flex-direction:column;gap:8px}
+.pcard-cat{font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+.pcard h3{font-family:'Quicksand',sans-serif;font-size:16.5px;font-weight:800;color:var(--cream);line-height:1.25;letter-spacing:-.01em}
+.pcard-tagline{font-size:14px;color:var(--ink-mid);font-style:italic;line-height:1.65}
+.pcard-detail{font-size:13.5px;color:var(--ink-dim);line-height:1.7;margin-top:2px}
+.pcard-flower-div{text-align:center;padding:8px 0;font-size:11px;color:var(--lav);opacity:.35;letter-spacing:8px}
+
+/* CARD STATS */
+.pcard-stats{display:flex;align-items:stretch;border-top:1px solid var(--border);margin-top:auto}
+.ps-node{flex:1;padding:10px 6px;text-align:center;position:relative}
+.ps-node::after{content:'';position:absolute;right:0;top:20%;bottom:20%;width:1px;background:var(--border)}
+.ps-node:last-child::after{display:none}
+.ps-val{font-family:'Quicksand',sans-serif;font-size:15px;font-weight:800;color:var(--cream);display:block;line-height:1;margin-bottom:3px}
+.ps-lbl{font-size:10px;color:var(--ink-dim);font-style:italic}
+.ps-dot{font-size:8px;color:var(--lav2);display:block;margin-bottom:2px;animation:twinkle 2.5s ease-in-out infinite}
+
+/* CARD FOOT */
+.pcard-foot{padding:10px 22px;background:var(--bg4);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.pcard-link{font-family:'Quicksand',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--lav);text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:color .15s;}
+.pcard-link:hover{color:var(--lav2)}
+.pcard-link.disabled{color:var(--ink-dimmer);pointer-events:none;cursor:default}
+.pcard-foot-flowers{font-size:10px;color:var(--pink);opacity:.5;letter-spacing:4px}
+
+/* ═══ FULL-WIDTH FEATURE CARD ═══ */
+.pcard.full{grid-column:1/-1;flex-direction:row}
+.pcard.full .pcard-banner{width:280px;flex-shrink:0;height:auto;min-height:220px;flex-direction:column;border-radius:0}
+.pcard.full .pcard-body{padding:28px 30px 20px}
+.pcard.full h3{font-size:20px}
+.pcard.full .pcard-tagline{font-size:15px}
+.pcard.full .pcard-stats{margin-top:16px}
+
+/* ═══ PROCESS SECTION ═══ */
+#process{background:var(--bg)}
+.process-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.proc-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px 22px;display:flex;flex-direction:column;gap:10px;transition:all .22s}
+.proc-card:hover{border-color:var(--border2);box-shadow:var(--glow-lav);transform:translateY(-3px)}
+.proc-icon{font-size:22px}
+.proc-num{font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lav3)}
+.proc-card h3{font-family:'Quicksand',sans-serif;font-size:15px;font-weight:800;color:var(--cream);line-height:1.25}
+.proc-card p{font-size:13.5px;color:var(--ink-mid);line-height:1.7}
+
+/* ═══ TOOLS ═══ */
+#tools{background:var(--bg2);border-top:1px solid var(--border)}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.tool-cat{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:all .22s}
+.tool-cat:hover{box-shadow:var(--glow-lav);transform:translateY(-3px);border-color:var(--border2)}
+.tool-cat-head{padding:13px 18px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.tool-cat-head h3{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:700;color:var(--cream)}
+.tool-cat-body{padding:12px 18px 16px;display:flex;flex-direction:column;gap:8px}
+.tool-row-label{font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-dim);display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.tool-row-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.pill-row{display:flex;flex-wrap:wrap;gap:5px}
+
+/* ═══ CONTACT ═══ */
+#contact{background:var(--bg);text-align:center;border-top:1px solid var(--border)}
+.contact-inner{max-width:500px;margin:0 auto}
+.contact-emoji{font-size:52px;display:block;margin-bottom:18px;animation:floatSlow 3.5s ease-in-out infinite}
+.contact-sub{font-size:16px;color:var(--ink-dim);margin-bottom:36px;font-style:italic}
+.contact-btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.cbtn{display:flex;align-items:center;gap:8px;font-family:'Quicksand',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.05em;padding:11px 22px;border-radius:var(--r-pill);text-decoration:none;border:1.5px solid var(--border2);background:var(--bg2);color:var(--ink-mid);transition:all .2s;}
+.cbtn:hover{transform:translateY(-2px);box-shadow:var(--glow-lav);border-color:var(--lav2);color:var(--lav)}
+.cbtn.main{background:var(--lav2);color:white;border-color:var(--lav2)}
+.cbtn.main:hover{background:var(--lav3)}
+
+footer{padding:22px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg2);position:relative;z-index:1;}
+footer p{font-family:'Quicksand',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dimmer)}
+.foot-dots{display:flex;gap:6px}
+.fdot{width:8px;height:8px;border-radius:50%}
+
+/* RUNE PARTICLES */
+.rune-particle{position:fixed;pointer-events:none;z-index:1;font-size:13px;animation:runeFloat var(--d,9s) linear infinite;opacity:0}
+@keyframes runeFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}8%{opacity:.4}90%{opacity:.25}100%{transform:translateY(-8vh) rotate(360deg);opacity:0}}
+
+@media(max-width:960px){
+  nav{padding:12px 24px}
+  section{padding:64px 28px}
+  #hero{padding:110px 28px 60px}
+  .work-grid{grid-template-columns:1fr}
+  .pcard.full{flex-direction:column}
+  .pcard.full .pcard-banner{width:100%;min-height:100px;height:100px}
+  .process-grid,.tools-grid{grid-template-columns:1fr 1fr}
+  .hero-stats{max-width:100%}
+}
+@media(max-width:600px){
+  nav{padding:10px 16px}
+  .nav-links{display:none}
+  .process-grid,.tools-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:10px;text-align:center}
+  .hero-stats{flex-direction:column}
+  .hs-cell{border-right:none;border-bottom:1px solid var(--border)}
+  .hs-cell:last-child{border-bottom:none}
+}
+</style>
+</head>
+<body>
+
+<div id="scroll-bar"></div>
+<div class="bg-clouds" id="bgClouds"></div>
+<div class="star-field" id="starField"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    cheryl.li
+  </a>
+  <ul class="nav-links">
+    <li><a href="#work">work</a></li>
+    <li><a href="#process">process</a></li>
+    <li><a href="#tools">tools</a></li>
+    <li><a href="#contact">say hi</a></li>
+  </ul>
+</nav>
+
+<!-- ════════════ HERO ════════════ -->
+<section id="hero">
+  <div class="reveal">
+    <div class="hero-eyebrow">design portfolio</div>
+    <h1>UX & <em>Product Design</em> work</h1>
+    <p class="hero-desc">I've designed for particle physics labs, biotech SaaS, HR startups, and a dating app. How do I make it work? By figuring out what people actually need, then designing with that in mind.</p>
+    <div class="hero-pills">
+      <span class="pill pl">Information Architecture</span>
+      <span class="pill pp">User Research</span>
+      <span class="pill ps">Interaction Design</span>
+      <span class="pill pm">Usability Testing</span>
+      <span class="pill po">Visual Design</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ WORK ════════════ -->
+<section id="work">
+  <div class="reveal">
+    <div class="section-tag tag-pink">✦ selected work</div>
+  </div>
+
+  <div class="work-grid">
+
+    <!-- SCISPOT — featured, full width -->
+    <div class="pcard full reveal" style="--tw:3s">
+      <div class="pcard-banner ban-sky">
+        <div class="pcard-banner-floaties" id="bf1"></div>
+        <span class="pcard-emoji">🔬</span>
+        <span class="pcard-type-tag">Product Design</span>
+      </div>
+      <div style="display:flex;flex-direction:column;flex:1">
+        <div class="pcard-shine"></div>
+        <div class="pcard-body">
+          <div class="pcard-cat">Biotech SaaS · Scispot · May – Aug 2022</div>
+          <h3>multiple features shipped in 4 months, flying solo!</h3>
+          <p class="pcard-tagline">I was the only designer at a biotech SaaS company building tools for life science labs. I scoped, designed, tested, and shipped a new feature roughly every week and a half.</p>
+          <p class="pcard-detail">Projects ranged from a multi-level lab materials manager to a permissions-based dataroom system that let labs securely share documents outside their org. One prototype (an equipment checkout tool) directly secured a major enterprise client before the feature was even fully built.</p>
+          <div class="pcard-flower-div">✿ · ✦ · ✿</div>
+          <div class="pcard-stats">
+            <div class="ps-node"><span class="ps-dot">✦</span><span class="ps-val">8+</span><span class="ps-lbl">features shipped</span></div>
+            <div class="ps-node"><span class="ps-dot">✦</span><span class="ps-val">25%</span><span class="ps-lbl">feature adoption ↑</span></div>
+            <div class="ps-node"><span class="ps-dot">✦</span><span class="ps-val">20%</span><span class="ps-lbl">churn reduction</span></div>
+            <div class="ps-node"><span class="ps-dot">✦</span><span class="ps-val">1</span><span class="ps-lbl">designer (me)</span></div>
+          </div>
+        </div>
+        <div class="pcard-foot">
+        <a href="case-scispot.html" class="pcard-link">open case study →</a>
+          <span class="pcard-foot-flowers">✿ ✦ ✿</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- REHVUP -->
+    <div class="pcard reveal" style="--tw:2.8s">
+      <div class="pcard-banner ban-lav">
+        <div class="pcard-banner-floaties" id="bf3"></div>
+        <span class="pcard-emoji">🎮</span>
+        <span class="pcard-type-tag">Information Architecture + Gamification</span>
+      </div>
+      <div class="pcard-shine"></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">HR Tech Startup · RehvUp · Sep – Dec 2023</div>
+        <h3>Gamification from scratch for a workplace social app</h3>
+        <p class="pcard-tagline">RehvUp wanted to increase engagement in their workplace engagement platform, but had no idea why people weren't liking the app. I diagnosed the root causes, then designed an entire gamification system as the sole designer (again).</p>
+        <p class="pcard-detail">Worked directly with third-party engineering contractors to rebuild app logic and fix interaction flows that had been generating the bulk of user complaints.</p>
+        <div class="pcard-flower-div">✿ · ✦ · ✿</div>
+      </div>
+      <div class="pcard-stats">
+        <div class="ps-node"><span class="ps-dot">✦</span><span class="ps-val">90%</span><span class="ps-lbl">fewer complaints</span></div>
+        <div class="ps-node"><span class="ps-dot">✦</span><span class="ps-val">multiple</span><span class="ps-lbl">features scoped</span></div>
+        <div class="ps-node"><span class="ps-dot">✦</span><span class="ps-val">countless</span><span class="ps-lbl">bugs fixed</span></div>
+      </div>
+      <div class="pcard-foot">
+        <a href="case-rehvup.html" class="pcard-link">open case study →</a>
+        <span class="pcard-foot-flowers">✿ ✦ ✿</span>
+      </div>
+    </div>
+
+    <!-- APHRODITE -->
+    <div class="pcard reveal" style="--tw:3.6s">
+      <div class="pcard-banner ban-pink">
+        <div class="pcard-banner-floaties" id="bf4"></div>
+        <span class="pcard-emoji">💌</span>
+        <span class="pcard-type-tag">Data Science + UX</span>
+      </div>
+      <div class="pcard-shine"></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Matchmaking Platform · The Aphrodite Project · 2021 – 2025</div>
+        <h3>Fairness research and safety design on a dating app</h3>
+        <p class="pcard-tagline">Started as a launch manager coordinating across 13 global campuses, evolved into leading EDA on algorithmic bias in the matching system. When a safety incident surfaced, I joined the UX team in designing safety features. I'm responsible for approachable, well informed copywriting that didn't make users feel surveilled.</p>
+        <p class="pcard-detail">Also used Google Analytics to identify engagement drop-offs and contributed to website redesign. Resolved Firebase data integrity issues affecting match quality.</p>
+        <div class="pcard-flower-div">✿ · ✦ · ✿</div>
+      </div>
+      <div class="pcard-stats">
+        <div class="ps-node"><span class="ps-dot">✦</span><span class="ps-val">3.5k+</span><span class="ps-lbl">signups in 12hrs</span></div>
+        <div class="ps-node"><span class="ps-dot">✦</span><span class="ps-val">20k+</span><span class="ps-lbl">profiles analysed</span></div>
+        <div class="ps-node"><span class="ps-dot">✦</span><span class="ps-val">13</span><span class="ps-lbl">campuses launched</span></div>
+      </div>
+      <div class="pcard-foot">
+        <span class="pcard-link disabled">case study coming soon</span>
+        <span class="pcard-foot-flowers">✿ ✦ ✿</span>
+      </div>
+    </div>
+
+    <!-- TRIUMF -->
+    <div class="pcard reveal" style="--tw:3.2s">
+      <div class="pcard-banner ban-mint">
+        <div class="pcard-banner-floaties" id="bf2"></div>
+        <span class="pcard-emoji">⚛️</span>
+        <span class="pcard-type-tag">UX Research + Web Design</span>
+      </div>
+      <div class="pcard-shine"></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Scientific Outreach · TRIUMF · Jan – Dec 2021</div>
+        <h3>Redesigning Canada's particle accelerator outreach website</h3>
+        <p class="pcard-tagline">TRIUMF's outreach site needed to bring it's iconic facility tour online. I ran card sorts, built user profiles, and restructured the entire information architecture around how to get people interested in particle physics.</p>
+        <p class="pcard-detail">Built a fully interactive facility map using custom HTML, jQuery, and CSS inside Elementor (replacing a static PDF that no one was clicking).</p>
+        <div class="pcard-flower-div">✿ · ✦ · ✿</div>
+      </div>
+      <div class="pcard-foot">
+        <a href="case-triumf-dol.html" class="pcard-link">open case study →</a>
+        <span class="pcard-foot-flowers">✿ ✦ ✿</span>
+      </div>
+    </div>
+
+    <!-- WARG -->
+    <div class="pcard reveal" style="--tw:4s">
+      <div class="pcard-banner ban-gold">
+        <div class="pcard-banner-floaties" id="bf5"></div>
+        <span class="pcard-emoji">🛩️</span>
+        <span class="pcard-type-tag">Branding + Visual Design</span>
+      </div>
+      <div class="pcard-shine"></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Student Design Team · WARG · May 2021 – May 2023</div>
+        <h3>Building WARG's brand identity from nothing</h3>
+        <p class="pcard-tagline">Waterloo Aerial Robotics Group had no visual identity. No palette, no tone, no consistency. I designed their full brand guide, built the website from scratch, made team merchandise happen, and launched a student recruitment campaign.</p>
+        <p class="pcard-detail">Also negotiated vendor pricing for merch runs and managed order fulfillment. That's design team energy for you: you own everything.</p>
+        <div class="pcard-flower-div">✿ · ✦ · ✿</div>
+      </div>
+      <div class="pcard-foot">
+        <a href="https://www.uwarg.com/" target="_blank" class="pcard-link">visit site →</a>
+        <span class="pcard-foot-flowers">✿ ✦ ✿</span>
+      </div>
+    </div>
+
+    <!-- GRHF (UX context) -->
+    <div class="pcard reveal" style="--tw:2.4s">
+      <div class="pcard-banner ban-peach">
+        <div class="pcard-banner-floaties" id="bf6"></div>
+        <span class="pcard-emoji">🏥</span>
+        <span class="pcard-type-tag">Design for Non-Technical Users</span>
+      </div>
+      <div class="pcard-shine"></div>
+      <div class="pcard-body">
+        <div class="pcard-cat">Healthcare Nonprofit · GRHF · 2023 – 2024</div>
+        <h3>Making data tools anyone can use</h3>
+        <p class="pcard-tagline">Built Tableau dashboards for a hospital foundation's volunteer coordination team: people who are not data people and shouldn't have to be. The design challenge was making complex donor analytics feel like a spreadsheet you already know how to use.</p>
+        <p class="pcard-detail">Wrote "explain it like I'm 5" documentation, built self-serve volunteer tools, and designed interactive maps that made geographic campaign strategy legible to a non-technical audience.</p>
+        <div class="pcard-flower-div">✿ · ✦ · ✿</div>
+      </div>
+      <div class="pcard-foot">
+        <span class="pcard-link disabled">NDA. Please look at my data work instead</span>
+        <span class="pcard-foot-flowers">✿ ✦ ✿</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════ PROCESS ════════════ -->
+<section id="process">
+  <div class="reveal">
+    <div class="section-tag tag-lav">✦ how I work</div>
+    <h2 class="s-title">the process <em>underneath</em></h2>
+    <p class="s-sub">According to my User Design Methods Professor, I'm a 'Mixed Methods Researcher'. I use whatever gets me to a clear picture of what's wrong and a defensible answer for what to build instead.</p>
+  </div>
+  <div class="process-grid">
+    <div class="proc-card reveal">
+      <div class="proc-icon">🔍</div>
+      <div class="proc-num">01 · discover</div>
+      <h3>Find the actual problem</h3>
+      <p>User interviews, card sorts, analytics audits, competitive analysis. I don't start designing until I understand the problem and positioning.</p>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">🗺️</div>
+      <div class="proc-num">02 · structure</div>
+      <h3>Build the skeleton first</h3>
+      <p>Information architecture before visuals. I map user flows, define mental models, and work out the logic first. This is where most design problems get solved.</p>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">✏️</div>
+      <div class="proc-num">03 · prototype</div>
+      <h3>Make something testable fast</h3>
+      <p>Low-fidelity first, high-fidelity only once the structure holds. I prototype at the fidelity that answers the question I'm trying to answer, which is how I ship fast.</p>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">🧪</div>
+      <div class="proc-num">04 · test</div>
+      <h3>Put it in front of real people</h3>
+      <p>Usability testing, A/B experiments where applicable, qualitative synthesis.</p>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">📊</div>
+      <div class="proc-num">05 · measure</div>
+      <h3>Define success before you ship</h3>
+      <p>I define metrics before building, not after. Whether it's feature adoption, task completion rate, or complaint volume.</p>
+    </div>
+    <div class="proc-card reveal">
+      <div class="proc-icon">🔄</div>
+      <div class="proc-num">06 · iterate</div>
+      <h3>Ship, then keep going</h3>
+      <p>Launch isn't the end. I document what I shipped, and continue to improve.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ TOOLS ════════════ -->
+<section id="tools">
+  <div class="reveal">
+    <div class="section-tag tag-sky">✦ tools & methods</div>
+    <h2 class="s-title">what's in the <em>toolkit</em></h2>
+    <p class="s-sub">These are the ones I've actually shipped work with.</p>
+  </div>
+  <div class="tools-grid">
+    <div class="tool-cat reveal">
+      <div class="tool-cat-head"><span style="font-size:17px">✏️</span><h3>design & prototyping</h3></div>
+      <div class="tool-cat-body">
+        <div><div class="tool-row-label">primary tools</div><div class="pill-row"><span class="pill pl">Figma</span><span class="pill pl">Canva</span></div></div>
+        <div><div class="tool-row-label">web</div><div class="pill-row"><span class="pill pl">HTML/CSS</span><span class="pill pl">jQuery</span><span class="pill pl">Elementor</span><span class="pill pl">WordPress</span></div></div>
+        <div><div class="tool-row-label">visual</div><div class="pill-row"><span class="pill pl">Adobe Creative Suite</span></div></div>
+      </div>
+    </div>
+    <div class="tool-cat reveal">
+      <div class="tool-cat-head"><span style="font-size:17px">🔍</span><h3>research & testing</h3></div>
+      <div class="tool-cat-body">
+        <div><div class="tool-row-label">research methods</div><div class="pill-row"><span class="pill pp">User Interviews</span><span class="pill pp">Card Sorting</span><span class="pill pp">Survey Design</span></div></div>
+        <div><div class="tool-row-label">analytics</div><div class="pill-row"><span class="pill pp">Google Analytics</span><span class="pill pp">Firebase</span><span class="pill pp">Qualtrics</span></div></div>
+        <div><div class="tool-row-label">testing</div><div class="pill-row"><span class="pill pp">Usability Testing</span><span class="pill pp">Typeform</span></div></div>
+      </div>
+    </div>
+    <div class="tool-cat reveal">
+      <div class="tool-cat-head"><span style="font-size:17px">🗺️</span><h3>strategy & systems</h3></div>
+      <div class="tool-cat-body">
+        <div><div class="tool-row-label">planning</div><div class="pill-row"><span class="pill pm">Information Architecture</span><span class="pill pm">User Flows</span><span class="pill pm">Roadmapping</span></div></div>
+        <div><div class="tool-row-label">delivery</div><div class="pill-row"><span class="pill pm">Jira</span><span class="pill pm">Miro</span></div></div>
+        <div><div class="tool-row-label">accessibility</div><div class="pill-row"><span class="pill pm">AODA Compliance</span><span class="pill pm">WCAG Standards</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <span class="contact-emoji">✉️</span>
+    <h2 class="s-title" style="font-size:clamp(26px,3.5vw,42px)">let's work <em>together</em></h2>
+    <p class="contact-sub">open to product, analytics, and UX roles. TN-eligible for US positions ˚₊</p>
+    <div class="contact-btns">
+      <a href="mailto:cheryl.li@uwaterloo.ca" class="cbtn main">✉ send a message</a>
+      <a href="https://linkedin.com/in/cheryl-xue-li" class="cbtn" target="_blank">LinkedIn</a>
+      <a href="index.html" class="cbtn">see my data work</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© Cheryl Li · UX & Design</p>
+  <div class="foot-dots">
+    <div class="fdot" style="background:var(--lav2)"></div>
+    <div class="fdot" style="background:var(--pink2)"></div>
+    <div class="fdot" style="background:var(--sky2)"></div>
+  </div>
+</footer>
+
+<script>
+/* NEBULA CLOUDS */
+(function(){
+  var c=document.getElementById('bgClouds');
+  var cols=['#5b3fa8','#b84068','#2870b8','#1a7a60','#c8b8e8'];
+  [{w:600,h:600,t:'0%',l:'-10%',ci:0,tt:22,dx:50,dy:30,sc:1.08,op:.18},
+   {w:500,h:400,t:'55%',l:'65%',ci:1,tt:26,dx:-40,dy:35,sc:1.05,op:.15},
+   {w:700,h:350,t:'30%',l:'35%',ci:2,tt:30,dx:30,dy:-30,sc:1.04,op:.10},
+   {w:400,h:400,t:'75%',l:'5%',ci:3,tt:20,dx:45,dy:20,sc:1.06,op:.12},
+   {w:300,h:300,t:'10%',l:'70%',ci:4,tt:18,dx:-20,dy:40,sc:1.05,op:.07}
+  ].forEach(function(cfg){
+    var d=document.createElement('div');d.className='cloud';
+    d.style.cssText='width:'+cfg.w+'px;height:'+cfg.h+'px;top:'+cfg.t+';left:'+cfg.l+';background:'+cols[cfg.ci]+';--t:'+cfg.tt+'s;--dx:'+cfg.dx+'px;--dy:'+cfg.dy+'px;--sc:'+cfg.sc+';--op:'+cfg.op+';animation-delay:'+(Math.random()*-15)+'s';
+    c.appendChild(d);
+  });
+})();
+
+/* STARFIELD */
+(function(){
+  var sf=document.getElementById('starField');
+  var cols=['#f0e8ff','#e8d4f8','#f8e0ec','#d8f0fc','#e8f8f0','#f8f0d8'];
+  for(var i=0;i<90;i++){
+    var s=document.createElement('div');s.className='bpc-star';
+    var sz=Math.random()*2.5+1;
+    s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:'+sz+'px;height:'+sz+'px;background:'+cols[Math.floor(Math.random()*cols.length)]+';--dur:'+(Math.random()*5+2)+'s;--op:'+(Math.random()*.8+.3)+';animation-delay:'+(Math.random()*8)+'s';
+    sf.appendChild(s);
+  }
+})();
+
+/* BANNER FLOATIES */
+['bf1','bf2','bf3','bf4','bf5','bf6'].forEach(function(id,i){
+  var c=document.getElementById(id);if(!c)return;
+  var sy=['✿','✦','✧','·','˚','✩'];
+  for(var j=0;j<10;j++){
+    var s=document.createElement('span');s.textContent=sy[Math.floor(Math.random()*sy.length)];
+    s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;font-size:'+(Math.random()*6+8)+'px;--ft:'+(Math.random()*2+1.5)+'s;animation-delay:'+(Math.random()*3+i*.3)+'s';
+    c.appendChild(s);
+  }
+});
+
+/* CURSOR SPARKLE */
+var starGlyphs=['✦','✧','⋆','✩','˚','·','✿'];
+var sparkCols=['#c8b8e8','#e8b4c8','#a8cce8','#a8d8c8','#f0c8a8','#e8d090'];
+document.addEventListener('mousemove',function(e){
+  if(Math.random()>.85){
+    var sp=document.createElement('div');sp.className='sparkle';
+    sp.textContent=starGlyphs[Math.floor(Math.random()*starGlyphs.length)];
+    sp.style.cssText='left:'+(e.clientX-6)+'px;top:'+(e.clientY-6)+'px;color:'+sparkCols[Math.floor(Math.random()*sparkCols.length)]+';text-shadow:0 0 8px currentColor';
+    document.body.appendChild(sp);setTimeout(function(){sp.remove()},750);
+  }
+});
+
+/* FLOATING RUNE PARTICLES */
+(function(){
+  var sy=['✦','✧','⋆','·','✩','∗','˚','₊','✿'];
+  var rc=['#c8b8e8','#e8b4c8','#a8cce8','#a8d8c8','#e8d090'];
+  for(var i=0;i<14;i++){
+    var p=document.createElement('div');p.className='rune-particle';
+    p.textContent=sy[Math.floor(Math.random()*sy.length)];
+    p.style.cssText='left:'+Math.random()*100+'%;color:'+rc[Math.floor(Math.random()*rc.length)]+';--d:'+(Math.random()*10+7)+'s;animation-delay:'+(Math.random()*14)+'s';
+    document.body.appendChild(p);
+  }
+})();
+
+/* SCROLL PROGRESS */
+window.addEventListener('scroll',function(){
+  var pct=window.scrollY/(document.body.scrollHeight-window.innerHeight);
+  document.getElementById('scroll-bar').style.width=(pct*100)+'%';
+});
+
+/* REVEAL */
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){setTimeout(function(){e.target.classList.add('in')},i*60);obs.unobserve(e.target);}
+  });
+},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+</script>
+</body>
+</html>

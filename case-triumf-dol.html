@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TRIUMF · Rebuilding a Science Website · cheryl's portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #1a1528;
+  --bg2: #211c34;
+  --bg3: #2a2440;
+  --bg4: #332d4e;
+  --cream: #f5edd8;
+  --lav: #c8b8e8;
+  --lav2: #b4a0d8;
+  --lav3: #9880c4;
+  --lav-soft: rgba(200,184,232,.15);
+  --lav-pale: rgba(200,184,232,.08);
+  --pink: #e8b4c8;
+  --pink2: #d898b4;
+  --pink-soft: rgba(232,180,200,.15);
+  --sky: #a8cce8;
+  --sky2: #88b8dc;
+  --sky-soft: rgba(168,204,232,.15);
+  --mint: #a8d8c8;
+  --mint2: #84c4b0;
+  --mint-soft: rgba(168,216,200,.15);
+  --peach: #f0c8a8;
+  --gold: #e8d090;
+  --ink-light: #f0e8ff;
+  --ink-mid: #c8b8e0;
+  --ink-dim: #8878a8;
+  --ink-dimmer: #584868;
+  --border: rgba(200,184,232,.14);
+  --border2: rgba(200,184,232,.28);
+  --shadow: 0 4px 24px rgba(0,0,0,.35);
+  --shadow-soft: 0 8px 40px rgba(0,0,0,.45);
+  --glow-lav: 0 0 20px rgba(180,160,216,.25);
+  --glow-mint: 0 0 20px rgba(136,184,176,.25);
+  --r: 16px; --r-lg: 24px; --r-xl: 28px; --r-pill: 100px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink-light);
+  font-family:'Nunito',sans-serif;font-size:16px;line-height:1.75;overflow-x:hidden;
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Cpath d='M11 1L13.2 8H20L14.4 12.2L16.6 19L11 14.8L5.4 19L7.6 12.2L2 8H8.8Z' fill='%23c8b8e8' stroke='%23b4a0d8' stroke-width='1.2'/%3E%3C/svg%3E") 11 11,auto;
+}
+.star-field{position:fixed;inset:0;pointer-events:none;z-index:0}
+.bpc-star{position:absolute;border-radius:50%;animation:starPulse var(--dur,4s) ease-in-out infinite;opacity:0}
+@keyframes starPulse{0%,100%{opacity:0;transform:scale(.5)}50%{opacity:var(--op,.8);transform:scale(1)}}
+.bg-clouds{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.cloud{position:absolute;border-radius:50%;filter:blur(80px);animation:drift var(--t,20s) ease-in-out infinite alternate;opacity:var(--op,.12);}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(var(--dx,30px),var(--dy,20px)) scale(var(--sc,1.05))}}
+.sparkle{position:fixed;pointer-events:none;font-size:14px;animation:sparkFade .75s ease forwards;z-index:9999}
+@keyframes sparkFade{0%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(.4) translateY(-12px)}}
+#scroll-bar{position:fixed;top:0;left:0;height:3px;z-index:300;background:linear-gradient(90deg,var(--mint2),var(--sky2),var(--lav2));border-radius:100px;transition:width .1s;width:0;box-shadow:0 0 10px rgba(136,184,220,.7)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 52px;background:rgba(26,21,40,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Quicksand',sans-serif;font-size:20px;font-weight:700;color:var(--cream);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nav-logo-dot{width:9px;height:9px;border-radius:50%;background:var(--mint2);display:inline-block;animation:dotBounce 2s ease-in-out infinite;}
+@keyframes dotBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.nav-back{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:600;color:var(--ink-mid);text-decoration:none;padding:6px 18px;border-radius:var(--r-pill);border:1.5px solid var(--border2);background:var(--lav-pale);transition:all .2s}
+.nav-back:hover{background:var(--mint-soft);color:var(--mint);border-color:var(--mint2)}
+
+/* HERO */
+.hero{padding:110px 60px 56px;max-width:900px;margin:0 auto;position:relative;z-index:1}
+.case-tag{display:inline-flex;align-items:center;gap:7px;font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:var(--r-pill);margin-bottom:18px;background:var(--mint-soft);color:var(--mint);border:1.5px solid rgba(168,216,200,.3)}
+.hero h1{font-family:'Quicksand',sans-serif;font-size:clamp(32px,4.5vw,54px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:var(--cream);margin-bottom:14px;}
+.hero-meta{display:flex;gap:20px;flex-wrap:wrap;font-family:'Nunito',sans-serif;font-size:13px;color:var(--ink-dim);font-weight:600;margin-bottom:28px}
+.hero-meta span{display:flex;align-items:center;gap:5px}
+.hero-tagline{font-size:16.5px;color:var(--ink-mid);line-height:1.85;max-width:680px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+
+/* STAT ROW */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:var(--r-xl);overflow:hidden;margin:36px 0;box-shadow:var(--shadow)}
+.stat-cell{background:var(--bg2);padding:22px 14px;text-align:center;position:relative}
+.stat-cell::after{content:'✦';position:absolute;top:10px;right:12px;font-size:8px;color:var(--mint);opacity:.35;animation:starPulse 3s ease-in-out infinite}
+.stat-val{font-family:'Quicksand',sans-serif;font-size:32px;font-weight:800;color:var(--cream);display:block;line-height:1;margin-bottom:6px;letter-spacing:-.02em}
+.stat-lbl{font-size:11px;color:var(--ink-dim);font-weight:700;text-transform:uppercase;letter-spacing:.07em}
+
+/* CONTENT */
+.content{max-width:900px;margin:0 auto;padding:0 60px 100px;position:relative;z-index:1}
+.section{margin-bottom:56px}
+.section-label{font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mint2);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--mint2),transparent);opacity:.4;max-width:200px}
+.section h2{font-family:'Quicksand',sans-serif;font-size:28px;font-weight:800;color:var(--cream);margin-bottom:14px;line-height:1.1;letter-spacing:-.02em}
+.section p{font-size:15px;color:var(--ink-mid);line-height:1.85;margin-bottom:14px}
+.section p:last-child{margin-bottom:0}
+ul.body-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin:14px 0}
+ul.body-list li{font-size:14.5px;color:var(--ink-mid);line-height:1.75;padding-left:20px;position:relative}
+ul.body-list li::before{content:'✦';position:absolute;left:0;top:4px;font-size:9px;color:var(--mint2)}
+strong{color:var(--cream);font-weight:700}
+.callout{background:var(--bg3);border-radius:var(--r-lg);padding:22px 26px;border-left:4px solid var(--mint2);margin:24px 0;box-shadow:var(--shadow)}
+.callout p{font-size:14.5px;color:var(--ink-mid);font-style:italic;line-height:1.75;margin:0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:20px 0}
+.info-card{background:var(--bg2);border-radius:var(--r-lg);padding:22px;border:1px solid var(--border);box-shadow:var(--shadow);transition:all .2s}
+.info-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:var(--glow-mint)}
+.info-card h4{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:700;margin-bottom:10px;color:var(--cream)}
+.info-card p,.info-card li{font-size:13.5px;color:var(--ink-mid);line-height:1.7}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;padding:0}
+.info-card li{padding-left:14px;position:relative}
+.info-card li::before{content:'◦';position:absolute;left:0;color:var(--mint2);font-weight:700;font-size:16px;line-height:1.3}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.pill{font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;font-style:italic}
+.p-mint{background:var(--mint-soft);color:var(--mint);border:1px solid rgba(168,216,200,.25)}
+.p-lav{background:var(--lav-soft);color:var(--lav);border:1px solid rgba(200,184,232,.25)}
+.p-sky{background:var(--sky-soft);color:var(--sky);border:1px solid rgba(168,204,232,.25)}
+.p-peach{background:rgba(240,200,168,.12);color:var(--peach);border:1px solid rgba(240,200,168,.2)}
+.p-blush{background:var(--pink-soft);color:var(--pink);border:1px solid rgba(232,180,200,.25)}
+
+/* IMAGE COMPONENTS */
+.img-showcase{margin:24px 0;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-soft);background:var(--bg2)}
+.img-showcase img{width:100%;display:block;transition:transform .4s ease}
+.img-showcase:hover img{transform:scale(1.01)}
+.img-caption{padding:12px 18px;background:var(--bg3);border-top:1px solid var(--border);font-family:'Quicksand',sans-serif;font-size:11.5px;font-weight:600;color:var(--ink-dim);font-style:italic;letter-spacing:.02em}
+.img-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}
+.img-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:24px 0}
+.img-item{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);background:var(--bg2);display:flex;flex-direction:column}
+.img-item img{width:100%;display:block;object-fit:cover;transition:transform .3s}
+.img-item:hover img{transform:scale(1.02)}
+.img-item .img-caption{margin-top:auto}
+
+/* FEATURED HERO IMAGE — with TRIUMF logo overlay feel */
+.hero-img-wrap{position:relative;margin:24px 0;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-soft)}
+.hero-img-wrap img{width:100%;display:block}
+.hero-img-label{position:absolute;bottom:0;left:0;right:0;padding:18px 22px;background:linear-gradient(to top,rgba(26,21,40,.9),transparent);font-family:'Quicksand',sans-serif;font-size:13px;font-weight:700;color:var(--cream);letter-spacing:.04em}
+
+/* PIPELINE */
+.pipeline-step{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
+.pipeline-step:last-child{border-bottom:none}
+.pipeline-num{font-family:'Quicksand',sans-serif;font-size:28px;font-weight:800;color:var(--mint2);flex-shrink:0;width:36px;opacity:.85}
+.pipeline-body h4{font-family:'Quicksand',sans-serif;font-size:13.5px;font-weight:700;margin-bottom:4px;color:var(--cream)}
+.pipeline-body p{font-size:13px;color:var(--ink-mid);line-height:1.7;margin:0}
+
+/* HYPOTHESIS CARDS */
+.hyp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:20px 0}
+.hyp-card{background:var(--bg2);border-radius:var(--r-lg);padding:20px;border:1px solid var(--border);border-top:3px solid var(--mint2);transition:all .22s;position:relative}
+.hyp-card:hover{transform:translateY(-3px);box-shadow:var(--glow-mint);border-color:var(--border2)}
+.hyp-num{font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mint2);margin-bottom:6px}
+.hyp-card h4{font-family:'Quicksand',sans-serif;font-size:14px;font-weight:800;color:var(--cream);margin-bottom:8px;line-height:1.3}
+.hyp-card p{font-size:13px;color:var(--ink-mid);line-height:1.65;margin:0}
+.hyp-verdict{display:inline-block;margin-top:10px;font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px}
+.v-confirmed{background:var(--mint-soft);color:var(--mint);border:1px solid rgba(168,216,200,.3)}
+.v-partial{background:rgba(240,200,168,.12);color:var(--peach);border:1px solid rgba(240,200,168,.2)}
+
+/* BEFORE/AFTER */
+.ba-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);margin:24px 0;box-shadow:var(--shadow)}
+.ba-panel{position:relative;background:var(--bg2)}
+.ba-panel img{width:100%;display:block;object-fit:cover;max-height:320px}
+.ba-label{position:absolute;top:12px;left:12px;font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:var(--r-pill);background:rgba(26,21,40,.85);backdrop-filter:blur(8px)}
+.ba-before .ba-label{color:var(--pink);border:1px solid rgba(232,180,200,.3)}
+.ba-after .ba-label{color:var(--mint);border:1px solid rgba(168,216,200,.3)}
+.ba-caption{padding:10px 14px;background:var(--bg3);font-family:'Quicksand',sans-serif;font-size:11px;font-weight:600;color:var(--ink-dim);font-style:italic}
+
+/* ACCESSIBILITY CHECKLIST */
+.access-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}
+.access-item{display:flex;align-items:flex-start;gap:12px;background:var(--bg2);border-radius:var(--r-lg);padding:16px;border:1px solid var(--border)}
+.access-icon{font-size:18px;flex-shrink:0;margin-top:2px}
+.access-body h5{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:700;color:var(--cream);margin-bottom:4px}
+.access-body p{font-size:12.5px;color:var(--ink-mid);line-height:1.6;margin:0}
+
+/* RUNE PARTICLES */
+.rune-particle{position:fixed;pointer-events:none;z-index:1;font-size:13px;animation:runeFloat var(--d,9s) linear infinite;opacity:0}
+@keyframes runeFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}8%{opacity:.4}90%{opacity:.25}100%{transform:translateY(-8vh) rotate(360deg);opacity:0}}
+
+footer{text-align:center;padding:40px;border-top:1px solid var(--border);font-size:13px;color:var(--ink-dim);position:relative;z-index:1;font-family:'Quicksand',sans-serif}
+.foot-dots{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.fdot{width:8px;height:8px;border-radius:50%}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:768px){
+  nav{padding:12px 20px}
+  .hero,.content{padding-left:20px;padding-right:20px}
+  .hero{padding-top:90px}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .two-col,.img-grid-2,.ba-wrap,.access-grid{grid-template-columns:1fr}
+  .three-col,.hyp-grid,.img-grid-3{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){.stat-row,.three-col,.hyp-grid,.img-grid-3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="scroll-bar"></div>
+<div class="bg-clouds" id="bgClouds"></div>
+<div class="star-field" id="starField"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="nav-logo-dot"></span>cheryl.li</a>
+  <a href="ux-portfolio.html" class="nav-back">← back to UX work</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero reveal">
+  <div class="case-tag">⚛️ UX Research + Web Design · TRIUMF</div>
+  <h1>Rebuilding a particle accelerator's public website</h1>
+  <div class="hero-meta">
+    <span>📅 Jan – Apr 2021 · Sep – Dec 2021</span>
+    <span>👤 Digital Designer</span>
+    <span>🏢 TRIUMF, Vancouver BC</span>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- CONTEXT -->
+<div class="section reveal">
+  <div class="section-label">context</div>
+  <h2>What is TRIUMF, and who is the website actually for?</h2>
+  <p>TRIUMF is Canada's national particle physics accelerator, a world-class research facility on the UBC campus in Vancouver that operates one of the world's largest cyclotrons and hosts experiments in nuclear physics, materials science, and life sciences.</p>
+  <p>The "Discover Our Lab" outreach website exists to make that science accessible to the general public (mostly students but also curious adults, teachers, press, and retirees). The site had been built by people who worked there and were used to giving physical tours, and it showed.</p>
+
+  <div class="hero-img-wrap reveal">
+    <img src="assets/imgs/TRIUMF/DOL.png" alt="TRIUMF Discover Our Lab website hero showing Research in Motion video and content tiles"/>
+    <div class="hero-img-label">discoverourlab.triumf.ca — TRIUMF's public outreach site. The starting point for my two-term engagement.</div>
+  </div>
+
+  <div class="callout">
+    <p>The core misalignment: the site's navigation categories made perfect sense if you already understood TRIUMF's internal research divisions. If you were a curious student visiting for the first time because public tours had been cancelled due to COVID, the structure was intimidating.</p>
+  </div>
+</div>
+
+<!-- RESEARCH PROCESS -->
+<div class="section reveal">
+  <div class="section-label">research process</div>
+  <h2>Understanding the problem</h2>
+  <p>Before touching a single page, I needed to understand the existing audience and the navigation assumptions built into the site. My research process:</p>
+
+  <div class="info-card reveal" style="margin:20px 0">
+    <h4>🔍 Research methods used</h4>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:10px">
+      <div>
+        <div style="font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mint2);margin-bottom:8px">user research</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:13.5px;color:var(--ink-mid);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--mint2);font-size:16px;line-height:1.3">◦</span>Internal surveys to identify usability pain points across staff and external users</li>
+          <li style="font-size:13.5px;color:var(--ink-mid);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--mint2);font-size:16px;line-height:1.3">◦</span>Card-sorting sessions to understand how users mentally grouped site content</li>
+         </ul>
+      </div>
+      <div>
+        <div style="font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mint2);margin-bottom:8px">content & competitive analysis</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:13.5px;color:var(--ink-mid);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--mint2);font-size:16px;line-height:1.3">◦</span>Full content audit of the existing site: categorising pages by audience, quality, and engagement</li>
+          <li style="font-size:13.5px;color:var(--ink-mid);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--mint2);font-size:16px;line-height:1.3">◦</span>Competitive analysis against CERN, Bruce Power, Fermilab, and other science outreach sites</li>
+          <li style="font-size:13.5px;color:var(--ink-mid);padding-left:14px;position:relative"><span style="position:absolute;left:0;color:var(--mint2);font-size:16px;line-height:1.3">◦</span>Benchmarked navigation patterns and content strategies across peer institutions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INTERACTIVE MAP -->
+<div class="section reveal">
+  <div class="section-label">feature spotlight · interactive map</div>
+  <h2>The facility tour: from PDF to interactive experience</h2>
+  <p>The original facility tour was identical to a static brochure, but on a website. The brief was to replace it with something that actually worked for people visiting the site on a phone or laptop.</p>
+  <p>I built a fully interactive facility map using custom HTML, CSS, and jQuery within the Elementor environment. Each building on the site was clickable, linking through to dedicated pages for each facility with photography, explanatory content, and media.</p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/TRIUMF/interactive map.png" alt="TRIUMF interactive facility map showing the full campus layout with numbered clickable buildings and sidebar navigation"/>
+    <div class="img-caption">The interactive map: each numbered building links to a dedicated tour page with photography and content. The sidebar provides alphabetical navigation as an alternative entry point. Built in custom HTML, CSS, and jQuery within Elementor.</div>
+  </div>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/TRIUMF/Storytelling Nav.png" alt="TRIUMF tour storytelling navigation showing Featured Media section with TRIUMF 360, Newton's Apple, and Canadian Press story tiles, plus previous/next pagination"/>
+    <div class="img-caption">The tour storytelling navigation: each facility stop has featured media (360° imagery, video, press stories) surfaced directly on the page. Previous/next pagination creates a linear journey through the lab, with a "Return to Tour Map" escape hatch always available.</div>
+  </div>
+
+  <div class="callout">
+    <p>The map was the most technically complex piece. Elementor is a visual page builder, not a coding environment. Getting numbered markers, clickable regions, hover states, and sidebar synchronisation working required writing custom jQuery that hooked into Elementor's DOM. It was a constraint-driven build and I'm proud of how clean the output was.</p>
+  </div>
+</div>
+
+<!-- GLOSSARY -->
+<div class="section reveal">
+  <div class="section-label">feature spotlight · glossary</div>
+  <h2>Making particle physics legible to everyone</h2>
+  <p>The site's content assumed a baseline understanding of terms like "cyclotron," "beamline," and "isotope" that most general visitors simply don't have (most tours were for elementary school students).</p>
+  <p>I researched, designed, and built an interactive scientific glossary in collaboration with science educators. I iterated between a hover-based tooltip format and a dedicated page format before landing on the page (tooltips were too easily missed on mobile).</p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/TRIUMF/glossary.png" alt="TRIUMF interactive glossary showing a masonry grid of term cards including H-minus Ions, Beamline, Decay Spectroscopy, Antimatter, Standard Model, and B.C. Binning"/>
+    <div class="img-caption">The interactive glossary: a masonry grid of term cards mixing scientific concepts (H-minus Ions, Standard Model, Beamline) with cultural context (B.C. Binning, TRIUMF's art history). Each card includes photography or illustration to make the definition concrete.</div>
+  </div>
+
+  <p>The glossary design decision I'm most proud of: mixing scientific terms with cultural and historical context cards (TRIUMF's art collection, key figures, the founding story). This made the glossary a discovery tool that surfaced parts of TRIUMF's heritage.</p>
+</div>
+
+<!-- NAVIGATION IA -->
+<div class="section reveal">
+  <div class="section-label">information architecture</div>
+  <h2>Rebuilding the navigation around how visitors think</h2>
+  <p>The original navigation used TRIUMF's internal division structure as its organising principle. The redesigned IA was built around the questions a public visitor actually arrives with: "What is this place?", "What research happens here?", "How can I explore the lab?", "What's the history?"</p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/TRIUMF/Bottom Nav.png" alt="TRIUMF bottom navigation showing four sections: Tour Our Lab, Our History, Events and Community, and Arts and Culture with links and the Discovery Accelerated tagline"/>
+    <div class="img-caption">The redesigned bottom navigation into four clear sections built around visitor intent rather than internal divisions: Tour Our Lab, Our History, Events & Community, Arts & Culture. "Discovery, accelerated" anchors the brand proposition in the footer.</div>
+  </div>
+
+  <p>The key structural change was separating <strong>public-facing discovery pathways</strong> (Tour, Arts, History, Events) from <strong>researcher-facing technical content</strong> which still existed on the main TRIUMF.ca but no longer cluttered the outreach navigation. Two audiences, two sites, each designed for its actual user.</p>
+</div>
+
+<!-- MOBILE + ACCESSIBILITY -->
+<div class="section reveal">
+  <div class="section-label">mobile & accessibility</div>
+  <h2>Making it work for everyone, on every device</h2>
+  <p>A significant portion of public visits to science outreach sites come from mobile devices, most likely students researching on their phones, people sharing links on social media. The existing site had no meaningful mobile responsiveness for its content-heavy pages.</p>
+  
+  <div class="img-showcase reveal">
+      <img src="assets/imgs/TRIUMF/MobileHPAW.png" alt="Mobile view of How Particle Accelerators Work page showing bold yellow background with 'Atom' definition on an iPhone screen"/>
+      <div class="img-caption">Mobile layout for "How Particle Accelerators Work" was one of the most content-heavy pages on the site. The redesign uses full-bleed yellow sections, large type, and illustrated diagrams to make a dense scientific explanation readable at thumb width.</div>
+  </div>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/TRIUMF/Radiation.png" alt="Radiation Environments page showing an illustrated space scene with planets, sun, and the text 'Sources of radiation include galactic cosmic rays, solar energy particles, and the Earth's radiation belt'"/>
+    <div class="img-caption">The Radiation Environments page. TRIUMF's existing visual art assets integrated directly into content pages. Part of the IA work was surfacing the art library as a primary content layer, not a hidden gallery section.</div>
+  </div>
+
+  <div class="access-grid reveal">
+    <div class="access-item">
+      <div class="access-icon">🎨</div>
+      <div class="access-body">
+        <h5>Contrast ratios</h5>
+        <p>Audited all text/background combinations against WCAG AA standards. Updated colour pairings across content pages where contrast was failing.</p>
+      </div>
+    </div>
+    <div class="access-item">
+      <div class="access-icon">👁️</div>
+      <div class="access-body">
+        <h5>Non-colour visual cues</h5>
+        <p>Added icons, underlines, and shape indicators to all interactive elements so colour wasn't the only signal for clickability or state.</p>
+      </div>
+    </div>
+    <div class="access-item">
+      <div class="access-icon">📱</div>
+      <div class="access-body">
+        <h5>Mobile responsiveness</h5>
+        <p>Adapted interactive assets (the map, the tour navigation, the glossary) into mobile-friendly alternative versions where the desktop version couldn't translate.</p>
+      </div>
+    </div>
+    <div class="access-item">
+      <div class="access-icon">📝</div>
+      <div class="access-body">
+        <h5>Text sizing & alt text</h5>
+        <p>Ensured minimum text sizes across all content types. Added descriptive alt text to TRIUMF's extensive scientific illustration library.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- THE SCIENCE ITSELF -->
+<div class="section reveal">
+  <div class="section-label">what I learned about particle physics</div>
+  <h2>Designing for subject matter you don't understand yet</h2>
+  <p>You can't design good science communication if you don't understand what you're communicating. I spent real time learning what a cyclotron actually does, why ISAC matters, what a beamline is, and how radiation environments connect to TRIUMF's medical isotope work.</p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/TRIUMF/TRIUMFJackandJill.png" alt="TRIUMF visual showing two scientists standing on a globe looking at the cosmos — from TRIUMF's Research in Motion film"/>
+    <div class="img-caption">Still from TRIUMF's "Research in Motion" film — the kind of evocative imagery that made TRIUMF's outreach site worth building well. Science that reaches for the cosmic scale deserves design that matches its ambition.</div>
+  </div>
+
+  <p>The design work got better as my understanding of the science improved. The glossary was better because I knew which terms people actually confused. The tour was better because I understood why each facility was interesting. The navigation was better because I understood the difference between what TRIUMF does for particle physics and what it does for medicine.</p>
+</div>
+
+
+<div style="position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 60px 60px">
+  <a href="www.discoverourlab.triumf.ca/" target="_blank" style="display:inline-flex;align-items:center;gap:9px;padding:14px 28px;border-radius:var(--r-pill);background:var(--lav2);color:var(--bg);font-family:'Quicksand',sans-serif;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s" onmouseover="this.style.background='var(--lav3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--lav2)';this.style.transform='none'">View the Website ↗</a>
+</div>
+
+<!-- TOOLS -->
+<div class="section reveal">
+  <div class="section-label">tools used</div>
+  <div class="pill-row">
+    <span class="pill p-mint">HTML / CSS</span>
+    <span class="pill p-mint">jQuery</span>
+    <span class="pill p-mint">Elementor</span>
+    <span class="pill p-mint">WordPress</span>
+    <span class="pill p-sky">Qualtrics</span>
+    <span class="pill p-lav">Figma</span>
+    <span class="pill p-lav">Miro</span>
+    <span class="pill p-lav">Adobe Creative Suite</span>
+    <span class="pill p-peach">Card Sorting</span>
+    <span class="pill p-peach">Content Auditing</span>
+    <span class="pill p-peach">AODA / WCAG</span>
+    <span class="pill p-blush">Competitive Analysis</span>
+    <span class="pill p-blush">User Research</span>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<footer>
+  <div class="foot-dots">
+    <div class="fdot" style="background:var(--mint2)"></div>
+    <div class="fdot" style="background:var(--sky2)"></div>
+    <div class="fdot" style="background:var(--lav2)"></div>
+  </div>
+  <p>© Cheryl Li · TRIUMF Case Study</p>
+  <div class="foot-dots">
+    <div class="fdot" style="background:var(--lav2)"></div>
+    <div class="fdot" style="background:var(--mint2)"></div>
+    <div class="fdot" style="background:var(--sky2)"></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var c=document.getElementById('bgClouds');
+  var cols=['#1a7a60','#2870b8','#5b3fa8','#1a5878','#c8b8e8'];
+  [{w:600,h:600,t:'0%',l:'-10%',ci:0,tt:22,dx:50,dy:30,sc:1.08,op:.15},
+   {w:500,h:400,t:'55%',l:'65%',ci:1,tt:26,dx:-40,dy:35,sc:1.05,op:.12},
+   {w:700,h:350,t:'30%',l:'35%',ci:2,tt:30,dx:30,dy:-30,sc:1.04,op:.08},
+   {w:400,h:400,t:'75%',l:'5%',ci:3,tt:20,dx:45,dy:20,sc:1.06,op:.10},
+   {w:300,h:300,t:'10%',l:'70%',ci:4,tt:18,dx:-20,dy:40,sc:1.05,op:.06}
+  ].forEach(function(cfg){
+    var d=document.createElement('div');d.className='cloud';
+    d.style.cssText='width:'+cfg.w+'px;height:'+cfg.h+'px;top:'+cfg.t+';left:'+cfg.l+';background:'+cols[cfg.ci]+';--t:'+cfg.tt+'s;--dx:'+cfg.dx+'px;--dy:'+cfg.dy+'px;--sc:'+cfg.sc+';--op:'+cfg.op+';animation-delay:'+(Math.random()*-15)+'s';
+    c.appendChild(d);
+  });
+})();
+(function(){
+  var sf=document.getElementById('starField');
+  var cols=['#f0e8ff','#d8f0fc','#d0f0e8','#f8f0d8','#e8f8f4'];
+  for(var i=0;i<80;i++){
+    var s=document.createElement('div');s.className='bpc-star';
+    var sz=Math.random()*2.5+1;
+    s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:'+sz+'px;height:'+sz+'px;background:'+cols[Math.floor(Math.random()*cols.length)]+';--dur:'+(Math.random()*5+2)+'s;--op:'+(Math.random()*.8+.3)+';animation-delay:'+(Math.random()*8)+'s';
+    sf.appendChild(s);
+  }
+})();
+var starGlyphs=['✦','✧','⋆','✩','˚','·','⚛'];
+var sparkCols=['#a8d8c8','#a8cce8','#c8b8e8','#e8d090','#84c4b0'];
+document.addEventListener('mousemove',function(e){
+  if(Math.random()>.86){
+    var sp=document.createElement('div');sp.className='sparkle';
+    sp.textContent=starGlyphs[Math.floor(Math.random()*starGlyphs.length)];
+    sp.style.cssText='left:'+(e.clientX-6)+'px;top:'+(e.clientY-6)+'px;color:'+sparkCols[Math.floor(Math.random()*sparkCols.length)]+';text-shadow:0 0 8px currentColor';
+    document.body.appendChild(sp);setTimeout(function(){sp.remove()},750);
+  }
+});
+(function(){
+  var sy=['✦','✧','⋆','·','✩','∗','˚','⚛'];
+  var rc=['#a8d8c8','#a8cce8','#c8b8e8','#84c4b0'];
+  for(var i=0;i<12;i++){
+    var p=document.createElement('div');p.className='rune-particle';
+    p.textContent=sy[Math.floor(Math.random()*sy.length)];
+    p.style.cssText='left:'+Math.random()*100+'%;color:'+rc[Math.floor(Math.random()*rc.length)]+';--d:'+(Math.random()*10+7)+'s;animation-delay:'+(Math.random()*14)+'s';
+    document.body.appendChild(p);
+  }
+})();
+window.addEventListener('scroll',function(){
+  var pct=window.scrollY/(document.body.scrollHeight-window.innerHeight);
+  document.getElementById('scroll-bar').style.width=(pct*100)+'%';
+});
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){setTimeout(function(){e.target.classList.add('in')},i*55);obs.unobserve(e.target);}
+  });
+},{threshold:.07,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+</script>
+</body>
+</html>

@@ -1,70 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RehvUp · Gamification from Scratch · cheryl's portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --bg: #1a1528;
-  --bg2: #211c34;
-  --bg3: #2a2440;
-  --bg4: #332d4e;
-  --cream: #f5edd8;
-  --cream2: #ede0c4;
-  --lav: #c8b8e8;
-  --lav2: #b4a0d8;
-  --lav3: #9880c4;
-  --lav4: #7a62a8;
-  --lav-soft: rgba(200,184,232,.15);
-  --lav-pale: rgba(200,184,232,.08);
-  --pink: #e8b4c8;
-  --pink2: #d898b4;
-  --pink3: #c07898;
-  --pink-soft: rgba(232,180,200,.15);
-  --sky: #a8cce8;
-  --sky2: #88b8dc;
-  --sky-soft: rgba(168,204,232,.15);
-  --mint: #a8d8c8;
-  --mint2: #84c4b0;
-  --mint-soft: rgba(168,216,200,.15);
-  --peach: #f0c8a8;
-  --gold: #e8d090;
-  --ink-light: #f0e8ff;
-  --ink-mid: #c8b8e0;
-  --ink-dim: #8878a8;
-  --ink-dimmer: #584868;
-  --border: rgba(200,184,232,.14);
-  --border2: rgba(200,184,232,.28);
-  --shadow: 0 4px 24px rgba(0,0,0,.35);
-  --shadow-soft: 0 8px 40px rgba(0,0,0,.45);
+  --bg: #1a1528; --bg2: #211c34; --bg3: #2a2440; --bg4: #332d4e;
+  --cream: #f5edd8; --lav: #c8b8e8; --lav2: #b4a0d8; --lav3: #9880c4;
+  --lav-soft: rgba(200,184,232,.15); --lav-pale: rgba(200,184,232,.08);
+  --pink: #e8b4c8; --pink2: #d898b4; --pink-soft: rgba(232,180,200,.15);
+  --sky: #a8cce8; --sky2: #88b8dc; --sky-soft: rgba(168,204,232,.15);
+  --mint: #a8d8c8; --mint2: #84c4b0; --mint-soft: rgba(168,216,200,.15);
+  --peach: #f0c8a8; --gold: #e8d090;
+  --ink-light: #f0e8ff; --ink-mid: #c8b8e0; --ink-dim: #8878a8; --ink-dimmer: #584868;
+  --border: rgba(200,184,232,.14); --border2: rgba(200,184,232,.28);
+  --shadow: 0 4px 24px rgba(0,0,0,.35); --shadow-soft: 0 8px 40px rgba(0,0,0,.45);
   --glow-lav: 0 0 20px rgba(180,160,216,.25);
   --r: 16px; --r-lg: 24px; --r-xl: 28px; --r-pill: 100px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--ink-light);
-  font-family:'Nunito',sans-serif;font-size:16px;line-height:1.75;overflow-x:hidden;
-  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Cpath d='M11 1L13.2 8H20L14.4 12.2L16.6 19L11 14.8L5.4 19L7.6 12.2L2 8H8.8Z' fill='%23c8b8e8' stroke='%23b4a0d8' stroke-width='1.2'/%3E%3C/svg%3E") 11 11,auto;
-}
-
-/* STARFIELD */
+body{background:var(--bg);color:var(--ink-light);font-family:'Nunito',sans-serif;font-size:16px;line-height:1.75;overflow-x:hidden;cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Cpath d='M11 1L13.2 8H20L14.4 12.2L16.6 19L11 14.8L5.4 19L7.6 12.2L2 8H8.8Z' fill='%23c8b8e8' stroke='%23b4a0d8' stroke-width='1.2'/%3E%3C/svg%3E") 11 11,auto;}
 .star-field{position:fixed;inset:0;pointer-events:none;z-index:0}
 .bpc-star{position:absolute;border-radius:50%;animation:starPulse var(--dur,4s) ease-in-out infinite;opacity:0}
 @keyframes starPulse{0%,100%{opacity:0;transform:scale(.5)}50%{opacity:var(--op,.8);transform:scale(1)}}
-
-/* NEBULA CLOUDS */
 .bg-clouds{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .cloud{position:absolute;border-radius:50%;filter:blur(80px);animation:drift var(--t,20s) ease-in-out infinite alternate;opacity:var(--op,.12);}
 @keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(var(--dx,30px),var(--dy,20px)) scale(var(--sc,1.05))}}
-
-/* SPARKLE */
 .sparkle{position:fixed;pointer-events:none;font-size:14px;animation:sparkFade .75s ease forwards;z-index:9999}
 @keyframes sparkFade{0%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(.4) translateY(-12px)}}
-
-/* SCROLL BAR */
 #scroll-bar{position:fixed;top:0;left:0;height:3px;z-index:300;background:linear-gradient(90deg,var(--lav2),var(--pink2),var(--lav3));border-radius:100px;transition:width .1s;width:0;box-shadow:0 0 10px rgba(180,160,216,.7)}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 52px;background:rgba(26,21,40,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
 .nav-logo{font-family:'Quicksand',sans-serif;font-size:20px;font-weight:700;color:var(--cream);text-decoration:none;display:flex;align-items:center;gap:8px;}
 .nav-logo-dot{width:9px;height:9px;border-radius:50%;background:var(--lav2);display:inline-block;animation:dotBounce 2s ease-in-out infinite;}
@@ -72,7 +39,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-back{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:600;color:var(--ink-mid);text-decoration:none;padding:6px 18px;border-radius:var(--r-pill);border:1.5px solid var(--border2);background:var(--lav-pale);transition:all .2s}
 .nav-back:hover{background:var(--lav-soft);color:var(--lav);border-color:var(--lav2)}
 
-/* HERO */
 .hero{padding:110px 60px 56px;max-width:900px;margin:0 auto;position:relative;z-index:1}
 .case-tag{display:inline-flex;align-items:center;gap:7px;font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:var(--r-pill);margin-bottom:18px;background:var(--lav-soft);color:var(--lav);border:1.5px solid rgba(200,184,232,.3)}
 .hero h1{font-family:'Quicksand',sans-serif;font-size:clamp(32px,4.5vw,54px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:var(--cream);margin-bottom:14px;}
@@ -80,37 +46,27 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .hero-meta span{display:flex;align-items:center;gap:5px}
 .hero-tagline{font-size:16.5px;color:var(--ink-mid);line-height:1.85;max-width:680px;padding-bottom:28px;border-bottom:1px solid var(--border)}
 
-/* STAT ROW */
-.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:var(--r-xl);overflow:hidden;margin:36px 0;box-shadow:var(--shadow)}
-.stat-cell{background:var(--bg2);padding:26px 20px;text-align:center;position:relative}
-.stat-cell::after{content:'✦';position:absolute;top:12px;right:14px;font-size:8px;color:var(--lav);opacity:.3;animation:starPulse 3s ease-in-out infinite}
-.stat-val{font-family:'Quicksand',sans-serif;font-size:40px;font-weight:800;color:var(--cream);display:block;line-height:1;margin-bottom:6px;letter-spacing:-.02em}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:var(--r-xl);overflow:hidden;margin:36px 0;box-shadow:var(--shadow)}
+.stat-cell{background:var(--bg2);padding:22px 14px;text-align:center;position:relative}
+.stat-cell::after{content:'✦';position:absolute;top:10px;right:12px;font-size:8px;color:var(--lav);opacity:.35;animation:starPulse 3s ease-in-out infinite}
+.stat-val{font-family:'Quicksand',sans-serif;font-size:32px;font-weight:800;color:var(--cream);display:block;line-height:1;margin-bottom:6px;letter-spacing:-.02em}
 .stat-lbl{font-size:11px;color:var(--ink-dim);font-weight:700;text-transform:uppercase;letter-spacing:.07em}
 
-/* CONTENT */
 .content{max-width:900px;margin:0 auto;padding:0 60px 100px;position:relative;z-index:1}
 .section{margin-bottom:56px}
 .section-label{font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lav3);margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--lav),transparent);opacity:.35;max-width:200px}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--lav2),transparent);opacity:.4;max-width:200px}
 .section h2{font-family:'Quicksand',sans-serif;font-size:28px;font-weight:800;color:var(--cream);margin-bottom:14px;line-height:1.1;letter-spacing:-.02em}
 .section p{font-size:15px;color:var(--ink-mid);line-height:1.85;margin-bottom:14px}
 .section p:last-child{margin-bottom:0}
-
-/* LISTS */
 ul.body-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin:14px 0}
 ul.body-list li{font-size:14.5px;color:var(--ink-mid);line-height:1.75;padding-left:20px;position:relative}
 ul.body-list li::before{content:'✦';position:absolute;left:0;top:4px;font-size:9px;color:var(--lav2)}
 strong{color:var(--cream);font-weight:700}
-
-/* CALLOUT */
 .callout{background:var(--bg3);border-radius:var(--r-lg);padding:22px 26px;border-left:4px solid var(--lav2);margin:24px 0;box-shadow:var(--shadow)}
 .callout p{font-size:14.5px;color:var(--ink-mid);font-style:italic;line-height:1.75;margin:0}
-
-/* GRIDS */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
 .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:20px 0}
-
-/* INFO CARDS */
 .info-card{background:var(--bg2);border-radius:var(--r-lg);padding:22px;border:1px solid var(--border);box-shadow:var(--shadow);transition:all .2s}
 .info-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:var(--glow-lav)}
 .info-card h4{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:700;margin-bottom:10px;color:var(--cream)}
@@ -119,28 +75,41 @@ strong{color:var(--cream);font-weight:700}
 .info-card li{padding-left:14px;position:relative}
 .info-card li::before{content:'◦';position:absolute;left:0;color:var(--lav2);font-weight:700;font-size:16px;line-height:1.3}
 
-/* CHARTS */
-.chart-wrap{background:var(--bg2);border-radius:var(--r-xl);padding:26px;border:1px solid var(--border);box-shadow:var(--shadow);margin:20px 0}
-.chart-wrap h4{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:700;color:var(--cream);margin-bottom:4px}
-.chart-wrap p.chart-sub{font-size:12px;color:var(--ink-dim);margin-bottom:18px}
-.chart-wrap canvas{max-height:300px}
+/* PROBLEM CARDS */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+.problem-card{background:var(--bg2);border-radius:var(--r-lg);padding:20px;border:1px solid var(--border);border-left:3px solid var(--pink2);transition:all .2s}
+.problem-card:hover{transform:translateY(-2px);box-shadow:0 0 20px rgba(216,152,180,.15);border-color:var(--border2)}
+.problem-card h4{font-family:'Quicksand',sans-serif;font-size:13.5px;font-weight:800;color:var(--cream);margin-bottom:6px}
+.problem-card p{font-size:13px;color:var(--ink-mid);line-height:1.65;margin:0}
+.solution-card{border-left:3px solid var(--lav2) !important}
+.solution-card:hover{box-shadow:0 0 20px rgba(180,160,216,.15) !important}
 
-/* ENERGY CARDS (mcgill) */
-.energy-card{background:var(--bg2);border-radius:var(--r-xl);padding:24px;border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:14px;transition:all .2s}
-.energy-card:hover{border-color:var(--border2);box-shadow:var(--glow-lav)}
-.energy-card h3{font-family:'Quicksand',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;color:var(--cream)}
-.energy-num{font-family:'Quicksand',sans-serif;font-size:34px;font-weight:800;color:var(--lav);display:block}
-.energy-label{font-size:12px;color:var(--ink-dim);font-weight:600;margin-bottom:10px;display:block}
-.challenge-tag{display:inline-block;background:rgba(232,180,200,.15);color:var(--pink);font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;margin-bottom:6px;border:1px solid rgba(232,180,200,.25)}
+/* GAMIFICATION SYSTEM */
+.game-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:20px 0}
+.game-card{background:var(--bg2);border-radius:var(--r-lg);padding:20px;border:1px solid var(--border);text-align:center;transition:all .2s;position:relative;overflow:hidden}
+.game-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--lav2),var(--pink2))}
+.game-card:hover{transform:translateY(-3px);box-shadow:var(--glow-lav);border-color:var(--border2)}
+.game-icon{font-size:28px;margin-bottom:10px;display:block}
+.game-card h4{font-family:'Quicksand',sans-serif;font-size:14px;font-weight:800;color:var(--cream);margin-bottom:6px}
+.game-card p{font-size:13px;color:var(--ink-mid);line-height:1.6;margin:0}
 
-/* PIPELINE (mcgill) */
-.pipeline-step{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--border)}
-.pipeline-step:last-child{border-bottom:none}
-.pipeline-num{font-family:'Quicksand',sans-serif;font-size:26px;font-weight:800;color:var(--lav2);flex-shrink:0;width:36px}
-.pipeline-body h4{font-family:'Quicksand',sans-serif;font-size:13.5px;font-weight:700;margin-bottom:4px;color:var(--cream)}
-.pipeline-body p{font-size:13px;color:var(--ink-mid);line-height:1.7;margin:0}
+/* SCOPE TABLE */
+.scope-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.scope-table th{text-align:left;font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);padding:10px 14px;border-bottom:1.5px solid var(--border);background:var(--bg3)}
+.scope-table td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--ink-mid);background:var(--bg2);vertical-align:top}
+.scope-table tr:last-child td{border-bottom:none}
+.scope-table tr:hover td{background:var(--lav-pale)}
+.badge-in{background:var(--mint-soft);color:var(--mint);font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;border:1px solid rgba(168,216,200,.25)}
+.badge-out{background:var(--pink-soft);color:var(--pink);font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;border:1px solid rgba(232,180,200,.25)}
 
-/* PILLS */
+/* USER TYPES */
+.user-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}
+.user-card{background:var(--bg2);border-radius:var(--r-lg);padding:18px 14px;border:1px solid var(--border);text-align:center;transition:all .2s}
+.user-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:var(--glow-lav)}
+.user-icon{font-size:24px;margin-bottom:8px;display:block}
+.user-card h5{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:800;color:var(--cream);margin-bottom:4px}
+.user-card p{font-size:12px;color:var(--ink-dim);line-height:1.5;margin:0}
+
 .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .pill{font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;font-style:italic}
 .p-mint{background:var(--mint-soft);color:var(--mint);border:1px solid rgba(168,216,200,.25)}
@@ -149,97 +118,21 @@ strong{color:var(--cream);font-weight:700}
 .p-peach{background:rgba(240,200,168,.12);color:var(--peach);border:1px solid rgba(240,200,168,.2)}
 .p-blush{background:var(--pink-soft);color:var(--pink);border:1px solid rgba(232,180,200,.25)}
 
-/* FEATURE GRID (rehvup) */
-.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:20px 0}
-.feature-card{background:var(--bg2);border-radius:var(--r-lg);padding:20px;border:1px solid var(--border);transition:all .22s}
-.feature-card:hover{transform:translateY(-3px);box-shadow:var(--glow-lav);border-color:var(--border2)}
-.feature-icon{font-size:22px;margin-bottom:10px}
-.feature-card h4{font-family:'Quicksand',sans-serif;font-size:13.5px;font-weight:700;margin-bottom:6px;color:var(--cream)}
-.feature-card p{font-size:12.5px;color:var(--ink-mid);line-height:1.6;margin:0}
-
-/* TIMELINE (rehvup) */
-.timeline{display:flex;flex-direction:column;gap:0;margin:20px 0;position:relative}
-.timeline::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:2px;background:var(--border)}
-.tl-item{display:flex;gap:20px;padding-bottom:26px;position:relative}
-.tl-dot{width:40px;height:40px;border-radius:50%;background:var(--bg3);border:2px solid var(--lav2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;z-index:1;box-shadow:0 0 10px rgba(180,160,216,.2)}
-.tl-body h4{font-family:'Quicksand',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;padding-top:8px;color:var(--cream)}
-.tl-body p{font-size:13.5px;color:var(--ink-mid);line-height:1.7;margin:0}
-
-/* SCOPE TABLE (rehvup) */
-.scope-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
-.scope-table th{text-align:left;font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);padding:8px 14px;border-bottom:1.5px solid var(--border)}
-.scope-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--ink-mid);vertical-align:top}
-.scope-table tr:last-child td{border-bottom:none}
-.badge-in{background:var(--mint-soft);color:var(--mint);font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;border:1px solid rgba(168,216,200,.25)}
-.badge-out{background:var(--pink-soft);color:var(--pink);font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;border:1px solid rgba(232,180,200,.25)}
-
-/* FIGMA LINK (rehvup) */
-.figma-link{display:inline-flex;align-items:center;gap:9px;padding:14px 28px;border-radius:var(--r-pill);background:var(--lav2);color:var(--bg);font-family:'Quicksand',sans-serif;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s;margin-top:8px}
-.figma-link:hover{background:var(--lav3);transform:translateY(-2px);box-shadow:var(--glow-lav)}
-
-/* STAT INSIGHT (traysense) */
-.stat-insight{background:rgba(168,216,200,.08);border-radius:var(--r-lg);padding:20px 24px;margin:20px 0;border:1px solid rgba(168,216,200,.2)}
-.stat-insight h4{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:700;color:var(--mint);margin-bottom:6px}
-.stat-insight p{font-size:13.5px;color:var(--mint2);line-height:1.65;margin:0}
-
-/* DATA TABLE (traysense) */
-.data-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0}
-.data-table th{text-align:left;font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);padding:8px 12px;border-bottom:1.5px solid var(--border)}
-.data-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--ink-mid)}
-.data-table tr:last-child td{border-bottom:none}
-.hl{color:var(--cream);font-weight:700}
-
-/* SYSTEM DIAGRAM (traysense) */
-.system-diagram{display:flex;align-items:center;justify-content:center;gap:0;margin:20px 0;flex-wrap:wrap}
-.sys-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 20px;text-align:center;min-width:130px;box-shadow:var(--shadow);transition:all .2s}
-.sys-box:hover{border-color:var(--border2);box-shadow:var(--glow-lav)}
-.sys-box .icon{font-size:22px;margin-bottom:8px}
-.sys-box h5{font-family:'Quicksand',sans-serif;font-size:12.5px;font-weight:700;color:var(--cream);margin-bottom:4px}
-.sys-box p{font-size:11px;color:var(--ink-dim);margin:0}
-.sys-arrow{font-size:22px;color:var(--lav2);padding:0 8px;align-self:center;text-shadow:0 0 8px rgba(180,160,216,.5)}
-
-/* TRIUMF-SPECIFIC */
-.competitor-card{background:var(--bg2);border-radius:var(--r-xl);padding:26px;border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:14px}
-.competitor-card .org-name{font-family:'Quicksand',sans-serif;font-size:24px;font-weight:800;margin-bottom:4px;color:var(--cream)}
-.competitor-card .org-type{font-family:'Quicksand',sans-serif;font-size:11px;font-weight:600;color:var(--ink-dim);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
-.strength-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.strength-pill{font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;background:var(--sky-soft);color:var(--sky);border:1px solid rgba(168,204,232,.25);font-style:italic}
-.cure-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
-.cure-card{border-radius:var(--r-lg);padding:20px;border:1px solid var(--border)}
-.cure-card h4{font-family:'Quicksand',sans-serif;font-size:20px;font-weight:800;margin-bottom:8px;color:var(--cream)}
-.cure-card p{font-size:13.5px;color:var(--ink-mid);line-height:1.65;margin:0}
-.cure-c{background:rgba(168,216,200,.08)} .cure-u{background:rgba(232,208,144,.08)} .cure-r{background:rgba(232,180,200,.08)} .cure-e{background:rgba(200,184,232,.08)}
-.option-card{border-radius:var(--r-lg);padding:20px;margin-bottom:12px;border:1px solid var(--border);background:var(--bg2)}
-.option-card h4{font-family:'Quicksand',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px;color:var(--cream)}
-.option-card p{font-size:13.5px;color:var(--ink-mid);line-height:1.65;margin:0}
-.option-pros{color:var(--mint);font-family:'Quicksand',sans-serif;font-size:12px;font-weight:700;margin-top:8px}
-.option-cons{color:var(--pink);font-family:'Quicksand',sans-serif;font-size:12px;font-weight:700}
-.opt-a{border-left:3px solid var(--mint2)} .opt-b{border-left:3px solid var(--sky2)} .opt-c{border-left:3px solid var(--gold)}
-.recommended-badge{display:inline-block;background:var(--lav2);color:var(--bg);font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;margin-left:8px;vertical-align:middle}
-
-/* FOOTER */
+.rune-particle{position:fixed;pointer-events:none;z-index:1;font-size:13px;animation:runeFloat var(--d,9s) linear infinite;opacity:0}
+@keyframes runeFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}8%{opacity:.4}90%{opacity:.25}100%{transform:translateY(-8vh) rotate(360deg);opacity:0}}
 footer{text-align:center;padding:40px;border-top:1px solid var(--border);font-size:13px;color:var(--ink-dim);position:relative;z-index:1;font-family:'Quicksand',sans-serif}
 .foot-dots{display:flex;justify-content:center;gap:8px;margin:12px 0}
 .fdot{width:8px;height:8px;border-radius:50%}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
 
 @media(max-width:768px){
-  nav{padding:12px 20px}
-  .hero,.content{padding-left:20px;padding-right:20px}
-  .hero{padding-top:90px}
-  .stat-row,.two-col,.three-col,.cure-grid{grid-template-columns:1fr 1fr}
-  .feature-grid{grid-template-columns:1fr 1fr}
-  .system-diagram{gap:8px}
-  .sys-arrow{display:none}
+  nav{padding:12px 20px}.hero,.content{padding-left:20px;padding-right:20px}.hero{padding-top:90px}
+  .stat-row,.game-grid,.user-grid{grid-template-columns:1fr 1fr}
+  .two-col,.problem-grid,.three-col{grid-template-columns:1fr}
 }
-@media(max-width:480px){.stat-row,.two-col,.three-col,.cure-grid,.feature-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.stat-row,.game-grid,.user-grid{grid-template-columns:1fr}}
 </style>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>RehvUp Gamification · cheryl's profile</title>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-
 </head>
 <body>
 <div id="scroll-bar"></div>
@@ -248,319 +141,308 @@ footer{text-align:center;padding:40px;border-top:1px solid var(--border);font-si
 
 <nav>
   <a href="index.html" class="nav-logo"><span class="nav-logo-dot"></span>cheryl.li</a>
-  <a href="index.html#cases" class="nav-back">← Back to portfolio</a>
+  <a href="ux-portfolio.html" class="nav-back">← back to UX work</a>
 </nav>
 
-<div class="hero">
-  <div class="case-tag">🎮 UX / Product Design · RehvUp</div>
-  <h1>Designing a gamification system from zero</h1>
+<div class="hero reveal">
+  <div class="case-tag">🎮 Information Architecture + Gamification · RehvUp</div>
+  <h1>Designing a gamification system from scratch</h1>
   <div class="hero-meta">
-    <span>📅 When: Sep – Dec 2023</span>
-    <span>👤 Role: UX researcher / product designer / information architect</span>
-    <span>🏢 Where: RehvUp (workplace social app)</span>
+    <span>📅 Sep – Dec 2023</span>
+    <span>👤 Information Architect / Designer</span>
+    <span>🏢 RehvUp</span>
   </div>
-  <p class="hero-tagline">What is RehvUp? It's a workplace social media platform, halfway between Reddit and Instagram but for employee wellbeing; with managers, communities, and EX coaches (think influencers that make content around wellness in the workplace). I was brought in as the sole designer to fix a broken UX and then build a fully new gamification system from scratch. Since the startup was acquired 3 months after my work was implemented, I assume I did a great job.</p>
+  <p class="hero-tagline">RehvUp is a workplace social platform (think Instagram for employee learning), where EX coaches post short-form video content on wellbeing and professional growth. I joined as the sole designer with two goals: fix what was broken, and increase engagement. The startup was acquired a few months after my work was implemented, which I think is a win on my behalf.</p>
 </div>
 
 <div class="content">
 
-  <div class="stat-row">
-    <div class="stat-cell"><span class="stat-val">90%</span><div class="stat-lbl">Reduction in user complaints</div></div>
-    <div class="stat-cell"><span class="stat-val">7</span><div class="stat-lbl">Gamification features scoped</div></div>
-    <div class="stat-cell"><span class="stat-val">med-fi</span><div class="stat-lbl">Figma prototype delivered</div></div>
-  </div>
+<!-- CONTEXT -->
+<div class="section reveal">
+  <div class="section-label">context</div>
+  <h2>What is RehvUp?</h2>
+  <p>RehvUp is an HR tech platform built around short-form video content for workplace wellbeing. The app has three distinct user types: employees, managers, and EX (Employee Experience) coaches who create video content on topics like mindfulness, feedback, and professional development within tailored communities.</p>
 
-  <div class="section">
-    <div class="section-label">Context</div>
-    <h2>The platform and the problem</h2>
-    <p>RehvUp lets employees interact with short-form video content, join communities, and engage with EX coaches on workplace topics like mindfulness and productivity. Something like Instagram but internal to a company. The app has four key user types: regular employees, managers, communities, and EX coaches who create content.</p>
-    <p>When I joined, the app had a backlog of user complaints. Navigation was confusing, post engagement logic was broken, and user journeys weren't clear. On top of fixing all of that, there was a second major goal: design an engagement system that would give users a reason to come back regularly.</p>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Phase 1</div>
-    <h2>Information Architecture (IA) audit and complaint reduction</h2>
-    <p>Before anything new could be designed, the existing problems needed to be understood. I worked directly with third-party engineering contractors using insights gained through app testing sessions, auditing logic flows and tracing the root causes of recurring complaints.</p>
-
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-dot">🔍</div>
-        <div class="tl-body"><h4>App testing sessions</h4><p>Walked through the app systematically, documenting every confusing flow, broken interaction, and unclear label</p></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot">🗺️</div>
-        <div class="tl-body"><h4>IA restructure</h4><p>Remapped the information architecture so users could navigate without guidance, tested and iterated through multiple feedback rounds</p></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot">⚙️</div>
-        <div class="tl-body"><h4>Logic fixes</h4><p>Identified and resolved post engagement logic errors (interactions that produced unexpected outcomes or no feedback at all)</p></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot">✅</div>
-        <div class="tl-body"><h4>Result: 90% fewer complaints</h4><p>Fixing navigation structure and post logic resolved the vast majority of reported issues before the gamification work even began</p></div>
-      </div>
+  <div class="user-grid reveal">
+    <div class="user-card">
+      <span class="user-icon">👤</span>
+      <h5>Employees</h5>
+      <p>Primary content consumers. Watch videos, track progress, earn points.</p>
+    </div>
+    <div class="user-card">
+      <span class="user-icon">👔</span>
+      <h5>Managers</h5>
+      <p>Assign content to teams, track completion, participate in communities.</p>
+    </div>
+    <div class="user-card">
+      <span class="user-icon">🎥</span>
+      <h5>EX Coaches</h5>
+      <p>External experts who create short-form video content on the platform.</p>
+    </div>
+    <div class="user-card">
+      <span class="user-icon">👥</span>
+      <h5>Communities</h5>
+      <p>Cross-functional groups with shared content feeds and discussion.</p>
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-label">Phase 2</div>
-    <h2>Gamification system design</h2>
-    <p>With the core app in a better state, I moved to the new project: design a gamification system that would motivate regular participation and give users a sense of progress. I started by defining the system architecture: what the components were, how they connected, and what user behaviour each was meant to drive</p>
+  <p>The platform had been live for some time but had accumulated significant UX debt. App logic was broken in ways that frustrated users. Navigation didn't match user mental models. And engagement was low. Users were opening the app but not returning.</p>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">⭐</div>
-        <h4>Experience Points (XP)</h4>
-        <p>Earned through app interactions: posting, commenting, watching content. Displayed on the user profile to visualise progress toward the next persona tier.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🏅</div>
-        <h4>Personas (Ranks)</h4>
-        <p>Rank tiers unlocked by accumulated XP. Each persona has defined privileges and benefits. The goal is to make progression feel like it means something, not just a number going up.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🏆</div>
-        <h4>Leaderboards</h4>
-        <p>Weekly and monthly boards showing the most active users. Additional XP awarded to top performers, creating a healthy competitive loop without being punishing.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h4>Progress Dashboard</h4>
-        <p>A profile-level view of points, badges earned, current rank, and progress to the next tier. Gives users a clear picture of where they are and what comes next.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h4>Challenges</h4>
-        <p>Short-term and long-term goals for bonus XP. Short challenges renew frequently to keep daily engagement up; longer ones reward sustained commitment.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🎖️</div>
-        <h4>Milestone Badges</h4>
-        <p>Goal-oriented badges tied to specific app milestones (first post, 30-day streak, etc). Gives users clear targets to aim for beyond the XP accumulation loop.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📚</div>
-        <h4>Educational Resources</h4>
-        <p>FAQs, tutorials, and tips explaining how the gamification system works. Helps users understand how to maximise engagement, especially important for a new system with no prior reference.</p>
-      </div>
+  <div class="callout">
+    <p>The brief I was given was pretty vague: "improve engagement and fix user experience issues." No specific problem statement, no existing user research, no defined success metrics. A blank canvas is its own design challenge. Before you can solve anything, you have to decide what to solve.</p>
+  </div>
+</div>
+
+<!-- DIAGNOSIS -->
+<div class="section reveal">
+  <div class="section-label">diagnosis</div>
+  <h2>Finding the real problems before designing the solutions</h2>
+  <p>I started with structured app testing sessions. I went through the app systematically as each user type, documenting every moment of friction, confusion, broken logic, and unexpected behaviour. I also worked directly with the third-party engineering contractors who had built the app, which gave me access to the intended logic versus the actual behaviour which was a gap that explained most of the problems.</p>
+
+  <div class="problem-grid reveal">
+    <div class="problem-card">
+      <h4>Navigation didn't match mental models</h4>
+      <p>The information architecture had been built around the app's internal data structure, not how users thought about their tasks. Finding content required navigating through menus that made no sense unless you understood the backend.</p>
+    </div>
+    <div class="problem-card">
+      <h4>Post engagement logic was broken</h4>
+      <p>The logic controlling how content appeared in feeds and how engagement was tracked had errors that meant some content never surfaced and some interactions weren't being registered. Users weren't crazy, the app actually wasn't working.</p>
+    </div>
+    <div class="problem-card">
+      <h4>No reason to return</h4>
+      <p>Once a user had watched their assigned content, there was nothing pulling them back. No progress to track, no social layer, no sense of accumulation. The app had no longitudinal engagement hook.</p>
     </div>
   </div>
+</div>
 
-  <div class="section">
-    <div class="section-label">Visualising the system</div>
-    <h2>XP flow and engagement loop</h2>
-    <div class="chart-wrap">
-      <h4>Gamification engagement loop</h4>
-      <p class="chart-sub">How each features contributes to drive acquisition & retention</p>
-      <canvas id="engagementChart"></canvas>
-    </div>
+<!-- SCOPE -->
+<div class="section reveal">
+  <div class="section-label">project scope</div>
+  <h2>What's in, and what isn't</h2>
+  <p>The scope document defined exactly what the project covered and what it did not. Scoping out the admin panel, notifications, and EX coach panel upfront prevented scope creep and kept engineering focused during handoff.</p>
 
-    <div class="chart-wrap">
-      <h4>Feature priority matrix: effort vs. engagement impact</h4>
-      <p class="chart-sub">How each feature was prioritised (based on design rationale)</p>
-      <canvas id="priorityChart"></canvas>
-    </div>
+  <table class="scope-table reveal">
+    <thead>
+      <tr><th>Feature area</th><th>Scope</th><th>Rationale</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>XP system, personas, leaderboards</strong></td><td><span class="badge-in">In scope</span></td><td>Core engagement mechanics.</td></tr>
+      <tr><td><strong>Profile progress dashboard</strong></td><td><span class="badge-in">In scope</span></td><td>Key to making progress visible to the user.</td></tr>
+      <tr><td><strong>Challenges + milestone badges</strong></td><td><span class="badge-in">In scope</span></td><td>Goal-setting mechanic that creates targets beyond passive XP accumulation.</td></tr>
+      <tr><td><strong>Educational resources</strong></td><td><span class="badge-in">In scope</span></td><td>New system needs explanation, part of the onboarding layer.</td></tr>
+      <tr><td><strong>Integration with posts, feeds, likes, comments</strong></td><td><span class="badge-in">In scope</span></td><td>Already built into existing features; XP hooks needed to be wired in.</td></tr>
+      <tr><td><strong>Desktop companion interface</strong></td><td><span class="badge-in">In scope</span></td><td>Most offices primarily work on desktop.</td></tr>
+      <tr><td><strong>IA restructure + logic fixes</strong></td><td><span class="badge-in">In scope</span></td><td>Foundation work that had to precede the gamification layer.</td></tr>
+      <tr><td><strong>Settings & notifications</strong></td><td><span class="badge-out">Out of scope</span></td><td>Separate product area, different sprint.</td></tr>
+      <tr><td><strong>EX coach panel</strong></td><td><span class="badge-out">Out of scope</span></td><td>Different user type with its own IA needs. Scoped to future roadmap.</td></tr>
+      <tr><td><strong>Admin panel</strong></td><td><span class="badge-out">Out of scope</span></td><td>Back-end tooling, not user-facing.</td></tr>
+      <tr><td><strong>Analytics dashboard</strong></td><td><span class="badge-out">Out of scope</span></td><td>Valuable but dependent on engagement data that doesn't yet exist at scale. Phase 2.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- GAMIFICATION -->
+<div class="section reveal">
+  <div class="section-label">gamification system design</div>
+  <h2>Building the engagement loop</h2>
+  <p>Gamification is easy to get wrong. Points and badges thoughtlessly slapped onto a product them feel hollow and condescending. I started by defining the system architecture: what the components were, how they connected, and what user behaviour each was meant to drive.</p>
+
+  <div class="callout">
+    <p>The target behaviours: post, comment, watch content, return on consecutive days, contribute to communities. The gamification system needed to make all of these feel rewarding without making the app feel like a video game. Workplace context matters. The tone had to be motivating without being juvenile.</p>
   </div>
 
-  <div class="section">
-    <div class="section-label">Scope document</div>
-    <h2>What's in! (and what isn't)</h2>
-    <p>The scope document defined exactly what the project covered and what it did not. Scoping out the admin panel, notifications, and EX coach panel upfront prevented scope creep and kept engineering focused during handoff.</p>
-
-    <table class="scope-table">
-      <thead><tr><th>Area</th><th>Status</th><th>Rationale</th></tr></thead>
-      <tbody>
-        <tr><td>XP system, personas, leaderboards</td><td><span class="badge-in">In scope</span></td><td>Core engagement mechanic</td></tr>
-        <tr><td>Profile progress dashboard</td><td><span class="badge-in">In scope</span></td><td>Key to making progress visible</td></tr>
-        <tr><td>Challenges + milestone badges</td><td><span class="badge-in">In scope</span></td><td>Goal-setting mechanic</td></tr>
-        <tr><td>Educational resources</td><td><span class="badge-in">In scope</span></td><td>Part of the sell</td></tr>
-        <tr><td>Integration with posts, feeds, likes, comments</td><td><span class="badge-in">In scope</span></td><td>Already built into existing features</td></tr>
-        <tr><td>Settings & notifications</td><td><span class="badge-out">Out of scope</span></td><td>Separate product area, different sprint</td></tr>
-        <tr><td>EX coach panel</td><td><span class="badge-out">Out of scope</span></td><td>Different user type, different IA</td></tr>
-        <tr><td>Admin panel</td><td><span class="badge-out">Out of scope</span></td><td>Back-end tooling, not user-facing</td></tr>
-        <tr><td>Departments</td><td><span class="badge-out">Out of scope</span></td><td>Org structure, not engagement layer</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Deliverables</div>
-    <h2>What I created</h2>
-    <div class="two-col">
-      <div class="info-card">
-        <h4>🎨 Medium-fidelity Figma prototype</h4>
-        <p>Full mobile gamification flow (XP display, persona progression, leaderboard views, challenge cards, badge gallery, and the profile dashboard). Focused on functionality over pixel-perfect branding.</p>
-      </div>
-      <div class="info-card">
-        <h4>📄 Scope documentation</h4>
-        <p>Formal scope document covering project objectives, feature list, integration boundaries, quality standards, and a defined approval process. Executives provided feedback before development began.</p>
-      </div>
-      <div class="info-card">
-        <h4>🖥️ Desktop companion interface</h4>
-        <p>Translated the mobile-first experience to desktop (same system, different layout constraints). Ensured consistency between platforms.</p>
-      </div>
-      <div class="info-card">
-        <h4>🗺️ User personas + roadmap</h4>
-        <p>Designed user personas for each of the four user types, and a product roadmap prioritising fixes and new features across the term.</p>
-      </div>
+  <div class="game-grid reveal">
+    <div class="game-card">
+      <span class="game-icon">⭐</span>
+      <h4>Experience Points (XP)</h4>
+      <p>Earned through app interactions: posting, commenting, watching content. Displayed on the user profile to visualise progress toward the next persona tier.</p>
     </div>
-
-  </div>
-
-  <div class="section">
-    <div class="section-label">Tools</div>
-    <div class="pill-row">
-      <span class="pill p-blush">Figma</span>
-      <span class="pill p-blush">User Research</span>
-      <span class="pill p-blush">Information Architecture</span>
-      <span class="pill p-blush">Product Roadmapping</span>
-      <span class="pill p-blush">UX/UI Design</span>
-      <span class="pill p-blush">Stakeholder Management</span>
+    <div class="game-card">
+      <span class="game-icon">🧬</span>
+      <h4>Personas (Rank Tiers)</h4>
+      <p>Rank tiers unlocked by accumulated XP. Each persona has defined privileges and benefits. Progression should feel like it means something, not just a number going up.</p>
+    </div>
+    <div class="game-card">
+      <span class="game-icon">🏆</span>
+      <h4>Leaderboards</h4>
+      <p>Weekly and monthly boards showing the most active users. Additional XP awarded to top performers, creating a healthy competitive loop without being punishing.</p>
+    </div>
+    <div class="game-card">
+      <span class="game-icon">📊</span>
+      <h4>Progress Dashboard</h4>
+      <p>A profile-level view of points, badges earned, current rank, and progress to the next tier. Gives users a clear picture of where they are and what comes next.</p>
+    </div>
+    <div class="game-card">
+      <span class="game-icon">🎯</span>
+      <h4>Challenges</h4>
+      <p>Short-term and long-term goals for bonus XP. Short challenges renew frequently to keep daily engagement up; longer ones reward sustained commitment.</p>
+    </div>
+    <div class="game-card">
+      <span class="game-icon">🎖️</span>
+      <h4>Milestone Badges</h4>
+      <p>Goal-oriented badges tied to specific app milestones (first post, 30-day streak, etc). Gives users clear targets beyond XP.</p>
+    </div>
+    <div class="game-card">
+      <span class="game-icon">📚</span>
+      <h4>Educational Resources</h4>
+      <p>FAQs, tutorials, and tips explaining how the gamification system works. Helps users understand how to maximise engagement, which is essential for any new system with no prior reference.</p>
     </div>
   </div>
+</div>
 
-  <a href="" target="_blank" class="figma-link">View Figma prototype ↗</a>
+<!-- IA RESTRUCTURE -->
+<div class="section reveal">
+  <div class="section-label">information architecture</div>
+  <h2>Rebuilding the navigation around task completion</h2>
+   <p>I ran analysis sessions with each user type, mapping their primary tasks and the number of taps required to complete them in the existing navigation versus a restructured one. The redesigned IA reduced task completion paths significantly across all user types and eliminated the most common navigation dead-ends that were generating support requests.</p>
+
+  <div class="two-col reveal">
+    <div class="info-card">
+      <h4>Before: content-type navigation</h4>
+      <ul>
+        <li>Videos (all videos, undifferentiated)</li>
+        <li>Communities (no task context)</li>
+        <li>Coaches (creator profiles, not content)</li>
+        <li>Profile (settings buried here)</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h4>After: task-oriented navigation</h4>
+      <ul>
+        <li>Home (my posted content, my progress)</li>
+        <li>Explore (browse by topic, featured content)</li>
+        <li>My Team / Community (social and leaderboard layer)</li>
+        <li>Profile (achievements, streaks, settings)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ENGINEERING COLLABORATION -->
+<div class="section reveal">
+  <div class="section-label">working with engineering</div>
+  <h2>Fixing broken logic through design-engineering collaboration</h2>
+  <p>The broken engagement logic wasn't something I could fix in Figma, it required direct collaboration with the third-party contractors who had built the app. This was an unusual part of the role: acting as an intermediary between the product vision, the broken implementation, and the engineering team who needed clear bug reports and behaviour specifications to fix it.</p>
+  <p>I documented every broken behaviour I found in structured bug reports: expected behaviour, actual behaviour, reproduction steps, and the user impact. This gave the engineering team actionable tickets rather than vague complaints, and it let me prioritise fixes by user impact rather than technical complexity.</p>
+
+  <div class="callout">
+    <p>New features don't fix broken foundations. The most impactful design work I did on this project was writing very clear bug reports.</p>
+  </div>
+</div>
+
+<!-- ROADMAP -->
+<div class="section reveal">
+  <div class="section-label">delivery</div>
+  <h2>Handing off a product roadmap, not just a design</h2>
+  <p>At the end of the term I delivered more than Figma files. The full handoff included:</p>
+  <ul class="body-list">
+    <li><strong>User personas</strong> — detailed profiles for each of the four user types, grounded in the app testing sessions and conversations with the team</li>
+    <li><strong>Journey maps</strong> — current state and future state flows for each persona's primary use cases</li>
+    <li><strong>Figma prototype</strong> — high-fidelity designs for the gamification system, the IA restructure, and the desktop companion interface</li>
+    <li><strong>Product roadmap</strong> — prioritised features with success criteria, rollout sequencing, and a clear articulation of what's in scope for next phase versus later</li>
+    <li><strong>Scope documentation</strong> — written rationale for every in/out-of-scope decision, so future designers and engineers understand the reasoning, not just the conclusion</li>
+  </ul>
+  <p>The roadmap was used directly to guide the next two development sprints after my term ended. That's the goal: leave the product in a state where the next person knows what to do and why.</p>
+</div>
+
+<!-- DELIVERABLES -->
+<div class="section reveal">
+  <div class="section-label">deliverables</div>
+  <h2>What I created</h2>
+  <div class="two-col reveal">
+    <div class="info-card">
+      <h4>🎨 Medium-fidelity Figma prototype</h4>
+      <p>Full mobile gamification flow: XP display, persona progression, leaderboard views, challenge cards, badge gallery, and the profile dashboard. Focused on functionality over pixel-perfect branding.</p>
+    </div>
+    <div class="info-card">
+      <h4>🖥️ Desktop companion interface</h4>
+      <p>Translated the mobile-first experience to desktop with the same system, different layout constraints.</p>
+    </div>
+    <div class="info-card">
+      <h4>📄 Scope documentation</h4>
+      <p>Formal scope document covering project objectives, feature list, integration boundaries, quality standards, and a defined approval process. Executives reviewed and provided feedback before development began.</p>
+    </div>
+    <div class="info-card">
+      <h4>🗺️ Personas + product roadmap</h4>
+      <p>User personas for all user types, journey maps for primary use cases, and a prioritised product roadmap used directly to guide the next two development sprints after my term ended.</p>
+    </div>
+  </div>
+</div>
+
+<!-- REFLECTION -->
+<div class="section reveal">
+  <div class="section-label">reflection</div>
+  <h2>What this project taught me</h2>
+
+  <div class="two-col reveal">
+    <div class="info-card">
+      <h4>✦ Diagnosis before prescription</h4>
+      <p>The brief asked for gamification. The problem was broken logic. If I'd jumped straight to designing points and badges, I'd have shipped a delightful overlay on a broken experience. Taking time to diagnose before designing was the right call, giving me a solid foundation to build new features onto.</p>
+    </div>
+    <div class="info-card">
+      <h4>✦ Scope is important</h4>
+      <p>Setting a clear scope boundary at the start of the project wasn't limiting, it let be intentional about what was in scope rather than shallow on everything.</p>
+    </div>
+    <div class="info-card">
+      <h4>✦ Gamification is a tricky beast</h4>
+      <p>Points and streaks only work when the underlying product gives users something worth returning for. I designed the gamification system last because adding engagement hooks to a broken experience just accelerates frustration. Foundation first, incentives second.</p>
+    </div>
+    <div class="info-card">
+      <h4>✦ Engineering handoff is a design skill</h4>
+      <p>Writing clear bug reports, scoping tickets accurately, and communicating design intent to contractors who weren't in the original design conversations is design work. The best Figma file in the world doesn't help if the engineers building from it don't understand the intent behind the choices.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="section reveal">
+  <div class="section-label">tools used</div>
+  <div class="pill-row">
+    <span class="pill p-lav">Figma</span>
+    <span class="pill p-lav">Information Architecture</span>
+    <span class="pill p-lav">Interaction Design</span>
+    <span class="pill p-blush">User Personas</span>
+    <span class="pill p-blush">Journey Mapping</span>
+    <span class="pill p-blush">Usability Testing</span>
+    <span class="pill p-sky">App Logic Analysis</span>
+    <span class="pill p-sky">Bug Documentation</span>
+    <span class="pill p-sky">Engineering Handoff</span>
+    <span class="pill p-mint">Gamification Design</span>
+    <span class="pill p-mint">Roadmapping</span>
+    <span class="pill p-mint">Scope Documentation</span>
+    <span class="pill p-peach">Desktop UI Design</span>
+  </div>
+</div>
+
+<div style="position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 60px 60px">
+  <a href="https://www.figma.com/proto/bX6vIZU2dk5k2F29QOv4bD/RehvUp_V2_Client--Copy-?node-id=68-4115&p=f&t=hIlBg80lmEh4A5eC-0&scaling=min-zoom&content-scaling=fixed&page-id=1%3A14296&starting-point-node-id=68%3A4115&show-proto-sidebar=1" target="_blank" style="display:inline-flex;align-items:center;gap:9px;padding:14px 28px;border-radius:var(--r-pill);background:var(--lav2);color:var(--bg);font-family:'Quicksand',sans-serif;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s" onmouseover="this.style.background='var(--lav3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--lav2)';this.style.transform='none'">View Figma prototype ↗</a>
+</div>
 
 </div>
 
-<script>
-// Engagement loop radar chart
-const ctx1 = document.getElementById('engagementChart').getContext('2d');
-new Chart(ctx1, {
-  type: 'radar',
-  data: {
-    labels: ['XP Points', 'Personas', 'Leaderboards', 'Challenges', 'Badges', 'Dashboard', 'Education'],
-    datasets: [{
-      label: 'Retention driver',
-      data: [9, 7, 8.5, 8.5, 6, 4, 2],
-      backgroundColor: 'rgba(232,180,200,0.4)',
-      borderColor: '#e07b5a',
-      borderWidth: 2,
-      pointBackgroundColor: '#e07b5a',
-      pointRadius: 5
-    },{
-      label: 'Acquisition driver',
-      data: [8.5, 1, 8.5, 9, 2, 8, 9.5],
-      backgroundColor: 'rgba(168,216,200,0.3)',
-      borderColor: '#2a8a68',
-      borderWidth: 2,
-      pointBackgroundColor: '#2a8a68',
-      pointRadius: 5
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: { legend: { position: 'bottom', labels: { color: '#c8b8e0', font: { family: 'Nunito', size: 12 } } } },
-    scales: { r: { min: 0, max: 10, ticks: { stepSize: 5, font: { size: 11 } }, pointLabels: { color: '#c8b8e0', font: { family: 'Nunito', size: 12 } } } }
-  }
-});
-
-// Priority bubble/scatter chart
-const ctx2 = document.getElementById('priorityChart').getContext('2d');
-new Chart(ctx2, {
-  type: 'bubble',
-  data: {
-    datasets: [{
-      label: 'Features',
-      data: [
-        { x: 1.5, y: 85, r: 24, label: 'XP Points' },
-        { x: 2, y: 65, r: 12, label: 'Personas' },
-        { x: 4.5, y: 90, r: 18, label: 'Leaderboard' },
-        { x: 6.5, y: 95, r: 18, label: 'Challenges' },
-        { x: 0.5, y: 45, r: 9, label: 'Badges' },
-        { x: 4, y: 60, r: 13, label: 'Dashboard' },
-        { x: 2, y: 45, r: 5, label: 'Education' },
-      ],
-      backgroundColor: [
-        'rgba(232,180,200,0.6)','rgba(168,216,200,0.6)','rgba(200,184,232,0.6)',
-        'rgba(240,200,168,0.5)','rgba(168,204,232,0.6)','rgba(232,208,144,0.5)',
-        'rgba(168,216,200,0.6)'
-      ],
-      borderColor: '#2d2926',
-      borderWidth: 1
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        callbacks: {
-          label: function(ctx) {
-            const d = ctx.raw;
-            return `[${d.label}] - Effort: ${d.x}/5, Impact: ${d.y}/100`;
-          }
-        }
-      }
-    },
-    scales: {
-      x: { min: 0, max: 7, title: { display: true, text: 'Implementation effort →', font: { family: 'Nunito', size: 12 } }, ticks: { display: false } },
-      y: { min: 0, max: 100, title: { display: true, text: 'Engagement impact →', font: { family: 'Nunito', size: 12 } }, ticks: { stepSize: 25, font: { size: 11 } } }
-    }
-  }
-});
-</script>
 <footer>
-  <p>© Cheryl Li · 2025</p>
   <div class="foot-dots">
     <div class="fdot" style="background:var(--lav2)"></div>
     <div class="fdot" style="background:var(--pink2)"></div>
-    <div class="fdot" style="background:var(--sky2)"></div>
-    <div class="fdot" style="background:var(--mint2)"></div>
+    <div class="fdot" style="background:var(--lav3)"></div>
   </div>
-  <p style="font-style:italic;font-size:12px;color:var(--ink-dimmer)">made with love & two cats</p>
+  <p>© Cheryl Li · RehvUp Case Study</p>
+  <div class="foot-dots">
+    <div class="fdot" style="background:var(--lav3)"></div>
+    <div class="fdot" style="background:var(--lav2)"></div>
+    <div class="fdot" style="background:var(--pink2)"></div>
+  </div>
 </footer>
+
 <script>
-if(typeof Chart !== 'undefined'){
-  Chart.defaults.color = '#8878a8';
-  Chart.defaults.borderColor = 'rgba(200,184,232,.12)';
-  Chart.defaults.plugins.legend.labels.color = '#c8b8e0';
-  Chart.defaults.scale.grid = { color: 'rgba(200,184,232,.10)' };
-}
-</script>
-<script>
-/* NEBULA CLOUDS */
-(function(){
-  var c=document.getElementById('bgClouds');
-  var cols=['#5b3fa8','#b84068','#2870b8','#1a7a60','#c8b8e8'];
-  [{w:600,h:600,t:'0%',l:'-10%',ci:0,tt:22,dx:50,dy:30,sc:1.08,op:.14},
-   {w:500,h:400,t:'55%',l:'65%',ci:1,tt:26,dx:-40,dy:35,sc:1.05,op:.12},
-   {w:700,h:350,t:'30%',l:'35%',ci:2,tt:30,dx:30,dy:-30,sc:1.04,op:.08},
-   {w:400,h:400,t:'75%',l:'5%',ci:3,tt:20,dx:45,dy:20,sc:1.06,op:.10},
-   {w:300,h:300,t:'10%',l:'70%',ci:4,tt:18,dx:-20,dy:40,sc:1.05,op:.06}
-  ].forEach(function(cfg){
-    var d=document.createElement('div');d.className='cloud';
-    d.style.cssText='width:'+cfg.w+'px;height:'+cfg.h+'px;top:'+cfg.t+';left:'+cfg.l+';background:'+cols[cfg.ci]+';--t:'+cfg.tt+'s;--dx:'+cfg.dx+'px;--dy:'+cfg.dy+'px;--sc:'+cfg.sc+';--op:'+cfg.op+';animation-delay:'+(Math.random()*-15)+'s';
-    c.appendChild(d);
-  });
-})();
-/* STARFIELD */
-(function(){
-  var sf=document.getElementById('starField');
-  var cols=['#f0e8ff','#e8d4f8','#f8e0ec','#d8f0fc','#e8f8f0'];
-  for(var i=0;i<80;i++){
-    var s=document.createElement('div');s.className='bpc-star';
-    var sz=Math.random()*2.5+.8;
-    s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:'+sz+'px;height:'+sz+'px;background:'+cols[Math.floor(Math.random()*cols.length)]+';--dur:'+(Math.random()*5+2)+'s;--op:'+(Math.random()*.8+.2)+';animation-delay:'+(Math.random()*8)+'s';
-    sf.appendChild(s);
-  }
-})();
-/* CURSOR SPARKLE */
-var starGlyphs=['✦','✧','⋆','✩','˚','·'];
-var sparkCols=['#c8b8e8','#e8b4c8','#a8cce8','#a8d8c8','#f0c8a8'];
-document.addEventListener('mousemove',function(e){
-  if(Math.random()>.86){
-    var sp=document.createElement('div');sp.className='sparkle';
-    sp.textContent=starGlyphs[Math.floor(Math.random()*starGlyphs.length)];
-    sp.style.cssText='left:'+(e.clientX-6)+'px;top:'+(e.clientY-6)+'px;color:'+sparkCols[Math.floor(Math.random()*sparkCols.length)]+';text-shadow:0 0 8px currentColor';
-    document.body.appendChild(sp);setTimeout(function(){sp.remove()},750);
-  }
-});
-/* SCROLL PROGRESS */
-window.addEventListener('scroll',function(){
-  var pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)||0;
-  document.getElementById('scroll-bar').style.width=(pct*100)+'%';
-});
+(function(){var c=document.getElementById('bgClouds');var cols=['#5b3fa8','#b84068','#2870b8','#1a7a60','#c8b8e8'];[{w:600,h:600,t:'0%',l:'-10%',ci:0,tt:22,dx:50,dy:30,sc:1.08,op:.16},{w:500,h:400,t:'55%',l:'65%',ci:1,tt:26,dx:-40,dy:35,sc:1.05,op:.12},{w:700,h:350,t:'30%',l:'35%',ci:2,tt:30,dx:30,dy:-30,sc:1.04,op:.08},{w:400,h:400,t:'75%',l:'5%',ci:3,tt:20,dx:45,dy:20,sc:1.06,op:.10},{w:300,h:300,t:'10%',l:'70%',ci:4,tt:18,dx:-20,dy:40,sc:1.05,op:.06}].forEach(function(cfg){var d=document.createElement('div');d.className='cloud';d.style.cssText='width:'+cfg.w+'px;height:'+cfg.h+'px;top:'+cfg.t+';left:'+cfg.l+';background:'+cols[cfg.ci]+';--t:'+cfg.tt+'s;--dx:'+cfg.dx+'px;--dy:'+cfg.dy+'px;--sc:'+cfg.sc+';--op:'+cfg.op+';animation-delay:'+(Math.random()*-15)+'s';c.appendChild(d);});})();
+(function(){var sf=document.getElementById('starField');var cols=['#f0e8ff','#e8d4f8','#f8e0ec','#d8f0fc','#f8f0d8'];for(var i=0;i<80;i++){var s=document.createElement('div');s.className='bpc-star';var sz=Math.random()*2.5+1;s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:'+sz+'px;height:'+sz+'px;background:'+cols[Math.floor(Math.random()*cols.length)]+';--dur:'+(Math.random()*5+2)+'s;--op:'+(Math.random()*.8+.3)+';animation-delay:'+(Math.random()*8)+'s';sf.appendChild(s);}})();
+var starGlyphs=['✦','✧','⋆','✩','˚','·','✿'];var sparkCols=['#c8b8e8','#e8b4c8','#a8cce8','#a8d8c8','#e8d090'];
+document.addEventListener('mousemove',function(e){if(Math.random()>.86){var sp=document.createElement('div');sp.className='sparkle';sp.textContent=starGlyphs[Math.floor(Math.random()*starGlyphs.length)];sp.style.cssText='left:'+(e.clientX-6)+'px;top:'+(e.clientY-6)+'px;color:'+sparkCols[Math.floor(Math.random()*sparkCols.length)]+';text-shadow:0 0 8px currentColor';document.body.appendChild(sp);setTimeout(function(){sp.remove()},750);}});
+(function(){var sy=['✦','✧','⋆','·','✩','∗','˚','₊','✿'];var rc=['#c8b8e8','#e8b4c8','#b4a0d8','#a8d8c8'];for(var i=0;i<12;i++){var p=document.createElement('div');p.className='rune-particle';p.textContent=sy[Math.floor(Math.random()*sy.length)];p.style.cssText='left:'+Math.random()*100+'%;color:'+rc[Math.floor(Math.random()*rc.length)]+';--d:'+(Math.random()*10+7)+'s;animation-delay:'+(Math.random()*14)+'s';document.body.appendChild(p);}})();
+window.addEventListener('scroll',function(){var pct=window.scrollY/(document.body.scrollHeight-window.innerHeight);document.getElementById('scroll-bar').style.width=(pct*100)+'%';});
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('in')},i*55);obs.unobserve(e.target);}});},{threshold:.07,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
 </script>
 </body>
 </html>

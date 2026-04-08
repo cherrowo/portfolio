@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Scispot · 12 Features, Solo · cheryl's portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #1a1528;
+  --bg2: #211c34;
+  --bg3: #2a2440;
+  --bg4: #332d4e;
+  --cream: #f5edd8;
+  --cream2: #ede0c4;
+  --lav: #c8b8e8;
+  --lav2: #b4a0d8;
+  --lav3: #9880c4;
+  --lav4: #7a62a8;
+  --lav-soft: rgba(200,184,232,.15);
+  --lav-pale: rgba(200,184,232,.08);
+  --pink: #e8b4c8;
+  --pink2: #d898b4;
+  --pink3: #c07898;
+  --pink-soft: rgba(232,180,200,.15);
+  --sky: #a8cce8;
+  --sky2: #88b8dc;
+  --sky-soft: rgba(168,204,232,.15);
+  --mint: #a8d8c8;
+  --mint2: #84c4b0;
+  --mint-soft: rgba(168,216,200,.15);
+  --peach: #f0c8a8;
+  --gold: #e8d090;
+  --ink-light: #f0e8ff;
+  --ink-mid: #c8b8e0;
+  --ink-dim: #8878a8;
+  --ink-dimmer: #584868;
+  --border: rgba(200,184,232,.14);
+  --border2: rgba(200,184,232,.28);
+  --shadow: 0 4px 24px rgba(0,0,0,.35);
+  --shadow-soft: 0 8px 40px rgba(0,0,0,.45);
+  --glow-lav: 0 0 20px rgba(180,160,216,.25);
+  --r: 16px; --r-lg: 24px; --r-xl: 28px; --r-pill: 100px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink-light);
+  font-family:'Nunito',sans-serif;font-size:16px;line-height:1.75;overflow-x:hidden;
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Cpath d='M11 1L13.2 8H20L14.4 12.2L16.6 19L11 14.8L5.4 19L7.6 12.2L2 8H8.8Z' fill='%23c8b8e8' stroke='%23b4a0d8' stroke-width='1.2'/%3E%3C/svg%3E") 11 11,auto;
+}
+
+/* STARFIELD */
+.star-field{position:fixed;inset:0;pointer-events:none;z-index:0}
+.bpc-star{position:absolute;border-radius:50%;animation:starPulse var(--dur,4s) ease-in-out infinite;opacity:0}
+@keyframes starPulse{0%,100%{opacity:0;transform:scale(.5)}50%{opacity:var(--op,.8);transform:scale(1)}}
+
+/* NEBULA CLOUDS */
+.bg-clouds{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.cloud{position:absolute;border-radius:50%;filter:blur(80px);animation:drift var(--t,20s) ease-in-out infinite alternate;opacity:var(--op,.12);}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(var(--dx,30px),var(--dy,20px)) scale(var(--sc,1.05))}}
+
+/* SPARKLE */
+.sparkle{position:fixed;pointer-events:none;font-size:14px;animation:sparkFade .75s ease forwards;z-index:9999}
+@keyframes sparkFade{0%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(.4) translateY(-12px)}}
+
+/* SCROLL BAR */
+#scroll-bar{position:fixed;top:0;left:0;height:3px;z-index:300;background:linear-gradient(90deg,var(--lav2),var(--pink2),var(--lav3));border-radius:100px;transition:width .1s;width:0;box-shadow:0 0 10px rgba(180,160,216,.7)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 52px;background:rgba(26,21,40,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Quicksand',sans-serif;font-size:20px;font-weight:700;color:var(--cream);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.nav-logo-dot{width:9px;height:9px;border-radius:50%;background:var(--lav2);display:inline-block;animation:dotBounce 2s ease-in-out infinite;}
+@keyframes dotBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.nav-back{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:600;color:var(--ink-mid);text-decoration:none;padding:6px 18px;border-radius:var(--r-pill);border:1.5px solid var(--border2);background:var(--lav-pale);transition:all .2s}
+.nav-back:hover{background:var(--lav-soft);color:var(--lav);border-color:var(--lav2)}
+
+/* HERO */
+.hero{padding:110px 60px 56px;max-width:900px;margin:0 auto;position:relative;z-index:1}
+.case-tag{display:inline-flex;align-items:center;gap:7px;font-family:'Quicksand',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:var(--r-pill);margin-bottom:18px;background:var(--sky-soft);color:var(--sky);border:1.5px solid rgba(168,204,232,.3)}
+.hero h1{font-family:'Quicksand',sans-serif;font-size:clamp(32px,4.5vw,54px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:var(--cream);margin-bottom:14px;}
+.hero-meta{display:flex;gap:20px;flex-wrap:wrap;font-family:'Nunito',sans-serif;font-size:13px;color:var(--ink-dim);font-weight:600;margin-bottom:28px}
+.hero-meta span{display:flex;align-items:center;gap:5px}
+.hero-tagline{font-size:16.5px;color:var(--ink-mid);line-height:1.85;max-width:680px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+
+/* STAT ROW */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:var(--r-xl);overflow:hidden;margin:36px 0;box-shadow:var(--shadow)}
+.stat-cell{background:var(--bg2);padding:22px 16px;text-align:center;position:relative}
+.stat-cell::after{content:'✦';position:absolute;top:10px;right:12px;font-size:8px;color:var(--lav);opacity:.3;animation:starPulse 3s ease-in-out infinite}
+.stat-val{font-family:'Quicksand',sans-serif;font-size:34px;font-weight:800;color:var(--cream);display:block;line-height:1;margin-bottom:6px;letter-spacing:-.02em}
+.stat-lbl{font-size:11px;color:var(--ink-dim);font-weight:700;text-transform:uppercase;letter-spacing:.07em}
+
+/* CONTENT */
+.content{max-width:900px;margin:0 auto;padding:0 60px 100px;position:relative;z-index:1}
+.section{margin-bottom:56px}
+.section-label{font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sky2);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--sky),transparent);opacity:.35;max-width:200px}
+.section h2{font-family:'Quicksand',sans-serif;font-size:28px;font-weight:800;color:var(--cream);margin-bottom:14px;line-height:1.1;letter-spacing:-.02em}
+.section p{font-size:15px;color:var(--ink-mid);line-height:1.85;margin-bottom:14px}
+.section p:last-child{margin-bottom:0}
+
+/* LISTS */
+ul.body-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin:14px 0}
+ul.body-list li{font-size:14.5px;color:var(--ink-mid);line-height:1.75;padding-left:20px;position:relative}
+ul.body-list li::before{content:'✦';position:absolute;left:0;top:4px;font-size:9px;color:var(--sky2)}
+strong{color:var(--cream);font-weight:700}
+
+/* CALLOUT */
+.callout{background:var(--bg3);border-radius:var(--r-lg);padding:22px 26px;border-left:4px solid var(--sky2);margin:24px 0;box-shadow:var(--shadow)}
+.callout p{font-size:14.5px;color:var(--ink-mid);font-style:italic;line-height:1.75;margin:0}
+
+/* GRIDS */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:20px 0}
+
+/* INFO CARDS */
+.info-card{background:var(--bg2);border-radius:var(--r-lg);padding:22px;border:1px solid var(--border);box-shadow:var(--shadow);transition:all .2s}
+.info-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:var(--glow-lav)}
+.info-card h4{font-family:'Quicksand',sans-serif;font-size:13px;font-weight:700;margin-bottom:10px;color:var(--cream)}
+.info-card p,.info-card li{font-size:13.5px;color:var(--ink-mid);line-height:1.7}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;padding:0}
+.info-card li{padding-left:14px;position:relative}
+.info-card li::before{content:'◦';position:absolute;left:0;color:var(--sky2);font-weight:700;font-size:16px;line-height:1.3}
+
+/* PILLS */
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.pill{font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;font-style:italic}
+.p-mint{background:var(--mint-soft);color:var(--mint);border:1px solid rgba(168,216,200,.25)}
+.p-lav{background:var(--lav-soft);color:var(--lav);border:1px solid rgba(200,184,232,.25)}
+.p-sky{background:var(--sky-soft);color:var(--sky);border:1px solid rgba(168,204,232,.25)}
+.p-peach{background:rgba(240,200,168,.12);color:var(--peach);border:1px solid rgba(240,200,168,.2)}
+.p-blush{background:var(--pink-soft);color:var(--pink);border:1px solid rgba(232,180,200,.25)}
+
+/* FEATURE CARDS */
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+.feature-card{background:var(--bg2);border-radius:var(--r-lg);padding:20px 22px;border:1px solid var(--border);transition:all .22s;position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sky2),var(--lav2))}
+.feature-card:hover{transform:translateY(-3px);box-shadow:0 0 20px rgba(136,184,220,.2);border-color:var(--border2)}
+.feature-card h4{font-family:'Quicksand',sans-serif;font-size:14px;font-weight:800;margin-bottom:6px;color:var(--cream)}
+.feature-card .fc-tag{font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sky2);margin-bottom:8px;display:block}
+.feature-card p{font-size:13px;color:var(--ink-mid);line-height:1.65;margin:0}
+
+/* IMAGE SHOWCASE */
+.img-showcase{margin:24px 0;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-soft);background:var(--bg2)}
+.img-showcase img{width:100%;display:block;transition:transform .4s ease}
+.img-showcase:hover img{transform:scale(1.01)}
+.img-caption{padding:12px 18px;background:var(--bg3);border-top:1px solid var(--border);font-family:'Quicksand',sans-serif;font-size:11.5px;font-weight:600;color:var(--ink-dim);font-style:italic;letter-spacing:.02em}
+
+.img-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}
+.img-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:24px 0}
+.img-item{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);background:var(--bg2);display:flex;flex-direction:column}
+.img-item img{width:100%;display:block;object-fit:cover;transition:transform .3s}
+.img-item:hover img{transform:scale(1.02)}
+.img-item .img-caption{margin-top:auto}
+
+/* PIPELINE STEPS */
+.pipeline-step{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
+.pipeline-step:last-child{border-bottom:none}
+.pipeline-num{font-family:'Quicksand',sans-serif;font-size:28px;font-weight:800;color:var(--sky2);flex-shrink:0;width:36px;opacity:.8}
+.pipeline-body h4{font-family:'Quicksand',sans-serif;font-size:13.5px;font-weight:700;margin-bottom:4px;color:var(--cream)}
+.pipeline-body p{font-size:13px;color:var(--ink-mid);line-height:1.7;margin:0}
+
+/* SCOPE TABLE */
+.scope-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.scope-table th{text-align:left;font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);padding:8px 14px;border-bottom:1.5px solid var(--border)}
+.scope-table td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--ink-mid);vertical-align:top}
+.scope-table tr:last-child td{border-bottom:none}
+.scope-table tr:hover td{background:var(--lav-pale)}
+.badge-outcome{background:var(--sky-soft);color:var(--sky);font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;border:1px solid rgba(168,204,232,.25);white-space:nowrap}
+
+/* BRANDING SWATCH */
+.swatch-row{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
+.swatch{display:flex;flex-direction:column;align-items:center;gap:6px}
+.swatch-dot{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.12)}
+.swatch-hex{font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;color:var(--ink-dim);letter-spacing:.06em}
+
+/* OUTCOME BAR */
+.outcome-bar{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.ob-row{display:flex;align-items:center;gap:14px}
+.ob-label{font-family:'Quicksand',sans-serif;font-size:12px;font-weight:700;color:var(--cream);min-width:160px;flex-shrink:0}
+.ob-track{flex:1;height:10px;background:rgba(168,204,232,.1);border-radius:100px;border:1px solid rgba(168,204,232,.2);overflow:hidden}
+.ob-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--sky2),var(--lav2));transition:width 1.5s cubic-bezier(.22,1,.36,1)}
+.ob-val{font-family:'Quicksand',sans-serif;font-size:12px;font-weight:700;color:var(--sky);min-width:40px;text-align:right}
+
+/* FOOTER */
+footer{text-align:center;padding:40px;border-top:1px solid var(--border);font-size:13px;color:var(--ink-dim);position:relative;z-index:1;font-family:'Quicksand',sans-serif}
+.foot-dots{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.fdot{width:8px;height:8px;border-radius:50%}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* RUNE PARTICLES */
+.rune-particle{position:fixed;pointer-events:none;z-index:1;font-size:13px;animation:runeFloat var(--d,9s) linear infinite;opacity:0}
+@keyframes runeFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}8%{opacity:.4}90%{opacity:.25}100%{transform:translateY(-8vh) rotate(360deg);opacity:0}}
+
+@media(max-width:768px){
+  nav{padding:12px 20px}
+  .hero,.content{padding-left:20px;padding-right:20px}
+  .hero{padding-top:90px}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .two-col,.feature-grid,.img-grid-2,.img-grid-3{grid-template-columns:1fr}
+  .three-col{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){.stat-row,.three-col{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="scroll-bar"></div>
+<div class="bg-clouds" id="bgClouds"></div>
+<div class="star-field" id="starField"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="nav-logo-dot"></span>cheryl.li</a>
+  <a href="ux-portfolio.html" class="nav-back">← back to UX work</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero reveal">
+  <div class="case-tag">🔬 Product Design · Biotech SaaS</div>
+  <h1>I get to call myself lead designer if I'm the only designer on the team</h1>
+  <div class="hero-meta">
+    <span>📅 May – Aug 2022</span>
+    <span>👤 Lead Product Designer</span>
+    <span>🏢 Scispot, Kitchener ON</span>
+  </div>
+  <p class="hero-tagline">Scispot builds lab management software for life science teams. I was scoping, researching, prototyping, and handing off to engineering for over a dozen features while keeping the existing product from falling apart at the seams (classic startup energy).</p>
+</div>
+<div class="content">
+
+<!-- CONTEXT -->
+<div class="section reveal">
+  <div class="section-label">context</div>
+  <h2>What is Scispot?</h2>
+  <p>Scispot is an electronic lab notebook (ELN) and lab management platform for biotech and life science teams. Think of it as Notion except for lab scientists to record experiments, manage inventory, track orders, collaborate with collaborators outside the org, and run their entire lab operations without switching between a dozen tools.</p>
+  <p>When I joined, the core product existed but was expanding fast. I was brought in to design new features and improve existing ones, but without a design manager, without a design system, and often without a full brief. The expectation was that I could go from nothing to Figma handoff.</p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Scispot/ScispotApp.png" alt="Scispot main application home screen showing Labspaces, Projects, and recent files"/>
+    <div class="img-caption">The Scispot home interface: the starting point for all lab operations. Navigation covers Labspaces, Labsheets, Labflows, and more.</div>
+  </div>
+</div>
+
+<!-- MY ROLE -->
+<div class="section reveal">
+  <div class="section-label">my role</div>
+  <h2>What "sole designer" actually meant</h2>
+  <p>This wasn't a "junior designer follows a design system" kind of role. There was no senior designer to review my work, no existing component library to pull from, and new feature requests came in constantly. My day-to-day looked like:</p>
+  <ul class="body-list">
+    <li><strong>Stakeholder interviews</strong>: understanding what clients were asking for and translating vague requests into design problems worth solving</li>
+    <li><strong>Competitive analysis</strong>: benchmarking against Benchling, Labguru, and other ELN tools to understand where Scispot sat in the market</li>
+    <li><strong>Wireframing → high-fidelity prototyping</strong> in Figma, from scratch each time</li>
+    <li><strong>Engineering handoff</strong>: writing specs, managing tickets, coordinating directly with developers and the client success team</li>
+    <li><strong>Metrics tracking</strong>: defining success metrics for each feature before it shipped and reviewing adoption data post-launch</li>
+  </ul>
+
+  <div class="two-col reveal" style="margin-top:20px">
+    <div class="info-card">
+      <h4>🎨 Design scope</h4>
+      <ul>
+        <li>End-to-end feature design (brief → handoff)</li>
+        <li>Figma prototyping at multiple fidelities</li>
+        <li>Rebranding: applying new style guide across product</li>
+        <li>Data visualisation templates for usage reports</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h4>🤝 Cross-functional work</h4>
+      <ul>
+        <li>Directly interviewed enterprise clients for requirements</li>
+        <li>Coordinated with engineering in Jira</li>
+        <li>Working with engineering to assess feasbility</li>
+        <li>Worked with marketing to communicate new features</li>
+        <li>Collaborated with client success on onboarding flows</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- BRANDING -->
+<div class="section reveal">
+  <div class="section-label">visual identity</div>
+  <h2>First: getting the brand right</h2>
+  <p>Before designing new features, I needed to understand the visual language. One of my responsibilities was ensuring the entire product adhered to the new style guide consistently. Every screen, every component.</p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Scispot/Branding.png" alt="Scispot brand guide showing primary purple #6A35FF, secondary colors, and additional palette"/>
+    <div class="img-caption">Scispot's brand palette: primary electric purple (#6A35FF), supported by soft lavender, blush pink, and cyan accents. The molecular logo motif carries through the product.</div>
+  </div>
+
+  <p>The visual language (clean whites with electric purple accents, molecular iconography, and a light clinical feel) had to stay coherent across every new feature I designed. This also meant updating existing screens that hadn't been updated during the rebrand.</p>
+</div>
+
+<!-- FEATURES -->
+<div class="section reveal">
+  <div class="section-label">feature work</div>
+  <h2>The projects: what they were and why they mattered</h2>
+  <p>Each project started differently. Some came from client requests, some from internal pain points, one directly secured a client contract. Here's the full breakdown.</p>
+
+  <div class="feature-grid reveal">
+    <div class="feature-card">
+      <span class="fc-tag">Collaboration</span>
+      <h4>Datarooms</h4>
+      <p>A system for sharing lab documents securely outside the org. Covered sharing permissions, updated layouts, user management for documents, and all interface states.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-tag">Inventory</span>
+      <h4>Lab Materials Manager</h4>
+      <p>Redesigned the information architecture of the digital storage tool to handle complex multi-level storage hierarchies. For fridges inside labs inside buildings.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-tag">Operations · Client Win</span>
+      <h4>Equipment Checkout</h4>
+      <p>Prototyped an equipment management and checkout system. This prototype secured a contract with a large prospective client before the feature was fully built.</p>
+   </div>
+    <div class="feature-card">
+      <span class="fc-tag">Integration</span>
+      <h4>Inventory Management</h4>
+      <p>Linked the lab notebook with Labsheets so scientists could update inventory in real time without switching tools. Reduced double-entry and manual sync errors.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-tag">Compliance & Training</span>
+      <h4>Training Modules</h4>
+      <p>A new product within Scispot: required training modules, a permissions system for assigning modules by role, and a tracking system for completion.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-tag">Data Integration</span>
+      <h4>Database Integration</h4>
+      <p>Designed user flows in Figma for connecting Google Sheets and S3 directly into Scispot, enabling labs to bring in their existing data without migration headaches.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-tag">Onboarding</span>
+      <h4>Landing & Signup</h4>
+      <p>Wireframed and designed the user flows for getting new labs onto the ELN. Clear, low-friction, and designed to surface value as fast as possible.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-tag">Visual Identity</span>
+      <h4>Rebranding</h4>
+      <p>Applied the updated brand style guide across the entire application, ensuring every screen, modal, and component reflected the new visual language consistently.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-tag">Data Management</span>
+      <h4>Labsheet Filters & Flags</h4>
+      <p>Designed conditional filtering and colour-coded flagging logic for Scispot's in-app spreadsheet system. Let users create custom alert rules based on column values.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-tag">Notifications</span>
+      <h4>Alerts Redesign</h4>
+      <p>Redesigned the alert system so notifications were role-relevant rather than a broadcast firehose. Users now only see alerts relevant to their specific tasks.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-tag">Analytics</span>
+      <h4>Usage Reports</h4>
+      <p>Created data visualisation templates that let clients see their own Scispot usage: inventory summaries, sample counts, and box creation stats at a glance.</p>
+    </div>
+    <div class="feature-card">
+      <span class="fc-tag">Permissions · Client Win</span>
+      <h4>Request Manager</h4>
+      <p>A structured system for cross-team lab requests: requestors, requestees, approvers, to-do tracking, file attachments, and an activity log all in one view. Secured a new major client contract.</p>
+    </div>
+  </div>
+</div>
+
+<!-- DEEP DIVES -->
+<div class="section reveal">
+  <div class="section-label">selected deep dives</div>
+  <h2>Three projects worth zooming in on</h2>
+</div>
+
+<!-- DEEP DIVE 1: ELN / Protocols -->
+<div class="section reveal">
+  <div class="section-label">deep dive 01</div>
+  <h2>The Electronic Lab Notebook: making protocols usable</h2>
+  <p>The core ELN product let scientists document experiments, but the existing interface had usability issues that kept coming up in research sessions. The sidebar was cluttered with items that didn't make sense in context. The resource system was hard to navigate. Tables couldn't be resized. The rich text editor felt bolted on.</p>
+
+  <div class="callout">
+    <p>"Why can I add sheets in 3 locations?" was the exact kind of feedback that kicked off this project. When users are confused about basic navigation, you don't have a feature problem. You have an information architecture problem.</p>
+  </div>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Scispot/Protocols.png" alt="Before and after comparison of the ELN interface with annotated pain points and proposed changes"/>
+    <div class="img-caption">Side-by-side: the existing ELN interface with annotated usability complaints (left), and the proposed redesign addressing navigation, table handling, and resource management (right).</div>
+  </div>
+
+  <p>My approach: document every complaint from user sessions, categorise them by severity, and work through them systematically. The new ELN design consolidated the sidebar, moved status to the overview, made tables resizable, and introduced a cleaner resource modal.</p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Scispot/NewELN.png" alt="New flexible Electronic Lab Notebook format with improved layout and navigation"/>
+    <div class="img-caption">The redesigned ELN: a flexible notebook format with cleaner tabbed navigation (Overview, Pages, Attachments, Project Management), improved resource handling, and consistent component usage.</div>
+  </div>
+</div>
+
+<!-- DEEP DIVE 2: Labsheet Filters & Flags -->
+<div class="section reveal">
+  <div class="section-label">deep dive 02</div>
+  <h2>Labsheet Filters & Flags: conditional logic for non-developers</h2>
+  <p>Scispot's Labsheets are essentially a specialised spreadsheet for lab data (samples, inventory, reagents, results). Scientists needed a way to flag rows based on conditions, like "flag anything where quantity is less than 2" or "flag items expiring before summer break." The catch: the users building these rules are scientists, not engineers.</p>
+  <p>The design challenge was making conditional logic feel intuitive, like when you're booking a hotel online. Finding column name, type, condition, and values without exposing the underlying technical complexity. I also needed to design the full filter view that let users switch between different filtered perspectives on the same labsheet.</p>
+
+  <div class="img-grid-2 reveal">
+    <div class="img-item">
+      <img src="assets/imgs/Scispot/Flagging.png" alt="Conditional flagging modal showing flag rules builder with column, type, condition, and value fields"/>
+      <div class="img-caption">The "New Flag" modal: users define flag rules using column name, type, condition, and value. Multiple rules can be chained. The second panel shows a more complex compound rule ("low stock before summer break").</div>
+    </div>
+    <div class="img-item">
+      <img src="assets/imgs/Scispot/LabsheetView.png" alt="New labsheet interface with multiple filtered views and Add New View modal"/>
+      <div class="img-caption">The labsheet interface with view management. Users can create named views with custom column selections, allowing different team members to see the same data through different lenses.</div>
+    </div>
+  </div>
+</div>
+
+<!-- DEEP DIVE 3: Alerts + Request Manager -->
+<div class="section reveal">
+  <div class="section-label">deep dive 03</div>
+  <h2>Alerts & Request Manager</h2>
+  <p>The existing alert system sent notifications to everyone regardless of role. A researcher would get alerts about inventory thresholds in a lab they never touched. A manager would get notified about every minor status change. The result: people stopped reading alerts entirely.</p>
+  <p>The redesign introduced role-scoped alerts: users only receive notifications relevant to their specific manager context. I introduced a new rule builder that let admins define when and who gets notified.</p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Scispot/Alerts.png" alt="New Alert creation interface with manager context, name, user assignment, and rule builder"/>
+    <div class="img-caption">The redesigned alert creation flow: scoped to a specific manager context, with targeted user assignment and a rule builder that lets admins create time-based or condition-based triggers.</div>
+  </div>
+
+  <p>The Request Manager tackled a different collaboration problem: cross-team lab requests had no formal system. Scientists would request samples or experiments from other labs via email or Slack with no tracking, no accountability, and no paper trail.</p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Scispot/Request Manager.png" alt="Request Manager interface showing requestor, requestees, approver, to-dos, and activity log"/>
+    <div class="img-caption">The Request Manager: a structured view for cross-team lab requests with clearly defined roles (requestor, requestees, approver), to-do tracking linked to Labsheets, file attachments, and a full activity log.</div>
+  </div>
+</div>
+
+<!-- ORDER MANAGER + TEMPLATES -->
+<div class="section reveal">
+  <div class="section-label">additional work</div>
+  <h2>Order Manager, Reports & Templates</h2>
+  <p>Lab procurement was another manual nightmare. Orders tracked in spreadsheets, no status visibility, no connection to inventory. The Order Manager gave labs a structured place to create orders, track item status (received, shipped, ordered, backordered, cancelled), and get a live subtotal with shipping and VAT.</p>
+
+  <div class="img-grid-2 reveal">
+    <div class="img-item">
+      <img src="assets/imgs/Scispot/OrderManager.png" alt="Order Manager interface with status-coded items, sharing, and order totals"/>
+      <div class="img-caption">Order Manager: status-coded rows (received, shipped, ordered, backordered, cancelled) with bulk actions, labsheet linking, and automatic order totals.</div>
+    </div>
+    <div class="img-item">
+      <img src="assets/imgs/Scispot/Template Prototype.png" alt="Template preview modal showing tissue template with labsheet structure and Use in ELN action"/>
+      <div class="img-caption">The template preview system: labs can preview an experiment template before using it, seeing the full labsheet structure and confirming it fits their protocol before committing.</div>
+    </div>
+  </div>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Scispot/DataVis.png" alt="Scispot usage reports showing inventory breakdown by type, sample counts, and box creation stats"/>
+    <div class="img-caption">Usage reports: data visualisation templates that let clients understand their own lab data: inventory composition, sample counts by group, and storage box creation at a glance.</div>
+  </div>
+</div>
+
+<!-- LOGIN / ENTRY POINT -->
+<div class="section reveal">
+  <div class="section-label">onboarding</div>
+  <h2>The front door: login and first impressions</h2>
+  <p>The login experience is small but signals everything about a product's character. The updated login screen kept it clean and focused — Scispot branding, Google sign-in prominently offered, email magic link as the fallback. The molecular illustration background reinforces the scientific identity without overwhelming the form.</p>
+
+  <div class="img-showcase reveal">
+    <img src="assets/imgs/Scispot/Login.png" alt="Scispot login page with Google sign-in and magic link option on a gradient background with molecular illustrations"/>
+    <div class="img-caption">The Scispot login experience. A gradient background with subtle molecular illustrations, clear sign-in hierarchy (Google first, email magic link second), and the updated brand identity front and centre.</div>
+  </div>
+</div>
+
+<!-- REFLECTIONS -->
+<div class="section reveal">
+  <div class="section-label">reflection</div>
+  <h2>What I learned doing this alone</h2>
+
+  <div class="two-col reveal">
+    <div class="info-card">
+      <h4>✦ Constraints force focus</h4>
+      <p>With 12 features and one designer, I had to develop a ruthless sense of what was worth spending time on. Good enough and shipped beats perfect and not. I learned to prototype at the fidelity that answers the question, not the fidelity that looks impressive.</p>
+    </div>
+    <div class="info-card">
+      <h4>✦ Talk to the people touching the product</h4>
+      <p>The most useful input didn't come from product briefs. It came from client success calls, engineering conversations, and watching scientists actually use the product. Information architecture problems look obvious in user sessions. They're invisible in Figma.</p>
+    </div>
+    <div class="info-card">
+      <h4>✦ Define success before you design</h4>
+      <p>I started defining success metrics for each feature before I started wireframing. This changed how I thought about tradeoffs: not "which version looks better" but "which version is more likely to move the number we care about."</p>
+    </div>
+    <div class="info-card">
+      <h4>✦ Solo doesn't mean isolated</h4>
+      <p>Being the only designer doesn't mean designing in isolation. I treated engineers as design collaborators, made sure client success understood the rationale behind changes, and kept marketing looped in on what was shipping.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="section reveal">
+  <div class="section-label">tools used</div>
+  <div class="pill-row">
+    <span class="pill p-sky">Figma</span>
+    <span class="pill p-sky">Adobe Creative Suite</span>
+    <span class="pill p-lav">Jira</span>
+    <span class="pill p-lav">Competitive Analysis</span>
+    <span class="pill p-mint">User Research</span>
+    <span class="pill p-mint">Usability Testing</span>
+    <span class="pill p-mint">Stakeholder Interviews</span>
+    <span class="pill p-peach">Metrics Design</span>
+    <span class="pill p-peach">Feature Adoption Tracking</span>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<footer>
+  <div class="foot-dots">
+    <div class="fdot" style="background:var(--sky2)"></div>
+    <div class="fdot" style="background:var(--lav2)"></div>
+    <div class="fdot" style="background:var(--pink2)"></div>
+  </div>
+  <p>© Cheryl Li · Scispot Case Study</p>
+  <div class="foot-dots">
+    <div class="fdot" style="background:var(--mint2)"></div>
+    <div class="fdot" style="background:var(--sky2)"></div>
+    <div class="fdot" style="background:var(--lav2)"></div>
+  </div>
+</footer>
+
+<script>
+/* NEBULA CLOUDS */
+(function(){
+  var c=document.getElementById('bgClouds');
+  var cols=['#2870b8','#5b3fa8','#1a7a60','#b84068','#c8b8e8'];
+  [{w:600,h:600,t:'0%',l:'-10%',ci:0,tt:22,dx:50,dy:30,sc:1.08,op:.16},
+   {w:500,h:400,t:'55%',l:'65%',ci:1,tt:26,dx:-40,dy:35,sc:1.05,op:.13},
+   {w:700,h:350,t:'30%',l:'35%',ci:2,tt:30,dx:30,dy:-30,sc:1.04,op:.09},
+   {w:400,h:400,t:'75%',l:'5%',ci:3,tt:20,dx:45,dy:20,sc:1.06,op:.11},
+   {w:300,h:300,t:'10%',l:'70%',ci:4,tt:18,dx:-20,dy:40,sc:1.05,op:.06}
+  ].forEach(function(cfg){
+    var d=document.createElement('div');d.className='cloud';
+    d.style.cssText='width:'+cfg.w+'px;height:'+cfg.h+'px;top:'+cfg.t+';left:'+cfg.l+';background:'+cols[cfg.ci]+';--t:'+cfg.tt+'s;--dx:'+cfg.dx+'px;--dy:'+cfg.dy+'px;--sc:'+cfg.sc+';--op:'+cfg.op+';animation-delay:'+(Math.random()*-15)+'s';
+    c.appendChild(d);
+  });
+})();
+
+/* STARFIELD */
+(function(){
+  var sf=document.getElementById('starField');
+  var cols=['#f0e8ff','#e8d4f8','#d8f0fc','#d0f0e8','#f8f0d8'];
+  for(var i=0;i<80;i++){
+    var s=document.createElement('div');s.className='bpc-star';
+    var sz=Math.random()*2.5+1;
+    s.style.cssText='left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;width:'+sz+'px;height:'+sz+'px;background:'+cols[Math.floor(Math.random()*cols.length)]+';--dur:'+(Math.random()*5+2)+'s;--op:'+(Math.random()*.8+.3)+';animation-delay:'+(Math.random()*8)+'s';
+    sf.appendChild(s);
+  }
+})();
+
+/* CURSOR SPARKLE */
+var starGlyphs=['✦','✧','⋆','✩','˚','·','✿'];
+var sparkCols=['#a8cce8','#c8b8e8','#a8d8c8','#e8b4c8','#e8d090'];
+document.addEventListener('mousemove',function(e){
+  if(Math.random()>.86){
+    var sp=document.createElement('div');sp.className='sparkle';
+    sp.textContent=starGlyphs[Math.floor(Math.random()*starGlyphs.length)];
+    sp.style.cssText='left:'+(e.clientX-6)+'px;top:'+(e.clientY-6)+'px;color:'+sparkCols[Math.floor(Math.random()*sparkCols.length)]+';text-shadow:0 0 8px currentColor';
+    document.body.appendChild(sp);setTimeout(function(){sp.remove()},750);
+  }
+});
+
+/* RUNE PARTICLES */
+(function(){
+  var sy=['✦','✧','⋆','·','✩','∗','˚','₊'];
+  var rc=['#a8cce8','#c8b8e8','#a8d8c8','#e8d090'];
+  for(var i=0;i<12;i++){
+    var p=document.createElement('div');p.className='rune-particle';
+    p.textContent=sy[Math.floor(Math.random()*sy.length)];
+    p.style.cssText='left:'+Math.random()*100+'%;color:'+rc[Math.floor(Math.random()*rc.length)]+';--d:'+(Math.random()*10+7)+'s;animation-delay:'+(Math.random()*14)+'s';
+    document.body.appendChild(p);
+  }
+})();
+
+/* SCROLL PROGRESS */
+window.addEventListener('scroll',function(){
+  var pct=window.scrollY/(document.body.scrollHeight-window.innerHeight);
+  document.getElementById('scroll-bar').style.width=(pct*100)+'%';
+});
+
+/* REVEAL */
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){setTimeout(function(){e.target.classList.add('in')},i*50);obs.unobserve(e.target);}
+  });
+},{threshold:.07,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+
+/* OUTCOME BARS ANIMATE ON SCROLL */
+var barObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.ob-fill').forEach(function(fill){
+        setTimeout(function(){fill.style.width=fill.dataset.width+'%'},200);
+      });
+      barObs.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+document.querySelectorAll('.outcome-bar').forEach(function(el){barObs.observe(el)});
+</script>
+</body>
+</html>
